@@ -7,7 +7,7 @@ import { HomePage } from '../home/home';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class Login {
+export class LoginPage {
 
   constructor(public navCtrl: NavController, private facebook: Facebook) {
   }

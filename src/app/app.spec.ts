@@ -1,7 +1,7 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Login } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';
 import {} from 'jasmine';
 
 let comp: MyApp;
@@ -47,7 +47,7 @@ describe('MyApp Root Component', () => {
     });
 
     it('initialises with a root page of HomePage', () => {
-        expect(comp['rootPage']).toBe(Login);
+        expect(comp['rootPage']).toBe(LoginPage);
     });
 
 });
