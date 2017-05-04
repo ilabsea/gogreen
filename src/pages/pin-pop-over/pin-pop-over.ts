@@ -25,12 +25,13 @@ export class PinPopoverPage {
 
   addPin(param){
     this.mapMarker.marker.setIcon('www/assets/icon/' + param + '.png');
-    console.log('param : ', this.mapMarker);
+  }
 
+  ionViewDidLeave(){
+    this.mapMarker.map.setClickable(true);
   }
 
   removeMarker(){
-    console.log('this.mapMarker.marker : ', this.mapMarker.marker);
     this.mapMarker.marker.remove();
     this.close();
   }

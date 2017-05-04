@@ -22,12 +22,10 @@ export class HomePage {
   marker: Marker;
   map: GoogleMap;
 
-  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController) {
-  }
-
-  ngAfterViewInit() {
-    console.log('ngAfterViewInit : ');
-    this.loadMap();
+  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController, public platform: Platform,) {
+    platform.ready().then(() => {
+      this.loadMap();
+    });
   }
 
   loadMap() {
@@ -53,7 +51,6 @@ export class HomePage {
 
   addMarker(){
     this.map.addEventListener(GoogleMapsEvent.MAP_CLICK).subscribe((e) => {
-      console.log('map clicked')
       this.map.setCenter(e);
       let markerOptions: MarkerOptions = {
         position: e,
@@ -72,7 +69,6 @@ export class HomePage {
     let popover = this.popoverCtrl.create(PinPopoverPage, {
       'mapMarker' : { 'map': this.map, 'marker': this.marker }
     });
-    console.log('popover : ', popover);
     popover.present();
   }
 }
