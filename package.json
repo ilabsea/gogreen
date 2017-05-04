@@ -1,5 +1,5 @@
 {
-  "name": "go-green",
+  "name": "gogreen",
   "author": "InSTEDD iLabSEA",
   "homepage": "http://www.ilabsoutheastasia.org/",
   "private": true,
@@ -18,10 +18,11 @@
     "@angular/http": "4.0.0",
     "@angular/platform-browser": "4.0.0",
     "@angular/platform-browser-dynamic": "4.0.0",
-    "@ionic-native/core": "3.4.2",
-    "@ionic-native/facebook": "^3.4.4",
+    "@ionic-native/camera": "^3.5.0",
+    "@ionic-native/core": "3.6.0",
+    "@ionic-native/facebook": "^3.6.1",
     "@ionic-native/geolocation": "^3.5.0",
-    "@ionic-native/google-maps": "^3.5.0",
+    "@ionic-native/google-maps": "^3.6.1",
     "@ionic-native/splash-screen": "3.4.2",
     "@ionic-native/status-bar": "3.4.2",
     "@ionic/storage": "2.0.1",
@@ -67,5 +68,18 @@
     }
   ],
   "description": "gogreen: an application that allows user to involve in helping the city clean by creating event to clean the city together.",
-  "test": "ng test"
+  "test": "ng test",
+  "version": "1.0.0",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilabsea/gogreen.git"
+  },
+  "keywords": [
+    "gogreen"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilabsea/gogreen/issues"
+  }
 }

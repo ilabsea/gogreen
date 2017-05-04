@@ -1,50 +1,78 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { GoogleMap, GoogleMapsEvent, LatLng } from '@ionic-native/google-maps';
+import { Platform, PopoverController} from 'ionic-angular';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  LatLng,
+  CameraPosition,
+  MarkerOptions,
+  Marker,
+  GoogleMapsAnimation
+} from '@ionic-native/google-maps';
+import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [GoogleMaps]
 })
-export class HomePage {
 
+export class HomePage {
+  marker: Marker;
   map: GoogleMap;
 
-  constructor(public platform: Platform) {
-    platform.ready().then(() => {
-      this.loadMap();
-    });
+  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController) {
   }
 
-  loadMap(){
-    let location = new LatLng(-34.9290,138.6010);
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit : ');
+    this.loadMap();
+  }
 
-    this.map = new GoogleMap('map', {
-      'backgroundColor': 'white',
-      'controls': {
-        'compass': true,
-        'myLocationButton': true,
-        'indoorPicker': true,
-        'zoom': true
-      },
-      'gestures': {
-        'scroll': true,
-        'tilt': true,
-        'rotate': true,
-        'zoom': true
-      },
-      'camera': {
-        'latLng': location,
-        'tilt': 30,
-        'zoom': 15,
-        'bearing': 50
-      }
-    });
+  loadMap() {
+    let element: HTMLElement = document.getElementById('map');
 
-    this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-      console.log('Map is ready!');
-    });
+    this.map= this.googleMaps.create(element);
+    let ionic: LatLng = new LatLng(10,105);
+    let position: CameraPosition = {
+      target: ionic,
+      zoom: 15,
+      tilt: 30
+    };
+
+    this.map.moveCamera(position);
+
+    this.map.one(GoogleMapsEvent.MAP_READY).then(() =>
+      console.log('Map is ready!')
+    );
+
+    this.addMarker();
 
   }
 
+  addMarker(){
+    this.map.addEventListener(GoogleMapsEvent.MAP_CLICK).subscribe((e) => {
+      console.log('map clicked')
+      this.map.setCenter(e);
+      let markerOptions: MarkerOptions = {
+        position: e,
+        animation: GoogleMapsAnimation.DROP,
+        draggable: true
+      };
+      this.map.addMarker(markerOptions).then((marker: Marker) => {
+        this.marker = marker;
+        this.map.setClickable(false);
+        this.popupPinIcon();
+      });
+    });
+  }
+
+  popupPinIcon() {
+    let popover = this.popoverCtrl.create(PinPopoverPage, {
+      'mapMarker' : { 'map': this.map, 'marker': this.marker }
+    });
+    console.log('popover : ', popover);
+    popover.present();
+  }
 }

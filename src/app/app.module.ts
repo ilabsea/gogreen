@@ -13,6 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { EventPage } from '../pages/event/event';
 import { ProfilePage } from '../pages/profile/profile';
+import { PinPopoverPage } from '../pages/pin-pop-over/pin-pop-over';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ProfilePage } from '../pages/profile/profile';
     LoginPage,
     TabsPage,
     EventPage,
-    ProfilePage
+    ProfilePage,
+    PinPopoverPage
   ],
   imports: [
     BrowserModule,
@@ -35,14 +37,14 @@ import { ProfilePage } from '../pages/profile/profile';
     LoginPage,
     TabsPage,
     EventPage,
-    ProfilePage
+    ProfilePage,
+    PinPopoverPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Facebook,
     GoogleMaps,
-    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
