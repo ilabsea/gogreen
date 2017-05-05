@@ -56,7 +56,7 @@ export class HomePage {
 
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
-          icon: pin.image_url
+          icon: pin.icon 
         }
         this.map.addMarker(option);
       }

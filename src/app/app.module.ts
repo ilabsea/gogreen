@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Facebook } from '@ionic-native/facebook';
 import { GoogleMaps } from '../providers/google-maps';
+import { Camera } from '../providers/camera';
 import { Geolocation } from '@ionic-native/geolocation'
 
 import { MyApp } from './app.component';
@@ -49,6 +50,7 @@ import { PinsService } from '../providers/pins-service';
     Facebook,
     GoogleMaps,
     PinsService,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
