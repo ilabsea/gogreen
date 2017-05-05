@@ -11,18 +11,19 @@ import {
   GoogleMapsAnimation
 } from '@ionic-native/google-maps';
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
+import { PinsService } from '../../providers/pins-service';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [GoogleMaps]
+  providers: [GoogleMaps, PinsService]
 })
 
 export class HomePage {
   marker: Marker;
   map: GoogleMap;
 
-  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController, public platform: Platform,) {
+  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController, public platform: Platform, public pinsService: PinsService) {
     platform.ready().then(() => {
       this.loadMap();
     });
@@ -32,21 +33,34 @@ export class HomePage {
     let element: HTMLElement = document.getElementById('map');
 
     this.map= this.googleMaps.create(element);
-    let ionic: LatLng = new LatLng(10,105);
+    let latlng: LatLng = new LatLng(43.0741904,-89.3809802);
     let position: CameraPosition = {
-      target: ionic,
+      target: latlng,
       zoom: 15,
       tilt: 30
     };
 
     this.map.moveCamera(position);
 
-    this.map.one(GoogleMapsEvent.MAP_READY).then(() =>
-      console.log('Map is ready!')
-    );
+    this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+      console.log('Map is ready!');
+      this.displayPins();
+    });
 
     this.addMarker();
+  }
 
+  displayPins(){
+    this.pinsService.getPins().then((pinsResult) => {
+      for(let pin of pinsResult["pins"]) {
+
+        let option = {
+          position: new LatLng (pin.latitude, pin.longitude),
+          icon: pin.image_url
+        }
+        this.map.addMarker(option);
+      }
+    });
   }
 
   addMarker(){
