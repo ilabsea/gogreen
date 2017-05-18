@@ -14,7 +14,7 @@ export class PinsService {
     headers.append('Content-Type', 'application/json' );
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post("http://192.168.1.124:3000/api/v1/pins", pinParams, options)
+    this.http.post("http://192.168.1.128:3000/api/v1/pins", pinParams, options)
       .subscribe(data => {
         console.log(data['_body']);
       }, error => {
@@ -24,7 +24,7 @@ export class PinsService {
 
   getPins(){
     return new Promise(resolve => {
-      this.http.get("http://192.168.1.124:3000/api/v1/pins")
+      this.http.get("http://192.168.1.128:3000/api/v1/pins")
         .subscribe(data => {
           resolve(data.json());
         }, error => {

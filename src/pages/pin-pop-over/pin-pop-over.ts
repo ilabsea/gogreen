@@ -1,4 +1,4 @@
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams , PopoverController} from 'ionic-angular';
 import { Component } from '@angular/core';
 import {
   GoogleMaps,
@@ -10,13 +10,14 @@ import {
   Marker,
   GoogleMapsAnimation
 } from '@ionic-native/google-maps';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+
+import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../../providers/pins-service';
 
 @Component({
   selector: 'page-pin-pop-over',
   templateUrl: 'pin-pop-over.html',
-  providers: [PinsService, Camera]
+  providers: [PinsService]
 })
 
 export class PinPopoverPage {
@@ -24,12 +25,12 @@ export class PinPopoverPage {
   icon: any;
   imageBase64: any;
 
-  constructor(public viewCtrl: ViewController, private navParams: NavParams, public pinsService: PinsService , private camera: Camera) {
+  constructor(public viewCtrl: ViewController, private navParams: NavParams,
+              public pinsService: PinsService, public popoverCtrl: PopoverController) {
     this.mapMarker = navParams.get('mapMarker');
   }
 
   ionViewDidLeave(){
-    this.mapMarker.map.setClickable(true);
     this.mapMarker.marker.getPosition((position) => {
       let lat = position.lat;
       let lng = position.lng;
@@ -44,30 +45,12 @@ export class PinPopoverPage {
       }
       this.pinsService.createPin(pinParams);
     })
-
+    this.popupThanks();
   }
 
   addPin(param) {
-    if(param=='camera'){
-      this.takePicture();
-    }else{
-      this.icon = 'www/assets/icon/' + param + '-small.png';
-      this.mapMarker.marker.setIcon(this.icon);
-    }
-  }
-
-  takePicture(){
-    const options: CameraOptions = {
-      quality: 20,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      console.log('error : ', err);
-    });
+    this.icon = 'www/assets/icon/' + param + '-small.png';
+    this.mapMarker.marker.setIcon(this.icon);
   }
 
   removeMarker(){
@@ -77,6 +60,13 @@ export class PinPopoverPage {
 
   close() {
     this.viewCtrl.dismiss();
-    this.mapMarker.map.setClickable(true);
+    // this.mapMarker.map.setClickable(true);
+  }
+
+  popupThanks() {
+    let popover = this.popoverCtrl.create(ThanksPopOver, {
+      'mapMarker' : { 'map': this.mapMarker.map, 'marker': this.mapMarker.marker }
+    });
+    popover.present();
   }
 }

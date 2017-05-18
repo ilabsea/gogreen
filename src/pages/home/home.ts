@@ -23,7 +23,8 @@ export class HomePage {
   marker: Marker;
   map: GoogleMap;
 
-  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController, public platform: Platform, public pinsService: PinsService) {
+  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
+              public platform: Platform, public pinsService: PinsService) {
     platform.ready().then(() => {
       this.loadMap();
     });
@@ -33,7 +34,7 @@ export class HomePage {
     let element: HTMLElement = document.getElementById('map');
 
     this.map= this.googleMaps.create(element);
-    let latlng: LatLng = new LatLng(43.0741904,-89.3809802);
+    let latlng: LatLng = new LatLng(11.562108, 104.888535);
     let position: CameraPosition = {
       target: latlng,
       zoom: 15,
@@ -56,7 +57,7 @@ export class HomePage {
 
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
-          icon: pin.icon 
+          icon: pin.icon
         }
         this.map.addMarker(option);
       }

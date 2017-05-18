@@ -16,6 +16,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { EventPage } from '../pages/event/event';
 import { ProfilePage } from '../pages/profile/profile';
 import { PinPopoverPage } from '../pages/pin-pop-over/pin-pop-over';
+import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../providers/pins-service';
 
 
@@ -27,7 +28,8 @@ import { PinsService } from '../providers/pins-service';
     TabsPage,
     EventPage,
     ProfilePage,
-    PinPopoverPage
+    PinPopoverPage,
+    ThanksPopOver
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { PinsService } from '../providers/pins-service';
     TabsPage,
     EventPage,
     ProfilePage,
-    PinPopoverPage
+    PinPopoverPage,
+    ThanksPopOver
   ],
   providers: [
     StatusBar,
