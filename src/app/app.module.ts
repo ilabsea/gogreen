@@ -18,7 +18,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { PinPopoverPage } from '../pages/pin-pop-over/pin-pop-over';
 import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../providers/pins-service';
-
+import { PinPhotosService } from '../providers/pin-photos-service';
 
 @NgModule({
   declarations: [
@@ -53,6 +53,7 @@ import { PinsService } from '../providers/pins-service';
     Facebook,
     GoogleMaps,
     PinsService,
+    PinPhotosService,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

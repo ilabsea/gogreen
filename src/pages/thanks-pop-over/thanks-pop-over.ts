@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ViewController, NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
+import { PinPhotosService } from '../../providers/pin-photos-service';
 
 @Component({
   selector: 'page-thanks-pop-over',
   templateUrl: 'thanks-pop-over.html',
-  providers: [Camera]
+  providers: [Camera, PinPhotosService]
 })
 
 export class ThanksPopOver {
@@ -14,7 +15,8 @@ export class ThanksPopOver {
   mapMarker: any;
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams,
-              private camera: Camera, private facebook: Facebook) {
+              private camera: Camera, private facebook: Facebook,
+              private pinPhotosService: PinPhotosService) {
     this.mapMarker = navParams.get('mapMarker');
   }
 
@@ -24,20 +26,6 @@ export class ThanksPopOver {
 
   ionViewDidLeave(){
     this.mapMarker.map.setClickable(true);
-  }
-
-  takePicture(){
-    const options: CameraOptions = {
-      quality: 20,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      console.log('error : ', err);
-    });
   }
 
   shareToFacebook(){
@@ -58,7 +46,23 @@ export class ThanksPopOver {
   }
 
   AddPhoto(){
-    this.takePicture();
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    let self = this;
+    this.camera.getPicture(options).then((imageData) => {
+      self.imageBase64 = 'data:image/jpeg;base64,' + imageData;
+      let params = {
+        "photo": self.imageBase64,
+        "pin_id": self.mapMarker.pinId
+      }
+      self.pinPhotosService.createPinPhoto(params);
+    }, (err) => {
+      console.log('error : ', err);
+    });
   }
 
   close() {

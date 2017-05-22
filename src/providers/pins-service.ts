@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PinsService {
+  public api:any = "http://192.168.1.124:3000/api/v1/";
 
   constructor(public http: Http) {
   }
@@ -14,17 +15,19 @@ export class PinsService {
     headers.append('Content-Type', 'application/json' );
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post("http://192.168.1.128:3000/api/v1/pins", pinParams, options)
+    return new Promise(resolve => {
+      this.http.post(this.api + "pins", pinParams, options)
       .subscribe(data => {
-        console.log(data['_body']);
+        resolve(data.json());
       }, error => {
-        console.log(error);
+        resolve(error);
       })
+    })
   }
 
   getPins(){
     return new Promise(resolve => {
-      this.http.get("http://192.168.1.128:3000/api/v1/pins")
+      this.http.get(this.api + "pins")
         .subscribe(data => {
           resolve(data.json());
         }, error => {

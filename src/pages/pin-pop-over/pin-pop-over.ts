@@ -23,7 +23,6 @@ import { PinsService } from '../../providers/pins-service';
 export class PinPopoverPage {
   mapMarker: any;
   icon: any;
-  imageBase64: any;
 
   constructor(public viewCtrl: ViewController, private navParams: NavParams,
               public pinsService: PinsService, public popoverCtrl: PopoverController) {
@@ -31,6 +30,7 @@ export class PinPopoverPage {
   }
 
   ionViewDidLeave(){
+    let self = this;
     this.mapMarker.marker.getPosition((position) => {
       let lat = position.lat;
       let lng = position.lng;
@@ -39,13 +39,16 @@ export class PinPopoverPage {
           latitude: lat,
           longitude: lng,
           icon: this.icon,
-          user_id: 1,
-          image: this.imageBase64
+          user_id: 1
         }
       }
-      this.pinsService.createPin(pinParams);
+      this.pinsService.createPin(pinParams).then((pin) => {
+        console.log('pin : ', pin)
+        self.popupThanks(pin["id"]);
+      }, (error) => {
+        console.log('error : ', error);
+      });
     })
-    this.popupThanks();
   }
 
   addPin(param) {
@@ -60,12 +63,11 @@ export class PinPopoverPage {
 
   close() {
     this.viewCtrl.dismiss();
-    // this.mapMarker.map.setClickable(true);
   }
 
-  popupThanks() {
+  popupThanks(pinId) {
     let popover = this.popoverCtrl.create(ThanksPopOver, {
-      'mapMarker' : { 'map': this.mapMarker.map, 'marker': this.mapMarker.marker }
+      'mapMarker' : { 'map': this.mapMarker.map, 'marker': this.mapMarker.marker, 'pinId' : pinId }
     });
     popover.present();
   }

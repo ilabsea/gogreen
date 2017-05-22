@@ -44,7 +44,6 @@ export class HomePage {
     this.map.moveCamera(position);
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-      console.log('Map is ready!');
       this.displayPins();
     });
 
