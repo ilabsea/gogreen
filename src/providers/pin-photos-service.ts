@@ -25,4 +25,15 @@ export class PinPhotosService {
       })
   }
 
+  getPinPhotosByPinId(pinId) {
+    return new Promise((resolve) => {
+      this.http.get(this.pinsService.api + "pin_photos/" + pinId + "/get_by_pin_id")
+        .subscribe(data => {
+          resolve(data.json());
+        }, (error) => {
+          resolve(error.json());
+        })
+    })
+  }
+
 }

@@ -20,10 +20,6 @@ export class ThanksPopOver {
     this.mapMarker = navParams.get('mapMarker');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ThanksPopOver');
-  }
-
   ionViewDidLeave(){
     this.mapMarker.map.setClickable(true);
   }
@@ -63,11 +59,6 @@ export class ThanksPopOver {
     }, (err) => {
       console.log('error : ', err);
     });
-  }
-
-  close() {
-    this.viewCtrl.dismiss();
-    this.mapMarker.map.setClickable(true);
   }
 
 }

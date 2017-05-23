@@ -16,9 +16,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { EventPage } from '../pages/event/event';
 import { ProfilePage } from '../pages/profile/profile';
 import { PinPopoverPage } from '../pages/pin-pop-over/pin-pop-over';
+import { PinInfoPage } from '../pages/pin-info/pin-info';
 import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
+import { PhotoPage } from '../pages/photo/photo';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { PinPhotosService } from '../providers/pin-photos-service';
     EventPage,
     ProfilePage,
     PinPopoverPage,
-    ThanksPopOver
+    ThanksPopOver,
+    PinInfoPage,
+    PhotoPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,9 @@ import { PinPhotosService } from '../providers/pin-photos-service';
     EventPage,
     ProfilePage,
     PinPopoverPage,
-    ThanksPopOver
+    ThanksPopOver,
+    PinInfoPage,
+    PhotoPage
   ],
   providers: [
     StatusBar,
