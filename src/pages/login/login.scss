@@ -1,26 +1,29 @@
 page-login {
   .home {
-    background: url('../../assets/home/backgroud.png');
+    background: url('../assets/home/backgroud.png') fixed center no-repeat;
+    background-size: cover;
   }
 
   .logo {
-    padding-left: 20%;
-    padding-top: 30%;
-    width: 85%;
+    padding-left: 19%;
+    padding-top: 20%;
+    max-width: 82%;
   }
 
   .welcome-text {
     color: white;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 8vw;
     text-align: center;
-    padding-top: 3%;
-    padding-bottom: 41%;
+    padding-top: 2%;
   }
 
   .login{
-    background: url("../../assets/home/login.png") center no-repeat;
-    width: 100%;
-    height: 9%;
+    background: url("../assets/home/login.png") center no-repeat;
+    background-size: contain;
+    width: 85%;
+    height: 8%;
+    margin-left: 7%;
+    margin-top: 41%;
   }
 }

@@ -3,8 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-// import { Login } from '../pages/login/login';
-// import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -12,12 +12,21 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = LoginPage;
+  hasRoot: any = false;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, private storage: Storage, statusBar: StatusBar, splashScreen: SplashScreen, ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
+      this.storage.get('isLogged').then(logged => {
+        if (logged) {
+           this.rootPage = TabsPage;
+        }
+        this.hasRoot = true;
+      });
     });
+
+
   }
 }

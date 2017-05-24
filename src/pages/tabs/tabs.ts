@@ -10,7 +10,6 @@ import { EventPage } from '../event/event';
 })
 export class TabsPage {
   tabHome: any = HomePage;
-  // tabPin: any = PinPage;
   tabProfile: any = ProfilePage;
   tabEvent: any = EventPage;
 
