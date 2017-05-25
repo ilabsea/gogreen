@@ -12,8 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 
 export class MyApp {
-  rootPage:any = LoginPage;
-  hasRoot: any = false;
+  rootPage:any = TabsPage;
+  hasRoot: any = true;
 
   constructor(platform: Platform, private storage: Storage, statusBar: StatusBar, splashScreen: SplashScreen, ) {
     platform.ready().then(() => {

@@ -43,7 +43,6 @@ export class PinPopoverPage {
         }
       }
       this.pinsService.createPin(pinParams).then((pin) => {
-        console.log('pin : ', pin)
         self.popupThanks(pin["id"]);
       }, (error) => {
         console.log('error : ', error);
@@ -68,7 +67,7 @@ export class PinPopoverPage {
   popupThanks(pinId) {
     let popover = this.popoverCtrl.create(ThanksPopOver, {
       'mapMarker' : { 'map': this.mapMarker.map, 'marker': this.mapMarker.marker, 'pinId' : pinId }
-    });
+    }, {cssClass: 'thanks-popover'});
     popover.present();
   }
 }

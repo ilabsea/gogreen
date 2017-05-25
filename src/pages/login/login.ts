@@ -12,12 +12,12 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, private facebook: Facebook, private storage: Storage) {
   }
-  
+
   facebookLogin(){
     this.facebook.login(['email']).then( (response) => {
       console.log('response : ', response);
       this.storage.set('isLogged', true);
-      this.navCtrl.push(TabsPage, {}, {animate: false});
+      this.navCtrl.setRoot(TabsPage);
     }).catch((error) => {
       console.log(error)
     });

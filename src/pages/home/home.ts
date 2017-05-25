@@ -25,10 +25,12 @@ export class HomePage {
   map: GoogleMap;
 
   constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
-              public platform: Platform, public pinsService: PinsService) {
-    platform.ready().then(() => {
-      this.loadMap();
-    });
+              public pinsService: PinsService) {
+  }
+
+  ionViewWillEnter(){
+    this.loadMap();
+    console.log('ionViewWillEnter in HomePage')
   }
 
   loadMap() {
@@ -38,8 +40,9 @@ export class HomePage {
     let latlng: LatLng = new LatLng(11.562108, 104.888535);
     let position: CameraPosition = {
       target: latlng,
-      zoom: 15,
-      tilt: 30
+      zoom: 13,
+      tilt: 30,
+      bearing: 50
     };
 
     this.map.moveCamera(position);
@@ -48,11 +51,10 @@ export class HomePage {
       this.displayPins();
     });
 
-    this.addMarker();
+    this.createMarker();
   }
 
   displayPins(){
-    let self = this;
     this.pinsService.getPins().then((pinsResult) => {
       for(let pin of pinsResult["pins"]) {
 
@@ -60,9 +62,8 @@ export class HomePage {
           position: new LatLng (pin.latitude, pin.longitude),
           icon: pin.icon,
           markerClick: function(){
-            console.log('pin option markerClick : ' , pin)
             this.map.setClickable(false);
-            self.popupPinInfo(pin);
+            this.popupPinInfo(pin);
           }
         }
         this.map.addMarker(option);
@@ -70,8 +71,7 @@ export class HomePage {
     });
   }
 
-  addMarker(){
-    let self = this;
+  createMarker(){
     this.map.addEventListener(GoogleMapsEvent.MAP_CLICK).subscribe((e) => {
       this.map.setCenter(e);
       let markerOptions: MarkerOptions = {
@@ -80,7 +80,7 @@ export class HomePage {
         draggable: true
       };
       this.map.addMarker(markerOptions).then((marker: Marker) => {
-        console.log('marker : ', marker)
+        console.log('marker in addMarker homePage : ', marker);
         this.marker = marker;
         this.map.setClickable(false);
         this.popupPinIcon();
@@ -91,7 +91,7 @@ export class HomePage {
   popupPinIcon() {
     let popover = this.popoverCtrl.create(PinPopoverPage, {
       'mapMarker' : { 'map': this.map, 'marker': this.marker }
-    });
+    }, {cssClass: 'pin-popover'});
     popover.present();
   }
 

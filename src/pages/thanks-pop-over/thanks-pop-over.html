@@ -1,5 +1,24 @@
-<ion-list>
-    <ion-item class="item-icon-left"><ion-icon ios="ios-star" md="md-star"></ion-icon> Thank you for contribution!</ion-item>
-    <ion-item class="item-icon-left" (click)="shareToFacebook()"><ion-icon name="logo-facebook"></ion-icon> Share to your friends</ion-item>
-    <ion-item class="item-icon-left" (click)="AddPhoto()"><ion-icon ios="ios-camera" md="md-camera"></ion-icon> Add photos</ion-item>
-</ion-list>
+<ion-card class="card-popover">
+  <ion-item class="item-icon-left">
+    <ion-avatar item-left>
+      <img src="assets/icon/thank.png" />
+    </ion-avatar>
+    Thank you for contribution!
+  </ion-item>
+</ion-card>
+<ion-card class="card-popover">
+  <ion-item class="item-icon-left item-popover" (click)="shareToFacebook()">
+    <ion-avatar item-left>
+      <img src="assets/icon/facebook.png"/>
+    </ion-avatar>
+    Share to your friends
+  </ion-item>
+</ion-card>
+<ion-card class="card-popover">
+  <ion-item class="item-icon-left" (click)="AddPhoto()">
+    <ion-avatar item-left>
+      <img src="assets/icon/camera.png"/>
+    </ion-avatar>
+    Add photos
+  </ion-item>
+</ion-card>
