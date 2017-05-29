@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, PopoverController} from 'ionic-angular';
+import { Platform, PopoverController, ViewController} from 'ionic-angular';
 import {
   GoogleMaps,
   GoogleMap,
@@ -13,6 +13,7 @@ import {
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 import { PinsService } from '../../providers/pins-service';
 import { PinInfoPage } from '../pin-info/pin-info';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -25,33 +26,46 @@ export class HomePage {
   map: GoogleMap;
 
   constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
-              public pinsService: PinsService) {
+              public pinsService: PinsService, private viewCtrl: ViewController) {
+    this.map = null;
+    this.marker = null;
   }
 
-  ionViewWillEnter(){
+  ionViewDidLoad(){
     this.loadMap();
-    console.log('ionViewWillEnter in HomePage')
   }
 
   loadMap() {
-    let element: HTMLElement = document.getElementById('map');
-
-    this.map= this.googleMaps.create(element);
     let latlng: LatLng = new LatLng(11.562108, 104.888535);
-    let position: CameraPosition = {
-      target: latlng,
-      zoom: 13,
-      tilt: 30,
-      bearing: 50
-    };
 
-    this.map.moveCamera(position);
+    this.map = new GoogleMap('map', {
+      'backgroundColor': 'white',
+      'controls': {
+        'compass': true,
+        'myLocationButton': true,
+        'indoorPicker': true,
+        'zoom': true
+      },
+      'gestures': {
+        'scroll': true,
+        'tilt': true,
+        'rotate': true,
+        'zoom': true
+      },
+      'camera': {
+        'latLng': latlng,
+        'tilt': 30,
+        'zoom': 15,
+        'bearing': 50
+      }
+    });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
       this.displayPins();
     });
 
     this.createMarker();
+
   }
 
   displayPins(){
@@ -80,7 +94,6 @@ export class HomePage {
         draggable: true
       };
       this.map.addMarker(markerOptions).then((marker: Marker) => {
-        console.log('marker in addMarker homePage : ', marker);
         this.marker = marker;
         this.map.setClickable(false);
         this.popupPinIcon();
