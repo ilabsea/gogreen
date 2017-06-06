@@ -10,7 +10,8 @@ import { Storage } from '@ionic/storage';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, private facebook: Facebook, private storage: Storage) {
+  constructor(public navCtrl: NavController, private facebook: Facebook,
+              private storage: Storage) {
   }
 
   facebookLogin(){

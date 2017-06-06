@@ -1,13 +1,9 @@
-page-thanks-pop-over {
+$popover-width: 280px;
 
+page-thanks-pop-over {
   .card-popover {
     margin-bottom: 1%;
     border-radius: 7%;
-  }
-
-  .card-popover img{
-    width: 15%;
-    height: 15%;
   }
 
   .item {
@@ -15,17 +11,14 @@ page-thanks-pop-over {
   }
 
   .item-inner{
-    margin-left: -120%;
-    font-size: 3vw;
     color: white;
-    font-weight: bold;
   }
+
 }
+
 
 .thanks-popover .popover-content {
   background-color: transparent;
   box-shadow: none;
-  width: 60%;
-  left: 20% !important;
-  top: 35% !important;
+  width: $popover-width;
 }

@@ -1,5 +1,4 @@
 import { NumberGenerator } from './number-generator';
-import {} from 'jasmine';
 
 let numberGenerator = null;
 

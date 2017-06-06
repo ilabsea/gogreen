@@ -13,9 +13,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 export class MyApp {
   rootPage:any = LoginPage;
-  hasRoot: any = true;
+  hasRoot: any = false;
 
-  constructor(platform: Platform, private storage: Storage, statusBar: StatusBar, splashScreen: SplashScreen, ) {
+  constructor(platform: Platform, private storage: Storage, statusBar: StatusBar, splashScreen: SplashScreen ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
@@ -26,7 +26,5 @@ export class MyApp {
         this.hasRoot = true;
       });
     });
-
-
   }
 }

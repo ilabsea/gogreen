@@ -8,6 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class EventPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
 
   ionViewDidLoad() {
