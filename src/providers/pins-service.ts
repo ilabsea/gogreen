@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Endpoint } from './endpoint';
 
 @Injectable()
 export class PinsService {
-  public api:any = "http://192.168.1.124:3000/api/v1/";
+  public api:any;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private endpoint: Endpoint) {
   }
 
   createPin(pinParams){
@@ -16,7 +17,7 @@ export class PinsService {
     let options = new RequestOptions({ headers: headers });
 
     return new Promise(resolve => {
-      this.http.post(this.api + "pins", pinParams, options)
+      this.http.post(this.endpoint.api + "pins", pinParams, options)
       .subscribe(data => {
         resolve(data.json());
       }, error => {
@@ -27,7 +28,7 @@ export class PinsService {
 
   getPins(){
     return new Promise(resolve => {
-      this.http.get(this.api + "pins")
+      this.http.get(this.endpoint.api + "pins")
         .subscribe(data => {
           resolve(data.json());
         }, error => {

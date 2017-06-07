@@ -22,6 +22,7 @@ import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
 import { PhotoPage } from '../pages/photo/photo';
+import { Endpoint } from '../providers/endpoint';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { PhotoPage } from '../pages/photo/photo';
     GoogleMaps,
     PinsService,
     PinPhotosService,
+    Endpoint,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

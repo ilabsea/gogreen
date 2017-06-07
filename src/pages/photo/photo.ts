@@ -1,25 +1,28 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PinPhotosService } from '../../providers/pin-photos-service';
+import { Endpoint } from '../../providers/endpoint';
 
 @Component({
   selector: 'page-photo',
   templateUrl: 'photo.html',
-  providers: [PinPhotosService]
+  providers: [PinPhotosService, Endpoint]
 
 })
 export class PhotoPage {
   pin: any;
   pinPhotos: any;
   map: any;
+  url: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private pinPhotosService: PinPhotosService) {
+              private pinPhotosService: PinPhotosService, private endpoint: Endpoint) {
     this.pin = navParams.get('pin');
     this.map = navParams.get('map');
   }
 
   ionViewDidEnter(){
+    this.url = this.endpoint.url;
     this.showPhotos();
   }
 
@@ -33,9 +36,7 @@ export class PhotoPage {
 
   buildPhotosRowCol(photos) {
     let n = 0 ;
-    let nbRows = Math.round(photos.length / 3);
     let res = [];
-
     while( n < photos.length ) {
       let row = [];
       let i = n;
@@ -49,16 +50,5 @@ export class PhotoPage {
     }
     return res;
   }
-
-
-
-
-
-
-
-
-
-
-
 
 }

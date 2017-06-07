@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-row class="row" *ngFor="let rows of pinPhotos">
     <ion-col class="col"  *ngFor="let column of rows" no-lines>
-      <img src='http://192.168.1.124:3000{{column["photo"]["url"]}}'>
+      <img src='{{url}}{{column["photo"]["url"]}}'>
     </ion-col>
   </ion-row>
 </ion-content>

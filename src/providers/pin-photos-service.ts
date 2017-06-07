@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { PinsService } from './pins-service';
+import { Endpoint } from './endpoint';
 
 @Injectable()
 export class PinPhotosService {
 
-  constructor(public http: Http, private pinsService: PinsService) {
+  constructor(public http: Http, private endpoint: Endpoint) {
   }
 
   createPinPhoto(params){
@@ -15,9 +15,7 @@ export class PinPhotosService {
     headers.append('Content-Type', 'application/json' );
     let options = new RequestOptions({ headers: headers });
 
-    console.log('params : ', params);
-
-    this.http.post(this.pinsService.api + "pin_photos", params, options)
+    this.http.post(this.endpoint.api + "pin_photos", params, options)
       .subscribe(data => {
         console.log(data['_body']);
       }, error => {
@@ -27,7 +25,7 @@ export class PinPhotosService {
 
   getPinPhotosByPinId(pinId) {
     return new Promise((resolve) => {
-      this.http.get(this.pinsService.api + "pin_photos/" + pinId + "/get_by_pin_id")
+      this.http.get(this.endpoint.api + "pin_photos/" + pinId + "/get_by_pin_id")
         .subscribe(data => {
           resolve(data.json());
         }, (error) => {
