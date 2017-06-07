@@ -1,6 +1,6 @@
 <ion-header>
-  
-  <ion-navbar>
+
+  <ion-navbar color="green-color">
     <ion-title>View photos</ion-title>
   </ion-navbar>
 
@@ -8,7 +8,9 @@
 
 
 <ion-content padding>
-  <ion-list *ngFor="let photo of pinPhotos" no-lines>
-    <ion-item><img src='http://192.168.1.124:3000{{photo["photo"]["url"]}}' width='50%'></ion-item>
-  </ion-list>
+  <ion-row class="row" *ngFor="let rows of pinPhotos">
+    <ion-col class="col"  *ngFor="let column of rows" no-lines>
+      <img src='http://192.168.1.124:3000{{column["photo"]["url"]}}'>
+    </ion-col>
+  </ion-row>
 </ion-content>

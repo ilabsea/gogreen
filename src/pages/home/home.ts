@@ -69,6 +69,7 @@ export class HomePage {
   }
 
   displayPins(){
+    let self = this;
     this.pinsService.getPins().then((pinsResult) => {
       for(let pin of pinsResult["pins"]) {
 
@@ -76,8 +77,8 @@ export class HomePage {
           position: new LatLng (pin.latitude, pin.longitude),
           icon: pin.icon,
           markerClick: function(){
-            this.map.setClickable(false);
-            this.popupPinInfo(pin);
+            self.map.setClickable(false);
+            self.popupPinInfo(pin);
           }
         }
         this.map.addMarker(option);
@@ -111,7 +112,7 @@ export class HomePage {
   popupPinInfo(pin) {
     let popover = this.popoverCtrl.create(PinInfoPage, {
       'mapPin' : { 'map': this.map, 'pin': pin }
-    });
+    }, {cssClass: 'pin-info-popover'});
     popover.present();
   }
 }

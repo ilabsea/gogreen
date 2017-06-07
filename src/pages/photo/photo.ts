@@ -24,12 +24,41 @@ export class PhotoPage {
   }
 
   showPhotos() {
-    console.log('this.ion view didload of photo page : ', this.map);
     let pinId = this.pin["id"];
     this.map.setClickable(false);
     this.pinPhotosService.getPinPhotosByPinId(pinId).then(pinPhotos => {
-      this.pinPhotos = pinPhotos["pin_photos"];
+      this.pinPhotos = this.buildPhotosRowCol(pinPhotos["pin_photos"]);
     })
   }
+
+  buildPhotosRowCol(photos) {
+    let n = 0 ;
+    let nbRows = Math.round(photos.length / 3);
+    let res = [];
+
+    while( n < photos.length ) {
+      let row = [];
+      let i = n;
+      while ( i < 3 + n ) {
+        if(photos[i])
+          row.push(photos[i]);
+        i++;
+      }
+      res.push(row);
+      n = n + 3;
+    }
+    return res;
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 }
