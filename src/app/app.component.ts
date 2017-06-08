@@ -15,7 +15,8 @@ export class MyApp {
   rootPage:any = LoginPage;
   hasRoot: any = true;
 
-  constructor(platform: Platform, private storage: Storage, statusBar: StatusBar, splashScreen: SplashScreen ) {
+  constructor(platform: Platform, private storage: Storage, statusBar: StatusBar,
+              splashScreen: SplashScreen ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
