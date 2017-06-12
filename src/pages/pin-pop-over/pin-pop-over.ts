@@ -1,18 +1,13 @@
 import { ViewController, NavParams , PopoverController} from 'ionic-angular';
 import { Component } from '@angular/core';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  LatLng,
-  CameraPosition,
-  MarkerOptions,
-  Marker,
-  GoogleMapsAnimation
-} from '@ionic-native/google-maps';
 
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../../providers/pins-service';
+import { PinInfoPage } from '../pin-info/pin-info';
+
+import {
+  MarkerOptions
+} from '@ionic-native/google-maps';
 
 @Component({
   selector: 'page-pin-pop-over',
@@ -44,6 +39,15 @@ export class PinPopoverPage {
       }
       this.pinsService.createPin(pinParams).then((pin) => {
         self.popupThanks(pin["id"]);
+        console.log('self.mapMarker : ', self.mapMarker);
+        self.mapMarker.markerClick(() => {
+          self.mapMarker.setClickable(false);
+          // self.popupPinInfo(pin);
+          let popover = this.popoverCtrl.create(PinInfoPage, {
+            'mapPin' : { 'map': this.mapMarker, 'pin': pin }
+          }, {cssClass: 'pin-info-popover'});
+          popover.present();
+        });
       }, (error) => {
         console.log('error : ', error);
       });
