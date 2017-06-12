@@ -10,13 +10,21 @@ import { LoginPage } from '../login/login';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+  userProfile: any;
+  userName: any;
 
   constructor(private facebook: Facebook, public navCtrl: NavController,
               private storage: Storage, private app: App) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Profile');
+    let userId = this.storage.get('userId');
+    let self = this;
+    let params = new Array<string>();
+    this.facebook.api("/me?fields=name" , params).then(function(user) {
+      self.userProfile = "https://graph.facebook.com/" + user["id"] + "/picture";
+      self.userName = user.name;
+    })
   }
 
   logout() {
@@ -25,6 +33,10 @@ export class ProfilePage {
       self.storage.set('isLogged', false);
       self.app.getRootNav().setRoot(LoginPage);
     });
+  }
+
+  inviteFiends() {
+    // this.facebook.appInvite( "https://play.google.com/store/apps/details?id=com.limmouyleng.powerconsumption");
   }
 
 }

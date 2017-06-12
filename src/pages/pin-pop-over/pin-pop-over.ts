@@ -1,16 +1,5 @@
 import { ViewController, NavParams , PopoverController} from 'ionic-angular';
 import { Component } from '@angular/core';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  LatLng,
-  CameraPosition,
-  MarkerOptions,
-  Marker,
-  GoogleMapsAnimation
-} from '@ionic-native/google-maps';
-
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../../providers/pins-service';
 
