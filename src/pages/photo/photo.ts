@@ -27,7 +27,6 @@ export class PhotoPage {
   }
 
   showPhotos() {
-    console.log('showPhotos');
     let pinId = this.pin["id"];
     this.map.setClickable(false);
     this.pinPhotosService.getPinPhotosByPinId(pinId).then(pinPhotos => {

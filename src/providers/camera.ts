@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 export class Camera {
 
   constructor() {
-    console.log('Hello Camera Provider');
   }
 
 }

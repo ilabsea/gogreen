@@ -15,12 +15,7 @@ export class PinPhotosService {
     headers.append('Content-Type', 'application/json' );
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post(this.endpoint.api + "pin_photos", params, options)
-      .subscribe(data => {
-        console.log(data['_body']);
-      }, error => {
-        console.log(error);
-      })
+    this.http.post(this.endpoint.api + "pin_photos", params, options);
   }
 
   getPinPhotosByPinId(pinId) {

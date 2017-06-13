@@ -25,7 +25,8 @@ export class HomePage {
   map: GoogleMap;
 
   constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
-              public pinsService: PinsService, private viewCtrl: ViewController) {
+              public pinsService: PinsService, private viewCtrl: ViewController,
+              private storage: Storage) {
     this.map = null;
     this.marker = null;
   }
@@ -86,12 +87,22 @@ export class HomePage {
   }
 
   createMarker(){
-    this.map.addEventListener(GoogleMapsEvent.MAP_CLICK).subscribe((e) => {
+    this.map.addEventListener(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((e) => {
       this.map.setCenter(e);
+      let self = this;
       let markerOptions: MarkerOptions = {
         position: e,
         animation: GoogleMapsAnimation.DROP,
-        draggable: true
+        draggable: true,
+        markerClick: function(marker){
+          self.map.setClickable(false);
+          self.pinsService.getPinByMarkerId(marker.id).then((pin) => {
+            self.popupPinInfo(pin);
+          }, (error) => {
+            console.log('error : ', error)
+          });
+
+        }
       };
       this.map.addMarker(markerOptions).then((marker: Marker) => {
         this.marker = marker;

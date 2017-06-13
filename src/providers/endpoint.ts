@@ -3,8 +3,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class Endpoint {
-  public url: any = "http://4548b7bb.ngrok.io";
-  public api:any = "http://4548b7bb.ngrok.io/api/v1/";
+  public url: any = "http://0b9f6964.ngrok.io";
+  public api:any = "http://0b9f6964.ngrok.io/api/v1/";
 
   constructor() {
   }

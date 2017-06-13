@@ -7,7 +7,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Facebook } from '@ionic-native/facebook';
 import { GoogleMaps } from '../providers/google-maps';
 import { Camera } from '../providers/camera';
-import { Geolocation } from '@ionic-native/geolocation'
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';

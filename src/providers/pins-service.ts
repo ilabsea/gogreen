@@ -37,4 +37,15 @@ export class PinsService {
     });
   }
 
+  getPinByMarkerId(markerId){
+    return new Promise(resolve => {
+      this.http.get(this.endpoint.api + "pins/" + markerId + "/get_by_marker_id")
+        .subscribe(data => {
+          resolve(data.json());
+        }, error => {
+          resolve(error);
+        })
+    });
+  }
+
 }
