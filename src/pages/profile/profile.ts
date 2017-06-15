@@ -36,7 +36,13 @@ export class ProfilePage {
   }
 
   inviteFiends() {
-    // this.facebook.appInvite( "https://play.google.com/store/apps/details?id=com.limmouyleng.powerconsumption");
+    this.facebook.appInvite({ url: "https://fb.me/1096318540501333",
+        picture: "https://www.logogarden.com/wp-content/uploads/lg-index/Example-Logo-6.jpg"
+    }).then((obj) => {
+      console.log('obj : ', obj);
+    }, (obj) => {
+        console.log(obj);
+    } );
   }
 
 }
