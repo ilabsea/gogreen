@@ -8,6 +8,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { IonicStorageModule } from '@ionic/storage';
 import { NavController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { FacebookMock } from '../../mocks'
 
 let comp: LoginPage;
 let fixture: ComponentFixture<LoginPage>;
@@ -46,16 +47,26 @@ describe('LoginPage Component', () => {
     expect(comp).toBeTruthy();
   });
 
-  it('should response and change root page to TabsPage', () => {
+  it('should login in facebook and change root page to TabsPage', () => {
     let navCtrl = fixture.debugElement.injector.get(NavController);
     spyOn(navCtrl, 'setRoot');
-    console.log("by : ", By);
     de = fixture.debugElement.query(By.css('button'));
-    console.log('de : ', de);
-    // de.nativeElement.click();
-    de.triggerEventHandler('click', null);
+    de.nativeElement.click();
+    let fb = new FacebookMock();
+    const mockRespond = JSON.stringify({
+      "status": "connected",
+      "authResponse": {
+        "accessToken": "token123",
+        "expiresIn": "5164654",
+        "session_key": true,
+        "userID": "123456789"
+      }
+    });
 
-    expect(navCtrl.setRoot).toHaveBeenCalledWith(TabsPage);
+    fb.login().then((response) => {
+      expect(response).toBe(mockRespond);
+      // expect(navCtrl.setRoot).toHaveBeenCalledWith(TabsPage);
+    })
+
   });
-
 });
