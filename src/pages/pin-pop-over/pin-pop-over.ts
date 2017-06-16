@@ -1,7 +1,12 @@
 import { ViewController, NavParams , PopoverController} from 'ionic-angular';
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../../providers/pins-service';
+import { PinInfoPage } from '../pin-info/pin-info';
+import {
+  GoogleMapsEvent
+} from '@ionic-native/google-maps';
 
 @Component({
   selector: 'page-pin-pop-over',
@@ -14,27 +19,35 @@ export class PinPopoverPage {
   icon: any;
 
   constructor(public viewCtrl: ViewController, private navParams: NavParams,
-              public pinsService: PinsService, public popoverCtrl: PopoverController) {
+              public pinsService: PinsService, public popoverCtrl: PopoverController,
+              private storage: Storage) {
     this.mapMarker = navParams.get('mapMarker');
   }
 
   ionViewDidLeave(){
+    this.submitPin();
+  }
+
+  submitPin(){
     let self = this;
     this.mapMarker.marker.getPosition((position) => {
       let lat = position.lat;
       let lng = position.lng;
-      let pinParams = {
-        "pin": {
-          latitude: lat,
-          longitude: lng,
-          icon: this.icon,
-          user_id: 1
+      self.storage.get('userID').then((userId) => {
+        let pinParams = {
+          "pin": {
+            latitude: lat,
+            longitude: lng,
+            icon: self.icon,
+            user_id: userId,
+            marker_id: self.mapMarker.marker._objectInstance.id
+          }
         }
-      }
-      this.pinsService.createPin(pinParams).then((pin) => {
-        self.popupThanks(pin["id"]);
-      }, (error) => {
-        console.log('error : ', error);
+        self.pinsService.createPin(pinParams).then((pin) => {
+          self.popupThanks(pin["id"]);
+        }, (error) => {
+          console.log('error : ', error);
+        });
       });
     })
   }

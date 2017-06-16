@@ -17,6 +17,7 @@ export class LoginPage {
   facebookLogin(){
     this.facebook.login(['email']).then( (response) => {
       this.storage.set('isLogged', true);
+      this.storage.set('userID', response.authResponse.userID);
       this.navCtrl.setRoot(TabsPage);
     }).catch((error) => {
       console.log(error)

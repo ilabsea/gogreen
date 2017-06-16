@@ -16,11 +16,9 @@ export class PinInfoPage {
 
   ionViewWillLeave(){
     this.mapPin.map.setClickable(true);
-    console.log('ionViewDidLeave in pageinfo')
   }
 
   showPhotos() {
-    console.log('this.mapPin : ', this.mapPin);
     this.navCtrl.push(PhotoPage, this.mapPin);
   }
 
