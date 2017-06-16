@@ -1,12 +1,25 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>event</ion-title>
+  <ion-navbar color="green-color">
+    <ion-title >Event</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  Event page
+  <ion-list>
+    <ion-item (click)='shareEvents()'>
+      <ion-avatar item-left>
+        <img src="assets/event/share.png">
+      </ion-avatar>
+      <h2>Share Events</h2>
+    </ion-item>
+    <ion-item (click)='viewEvents()'>
+      <ion-avatar item-left>
+        <img src="assets/event/view.png">
+      </ion-avatar>
+      <h2>View Events</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>
