@@ -1,11 +1,13 @@
-import { TestBed, ComponentFixture, async} from '@angular/core/testing';
+import { TestBed, ComponentFixture, async, inject} from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
 import { HomePage } from './home';
-import { Http, HttpModule, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
+import { Http, HttpModule, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
-import { PinsMock } from '../../mock'
+import { PinsMock } from '../../mocks';
+import { PinsService } from '../../providers/pins-service';
+import { Endpoint } from '../../providers/endpoint';
 
 let comp: HomePage;
 let fixture: ComponentFixture<HomePage>;
@@ -18,14 +20,15 @@ describe('HomePage Component', () => {
     TestBed.configureTestingModule({
       declarations: [MyApp, HomePage],
       providers: [
+        PinsService,
+        Endpoint,
         MockBackend,
-        BaseRequestOptions,
         {
           provide: Http,
           useFactory: (mockBackend, options) => {
             return new Http(mockBackend, options);
           },
-          deps: [MockBackend, BaseRequestOptions]
+          deps: [MockBackend]
         }
       ],
       imports: [
@@ -49,42 +52,25 @@ describe('HomePage Component', () => {
     expect(comp).toBeTruthy();
   });
 
-  // it('should return two pins', inject([PinsService, MockBackend], (pinsService, mockBackend) => {
-  //   const mockRespond = JSON.stringify({
-  //     "pins": [
-  //       {
-  //         "id": 1,
-  //         "latitude": 11.560987,
-  //         "longitude": 104.887940,
-  //         "icon": "www/assets/icon/sad-small.png",
-  //         "user_id": "1",
-  //         "created_at": "2017-06-07T02:19:01.220Z",
-  //         "updated_at": "2017-06-07T02:19:01.220Z",
-  //         "marker_id": "marker_m12"
-  //       },
-  //       {
-  //         "id": 2,
-  //         "latitude": 11.564434,
-  //         "longitude": 104.885749,
-  //         "icon": "www/assets/icon/sad-small.png",
-  //         "user_id": "1",
-  //         "created_at": "2017-06-07T02:37:34.318Z",
-  //         "updated_at": "2017-06-07T02:37:34.318Z",
-  //         "marker_id": "marker_m13"
-  //       },
-  //     ]
-  //   });
-  //
-  //   mockBackend.connections.subscribe((connection) => {
-  //     connection.mockRespond(new Response(new ResponseOptions({
-  //       body: mockRespond
-  //     })));
-  //   });
+  it('should return two pins', inject([PinsService, MockBackend],
+    (pinsService, mockBackend) => {
+    let pinsMock = new PinsMock();
+    const mockResponse = pinsMock.pins;
 
-        // expect(Array.isArray(productsService.products)).toBeTruthy();
-        // expect(productsService.products.length).toBeGreaterThan(0);
-  // })
-  //
+    mockBackend.connections.subscribe((connection) => {
+      connection.mockRespond(new Response(new ResponseOptions({
+        body: mockResponse
+      })));
+    });
+
+    pinsService.getPins().then((pins) => {
+      console.log('pins : ', pins);
+      expect(Array.isArray(pins["pins"])).toBeTruthy();
+      expect(pins["pins"].length).toBeGreaterThan(0);
+    });
+  }))
+});
+
   // it('displays products containing a title, description, and price in the list', () => {
   //
   //   let productsService = fixture.debugElement.injector.get(Products);
@@ -100,4 +86,4 @@ describe('HomePage Component', () => {
   //   expect(el.textContent).toContain(firstProduct.price);
   //
   // });
-});
+// });

@@ -3,22 +3,22 @@ import { NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
-
+import { Endpoint } from '../../providers/endpoint';
 
 @Component({
   selector: 'page-profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile.html',
+  providers: [Endpoint]
 })
 export class ProfilePage {
   userProfile: any;
   userName: any;
 
   constructor(private facebook: Facebook, public navCtrl: NavController,
-              private storage: Storage, private app: App) {
+              private storage: Storage, private app: App, private endpoint: Endpoint) {
   }
 
   ionViewDidLoad() {
-    let userId = this.storage.get('userId');
     let self = this;
     let params = new Array<string>();
     this.facebook.api("/me?fields=name" , params).then(function(user) {
@@ -31,6 +31,7 @@ export class ProfilePage {
     let self = this;
     this.facebook.logout().then(function(response) {
       self.storage.set('isLogged', false);
+      self.storage.set('userId', "");
       self.app.getRootNav().setRoot(LoginPage);
     });
   }
@@ -43,6 +44,10 @@ export class ProfilePage {
     }, (obj) => {
         console.log(obj);
     } );
+  }
+
+  aboutus(){
+    alert("It is in the process of development.");
   }
 
 }

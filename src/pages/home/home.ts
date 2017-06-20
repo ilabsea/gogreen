@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, PopoverController, ViewController} from 'ionic-angular';
+import { Platform, PopoverController} from 'ionic-angular';
 import {
   GoogleMaps,
   GoogleMap,
@@ -12,7 +12,6 @@ import {
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 import { PinsService } from '../../providers/pins-service';
 import { PinInfoPage } from '../pin-info/pin-info';
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -25,8 +24,7 @@ export class HomePage {
   map: GoogleMap;
 
   constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
-              public pinsService: PinsService, private viewCtrl: ViewController,
-              private storage: Storage) {
+              public pinsService: PinsService) {
     this.map = null;
     this.marker = null;
   }
@@ -97,6 +95,7 @@ export class HomePage {
         markerClick: function(marker){
           self.map.setClickable(false);
           self.pinsService.getPinByMarkerId(marker.id).then((pin) => {
+            console.log('pin : ', pin);
             self.popupPinInfo(pin);
           }, (error) => {
             console.log('error : ', error)

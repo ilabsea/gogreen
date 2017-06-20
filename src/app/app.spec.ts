@@ -26,13 +26,11 @@ describe('MyApp Root Component', () => {
            IonicStorageModule.forRoot()
         ]
       }).compileComponents();
-    }));
 
-    beforeEach(() => {
       fixture = TestBed.createComponent(MyApp);
       comp    = fixture.componentInstance;
       fixture.detectChanges();
-    });
+    }));
 
     afterEach(() => {
       fixture.destroy();
@@ -45,6 +43,7 @@ describe('MyApp Root Component', () => {
     });
 
     it('initialises with a root page of LoginPage', () => {
+      console.log(comp)
       expect(comp['hasRoot']).toBeFalsy();
       expect(comp['rootPage']).toBe(LoginPage);
     });

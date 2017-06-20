@@ -13,7 +13,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 export class MyApp {
   rootPage:any = LoginPage;
-  hasRoot: any = true;
+  hasRoot: any = false;
 
   constructor(platform: Platform, private storage: Storage, statusBar: StatusBar,
               splashScreen: SplashScreen ) {

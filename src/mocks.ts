@@ -80,7 +80,7 @@ export class FacebookMock {
 }
 
 export class PinsMock {
-  public pins: any = {
+  public pins: any = JSON.stringify({
       "pins": [
         {
           "id": 1,
@@ -103,5 +103,20 @@ export class PinsMock {
           "marker_id": "marker_m13"
         },
       ]
-    };
+    });
+}
+
+export class NavParamsMock {
+  static returnParam: any = {};
+  public get(key): any {
+    if (NavParamsMock.returnParam) {
+       return NavParamsMock.returnParam
+    }
+    return 'default';
+  }
+  static setParams(key, value){
+    console.log('key : ', key);
+    console.log('value : ', value);
+    NavParamsMock.returnParam[key] = value;
+  }
 }

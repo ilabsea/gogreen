@@ -14,7 +14,7 @@ export class ThanksPopOver {
   imageBase64: any;
   mapMarker: any;
 
-  constructor(public viewCtrl: ViewController, public navParams: NavParams,
+  constructor(public navParams: NavParams,
               private camera: Camera, private facebook: Facebook,
               private pinPhotosService: PinPhotosService) {
     this.mapMarker = navParams.get('mapMarker');
