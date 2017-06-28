@@ -21,7 +21,9 @@ import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
 import { PhotoPage } from '../pages/photo/photo';
+import { FormEventsPage } from '../pages/form-events/form-events';
 import { Endpoint } from '../providers/endpoint';
+import { Events } from '../providers/events';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { Endpoint } from '../providers/endpoint';
     PinPopoverPage,
     ThanksPopOver,
     PinInfoPage,
-    PhotoPage
+    PhotoPage,
+    FormEventsPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { Endpoint } from '../providers/endpoint';
     PinPopoverPage,
     ThanksPopOver,
     PinInfoPage,
-    PhotoPage
+    PhotoPage,
+    FormEventsPage
   ],
   providers: [
     StatusBar,
@@ -64,6 +68,7 @@ import { Endpoint } from '../providers/endpoint';
     PinPhotosService,
     Endpoint,
     Camera,
+    Events,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

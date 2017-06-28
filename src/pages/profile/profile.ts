@@ -3,19 +3,21 @@ import { NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
-import { Endpoint } from '../../providers/endpoint';
+import { PinsService } from '../../providers/pins-service';
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
-  providers: [Endpoint]
+  providers: [PinsService]
 })
 export class ProfilePage {
   userProfile: any;
   userName: any;
+  badgeType: any;
 
   constructor(private facebook: Facebook, public navCtrl: NavController,
-              private storage: Storage, private app: App, private endpoint: Endpoint) {
+              private storage: Storage, private app: App,
+              private pinsService: PinsService) {
   }
 
   ionViewDidLoad() {
@@ -48,6 +50,19 @@ export class ProfilePage {
 
   aboutus(){
     alert("It is in the process of development.");
+  }
+
+  calculateBadges() {
+    this.storage.get('userID').then(userId => {
+      this.pinsService.getNumberPinsByUserId(userId).then(nbPins => {
+        let number = nbPins["number_of_pins"];
+        if(number >= 3 && number <10){
+          this.badgeType = 'warrior';
+        }else if(number >= 10 && number <20){
+          this.badgeType = 'hero';
+        }
+      })
+    })
   }
 
 }
