@@ -10,7 +10,7 @@ export class Events {
     console.log('Hello Events Provider');
   }
 
-  createEvent(params) {
+  create(params) {
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json' );
@@ -26,7 +26,7 @@ export class Events {
     })
   }
 
-  getEvents(){
+  get(){
     return new Promise(resolve => {
       this.http.get(this.endpoint.api + "events")
         .subscribe(data => {

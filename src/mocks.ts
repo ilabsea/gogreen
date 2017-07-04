@@ -1,3 +1,5 @@
+import { Camera } from '@ionic-native/camera';
+
 export class ConfigMock {
 
   public get(): any {
@@ -115,8 +117,24 @@ export class NavParamsMock {
     return 'default';
   }
   static setParams(key, value){
-    console.log('key : ', key);
-    console.log('value : ', value);
     NavParamsMock.returnParam[key] = value;
   }
+}
+
+export class CameraMock extends Camera {
+  getPicture(options) {
+    return new Promise((resolve, reject) => {
+      resolve("BASE_64_ENCODED_DATA_GOES_HERE");
+    })
+  }
+}
+
+export class EventMock{
+
+  createEvent(params) {
+    return new Promise((resolve, reject) => {
+      resolve({'status' : 'ok'});
+    })
+  }
+
 }

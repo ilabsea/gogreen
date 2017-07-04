@@ -70,20 +70,3 @@ describe('HomePage Component', () => {
     });
   }))
 });
-
-  // it('displays products containing a title, description, and price in the list', () => {
-  //
-  //   let productsService = fixture.debugElement.injector.get(Products);
-  //   let firstProduct = productsService.products[0];
-  //
-  //   fixture.detectChanges();
-  //
-  //   de = fixture.debugElement.query(By.css('ion-list ion-item'));
-  //   el = de.nativeElement;
-  //
-  //   expect(el.textContent).toContain(firstProduct.title);
-  //   expect(el.textContent).toContain(firstProduct.description);
-  //   expect(el.textContent).toContain(firstProduct.price);
-  //
-  // });
-// });

@@ -7,30 +7,25 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="submitEvent()">
+  <form (ngSubmit)="submit()">
     <ion-item>
       <ion-label stacked>Title</ion-label>
-      <ion-input type="text" [(ngModel)]="event.title" name="title"></ion-input>
+      <ion-input type="text" [(ngModel)]='event.title' name="title" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Location</ion-label>
-      <ion-input type="text" [(ngModel)]="event.location" name="location"></ion-input>
+      <ion-input type="text" [(ngModel)]="event.location" name="location" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Start date</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.start_date" name="start_date"></ion-datetime>
+      <ion-label stacked>Date</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="event.start_date" name="start_date"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Start time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.start_time" name="start_time"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>End date</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.end_date" name="end_date"></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -55,6 +50,6 @@
       <ion-input type="url" [(ngModel)]="event.facebook_link" name="facebook_link"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" block>Save</button>
+    <button ion-button type="submit" [disabled]='!(event.title && event.location)' block>Save</button>
   </form>
 </ion-content>

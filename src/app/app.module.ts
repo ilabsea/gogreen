@@ -24,6 +24,8 @@ import { PhotoPage } from '../pages/photo/photo';
 import { FormEventsPage } from '../pages/form-events/form-events';
 import { Endpoint } from '../providers/endpoint';
 import { Events } from '../providers/events';
+import { ViewEventsPage } from '../pages/view-events/view-events';
+import { ShowEventPage } from '../pages/show-event/show-event';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { Events } from '../providers/events';
     ThanksPopOver,
     PinInfoPage,
     PhotoPage,
-    FormEventsPage
+    FormEventsPage,
+    ViewEventsPage,
+    ShowEventPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { Events } from '../providers/events';
     ThanksPopOver,
     PinInfoPage,
     PhotoPage,
-    FormEventsPage
+    FormEventsPage,
+    ViewEventsPage,
+    ShowEventPage
   ],
   providers: [
     StatusBar,

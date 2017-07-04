@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormEventsPage } from '../form-events/form-events'
+import { ViewEventsPage } from '../view-events/view-events'
 
 @Component({
   selector: 'page-event',
@@ -21,7 +22,8 @@ export class EventPage {
   }
 
   viewEvents(){
-
+    console.log('view Events');
+    this.navCtrl.push(ViewEventsPage);
   }
 
 }

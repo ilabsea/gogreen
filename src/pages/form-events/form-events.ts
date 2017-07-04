@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Events } from '../../providers/events';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { EventPage } from '../event/event';
 
 @Component({
   selector: 'page-form-events',
@@ -9,24 +11,28 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
   providers: [Events, Camera]
 })
 export class FormEventsPage {
-  event: any = {
-    title: "",
-    location: "",
-    start_date: "",
-    start_time: "",
-    end_date: "",
-    end_time: "",
-    description: "",
-    facebook_link: "",
-    image: ""
-  };
+  private event: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events,
-              private camera: Camera) {
+  constructor(public navCtrl: NavController, private events: Events,
+              private camera: Camera, public formBuilder: FormBuilder) {
+    this.event = formBuilder.group({
+      'title': ['', Validators.required],
+      'location': ['', Validators.required],
+      'start_date': [''],
+      'start_time': [''],
+      'end_date': [''],
+      'end_time': [''],
+      'description': [""],
+      'facebook_link': [""],
+      'image': ['']
+    });
   }
 
-  submitEvent(){
-    this.events.createEvent(this.event);
+  submit(){
+    console.log('this.event : ', this.event);
+    this.events.create(this.event).then(() => {
+      this.navCtrl.pop(EventPage);
+    });
   }
 
   selectImage(){
