@@ -15,13 +15,16 @@ import {
 })
 
 export class PinPopoverPage {
-  mapMarker: any;
-  icon: any;
+  map: any;
+  marker: any;
+  icon = '';
 
   constructor(public viewCtrl: ViewController, private navParams: NavParams,
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               private storage: Storage) {
-    this.mapMarker = navParams.get('mapMarker');
+    this.map = navParams.get('map');
+    this.marker = navParams.get('marker');
+    this.icon = navParams.get('pin') ? navParams.get('pin').icon : '';
   }
 
   ionViewDidLeave(){
@@ -30,7 +33,7 @@ export class PinPopoverPage {
 
   submitPin(){
     let self = this;
-    this.mapMarker.marker.getPosition((position) => {
+    this.marker.getPosition((position) => {
       let lat = position.lat;
       let lng = position.lng;
       self.storage.get('userID').then((userId) => {
@@ -40,11 +43,11 @@ export class PinPopoverPage {
             longitude: lng,
             icon: self.icon,
             user_id: userId,
-            marker_id: self.mapMarker.marker._objectInstance.id
+            marker_id: self.marker._objectInstance.id
           }
         }
         self.pinsService.createPin(pinParams).then((pin) => {
-          self.popupThanks(pin["id"]);
+          self.popupThanks(pin);
         }, (error) => {
           console.log('error : ', error);
         });
@@ -53,12 +56,12 @@ export class PinPopoverPage {
   }
 
   addPin(param) {
-    this.icon = 'www/assets/icon/' + param + '-small.png';
-    this.mapMarker.marker.setIcon(this.icon);
+    this.icon =  param;
+    this.marker.setIcon('www/assets/pin/' + this.icon + '-small.png');
   }
 
   removeMarker(){
-    this.mapMarker.marker.remove();
+    this.marker.remove();
     this.close();
   }
 
@@ -66,9 +69,9 @@ export class PinPopoverPage {
     this.viewCtrl.dismiss();
   }
 
-  popupThanks(pinId) {
+  popupThanks(pin) {
     let popover = this.popoverCtrl.create(ThanksPopOver, {
-      'mapMarker' : { 'map': this.mapMarker.map, 'marker': this.mapMarker.marker, 'pinId' : pinId }
+      'map': this.map, 'marker': this.marker, 'pin' : pin
     }, {cssClass: 'thanks-popover'});
     popover.present();
   }

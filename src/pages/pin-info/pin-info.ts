@@ -1,29 +1,40 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams, NavController } from 'ionic-angular';
+import { ViewController, NavParams, NavController,PopoverController } from 'ionic-angular';
 import { PhotoPage } from '../photo/photo';
+import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 
 @Component({
   selector: 'page-pin-info',
   templateUrl: 'pin-info.html',
 })
 export class PinInfoPage {
-  mapPin: any;
+  map: any;
+  pin: any;
+  marker: any;
   createdAt: any;
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams) {
-    this.mapPin = navParams.get('mapPin');
-    this.createdAt = this.mapPin.pin["created_at"];
-  }
+  numberPhoto: any;
 
-  ionViewWillLeave(){
-    this.mapPin.map.setClickable(true);
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public popoverCtrl: PopoverController, public viewCtrl: ViewController) {
+    this.map = navParams.get('map');
+    this.pin = navParams.get('pin');
+    this.marker = navParams.get('marker');
+    this.createdAt = this.pin["created_at"];
+    this.numberPhoto = 2;
   }
 
   showPhotos() {
-    this.navCtrl.push(PhotoPage, this.mapPin);
+    this.navCtrl.push(PhotoPage, {'pin': this.pin, 'map': this.map});
   }
 
   changeIcon() {
+    this.close();
+    let popover = this.popoverCtrl.create(PinPopoverPage, {"pin": this.pin, "marker": this.marker}, {cssClass: 'pin-popover'});
+    popover.present();
+  }
 
+  close() {
+    this.viewCtrl.dismiss();
   }
 
 }

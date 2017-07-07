@@ -1,5 +1,5 @@
-<p>Created on {{createdAt | date: 'dd/MM/yyyy'}}</p>
 <ion-list>
-    <ion-item class="item-icon-left" (click)="showPhotos()">View photos </ion-item>
-    <ion-item class="item-icon-left" (click)="changeIcon()">Change icon </ion-item>
+  <ion-list-header color='green-color'>Created on {{createdAt | date: 'dd/MM/yyyy'}}</ion-list-header>
+  <ion-item (click)="showPhotos()">View photos ({{numberPhoto}}) </ion-item>
+  <ion-item (click)="changeIcon()">Change icon </ion-item>
 </ion-list>

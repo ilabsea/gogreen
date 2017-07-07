@@ -23,22 +23,28 @@
       <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="event.start_date" name="start_date"></ion-datetime>
     </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Start time</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.start_time" name="start_time"></ion-datetime>
-    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label stacked>Start time</ion-label>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.start_time" name="start_time"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+          <ion-label stacked>End time</ion-label>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.end_time" name="end_time"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
     <ion-item>
-      <ion-label stacked>End time</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.end_time" name="end_time"></ion-datetime>
-    </ion-item>
-
-    <div>
-      <label>Event image</label>
+      <label style='font-size: 1.2rem; color: #999;'>Event image</label>
       <div (click)='selectImage()'>
-        <img width="50" height="50" [src]="event.image ? event.image : 'assets/icon/camera.png'">
+        <img width="50" height="50" [src]="event.image ? event.image : 'assets/event/image.png'" class='center'>
       </div>
-    </div>
+    </ion-item>
 
     <ion-item>
       <ion-label stacked>Description</ion-label>
@@ -50,6 +56,6 @@
       <ion-input type="url" [(ngModel)]="event.facebook_link" name="facebook_link"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" [disabled]='!(event.title && event.location)' block>Save</button>
+    <button ion-button type="submit" [disabled]='!(event.title && event.location)' block color="green-color">Save</button>
   </form>
 </ion-content>

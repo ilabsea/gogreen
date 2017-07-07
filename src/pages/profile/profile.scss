@@ -1,3 +1,20 @@
 page-profile {
+  ion-avatar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
 
+  ion-avatar img {
+    border-radius: 50%;
+  }
+
+  ion-avatar span{
+    font-weight: bold;
+    padding-top: 2%;
+    width: 100%;
+    text-align: center;
+  }
 }

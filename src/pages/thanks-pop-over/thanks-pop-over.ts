@@ -12,22 +12,26 @@ import { PinPhotosService } from '../../providers/pin-photos-service';
 
 export class ThanksPopOver {
   imageBase64: any;
-  mapMarker: any;
+  map: any;
+  marker: any;
+  pin: any;
 
   constructor(public navParams: NavParams,
               private camera: Camera, private facebook: Facebook,
               private pinPhotosService: PinPhotosService) {
-    this.mapMarker = navParams.get('mapMarker');
+    this.map = navParams.get('map');
+    this.marker = navParams.get('marker');
+    this.pin = navParams.get('pin');
   }
 
   ionViewDidLeave(){
-    this.mapMarker.map.setClickable(true);
+    this.map.setClickable(true);
   }
 
   shareToFacebook(){
     let self = this;
 
-    this.mapMarker.marker.getPosition().then(function(latlng){
+    this.marker.getPosition().then(function(latlng){
       let latlngUrl = latlng.toUrlValue();
       self.facebook.showDialog({
         method: "share",
@@ -54,7 +58,7 @@ export class ThanksPopOver {
       self.imageBase64 = 'data:image/jpeg;base64,' + imageData;
       let params = {
         "photo": self.imageBase64,
-        "pin_id": self.mapMarker.pinId
+        "pin_id": self.pin["id"]
       }
       self.pinPhotosService.createPinPhoto(params);
     }, (err) => {

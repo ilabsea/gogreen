@@ -61,22 +61,20 @@ export class HomePage {
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
       this.displayPins();
     });
-
     this.createMarker();
-
   }
 
   displayPins(){
     let self = this;
     this.pinsService.getPins().then((pinsResult) => {
       for(let pin of pinsResult["pins"]) {
-
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
-          icon: pin.icon,
-          markerClick: function(){
+          icon: 'www/assets/pin/' + pin.icon + '-small.png',
+          markerClick: function(marker){
+            console.log('e : ', marker);
             self.map.setClickable(false);
-            self.popupPinInfo(pin);
+            self.popupPinInfo(pin, marker);
           }
         }
         this.map.addMarker(option);
@@ -95,8 +93,7 @@ export class HomePage {
         markerClick: function(marker){
           self.map.setClickable(false);
           self.pinsService.getPinByMarkerId(marker.id).then((pin) => {
-            console.log('pin : ', pin);
-            self.popupPinInfo(pin);
+            self.popupPinInfo(pin, marker);
           }, (error) => {
             console.log('error : ', error)
           });
@@ -113,15 +110,15 @@ export class HomePage {
 
   popupPinIcon() {
     let popover = this.popoverCtrl.create(PinPopoverPage, {
-      'mapMarker' : { 'map': this.map, 'marker': this.marker }
+      'map': this.map, 'marker': this.marker 
     }, {cssClass: 'pin-popover'});
     popover.present();
   }
 
-  popupPinInfo(pin) {
+  popupPinInfo(pin, marker) {
     let popover = this.popoverCtrl.create(PinInfoPage, {
-      'mapPin' : { 'map': this.map, 'pin': pin }
-    }, {cssClass: 'pin-info-popover'});
+      'map': this.map, 'pin': pin , 'marker': marker
+    });
     popover.present();
   }
 }

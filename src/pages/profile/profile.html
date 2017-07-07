@@ -7,37 +7,40 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-row>
-    <ion-col col-2><img src='{{userProfile}}'></ion-col>
-    <ion-col><p>{{userName}}</p></ion-col>
-  </ion-row>
-  <hr>
+  <ion-avatar item-center>
+    <img src='{{userProfile}}'>
+    <span>{{userName}}</span>
+  </ion-avatar>
+
   <ion-list>
+
     <ion-item (click)='viewBadges()'>
       <ion-avatar item-left>
-        <img src="assets/profile/badge.png">
+        <img src="assets/profile/badge.svg">
       </ion-avatar>
       <h2>Your badges</h2>
     </ion-item>
+
     <ion-item (click)='inviteFiends()'>
       <ion-avatar item-left>
-        <img src="assets/profile/facebook.png">
+        <img src="assets/profile/facebook.svg">
       </ion-avatar>
       <h2>Invite friends</h2>
     </ion-item>
 
     <ion-item (click)='aboutus()'>
-      <ion-avatar item-left >
-        <!-- <img src="assets/profile/logout.png"> -->
+      <ion-avatar item-left>
+        <img src="assets/profile/about.svg">
       </ion-avatar>
       <h2>About us</h2>
     </ion-item>
 
     <ion-item (click)='logout()'>
-      <ion-avatar item-left >
-        <img src="assets/profile/logout.png">
+      <ion-avatar item-left>
+        <img src="assets/profile/logout.svg">
       </ion-avatar>
       <h2>Logout</h2>
     </ion-item>
+
   </ion-list>
 </ion-content>

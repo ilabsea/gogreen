@@ -17,11 +17,11 @@ export class EventPage {
     console.log('ionViewDidLoad Event');
   }
 
-  shareEvents(){
+  create(){
     this.navCtrl.push(FormEventsPage);
   }
 
-  viewEvents(){
+  view(){
     console.log('view Events');
     this.navCtrl.push(ViewEventsPage);
   }
