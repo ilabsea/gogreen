@@ -26,6 +26,7 @@ import { Endpoint } from '../providers/endpoint';
 import { Events } from '../providers/events';
 import { ViewEventsPage } from '../pages/view-events/view-events';
 import { ShowEventPage } from '../pages/show-event/show-event';
+import { Loading } from '../providers/loading';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ShowEventPage } from '../pages/show-event/show-event';
     Endpoint,
     Camera,
     Events,
+    Loading,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

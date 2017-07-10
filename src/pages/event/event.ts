@@ -22,7 +22,6 @@ export class EventPage {
   }
 
   view(){
-    console.log('view Events');
     this.navCtrl.push(ViewEventsPage);
   }
 

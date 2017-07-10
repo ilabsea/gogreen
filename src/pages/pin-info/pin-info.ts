@@ -5,7 +5,7 @@ import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 
 @Component({
   selector: 'page-pin-info',
-  templateUrl: 'pin-info.html',
+  templateUrl: 'pin-info.html'
 })
 export class PinInfoPage {
   map: any;
@@ -31,7 +31,8 @@ export class PinInfoPage {
     this.close();
     let popover = this.popoverCtrl.create(PinPopoverPage,
       {"map": this.map, "pin": this.pin, "marker": this.marker},
-      {cssClass: 'pin-popover'});
+      {cssClass: 'pin-popover'}
+    );
     popover.present();
   }
 

@@ -10,12 +10,10 @@ export class ShowEventPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.event = navParams.get('event');
-    console.log('this.event : ', this.event);
-
   }
 
   ionViewDidLoad() {
-    
+
   }
 
 }

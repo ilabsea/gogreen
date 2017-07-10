@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Events } from '../../providers/events';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { EventPage } from '../event/event';
+import { Loading } from '../../providers/loading';
 
 @Component({
   selector: 'page-form-events',
   templateUrl: 'form-events.html',
-  providers: [Events, Camera]
+  providers: [Events, Camera, Loading]
 })
 
 export class FormEventsPage {
@@ -25,7 +26,8 @@ export class FormEventsPage {
   };
 
   constructor(public navCtrl: NavController, private events: Events,
-              private camera: Camera, public formBuilder: FormBuilder) {
+              private camera: Camera, public formBuilder: FormBuilder,
+              public loading: Loading) {
     // this.event = formBuilder.group({
     //   'title': ['', Validators.required],
     //   'location': ['', Validators.required],
@@ -41,8 +43,11 @@ export class FormEventsPage {
 
   submit(){
     console.log('this.event : ', this.event);
+    this.loading.show();
+    let self = this;
     this.events.create(this.event).then(() => {
-      this.navCtrl.pop(EventPage);
+      this.loading.hide();
+      self.navCtrl.pop(EventPage);
     });
   }
 
