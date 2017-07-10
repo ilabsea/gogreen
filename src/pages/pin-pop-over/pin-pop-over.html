@@ -1,17 +1,17 @@
 <div>
   <ion-row class="row">
     <ion-col class="col">
-      <button (click)='addPin("happy")' [ngClass]="icon=='happy' ? '' : 'pin-blur'">
+      <button (click)='setIcon("happy")' [ngClass]="icon=='happy' ? '' : 'pin-blur'">
         <img src='assets/pin/happy.png'/>
       </button>
     </ion-col>
     <ion-col class="col">
-      <button (click)='addPin("sad")' [ngClass]="icon=='sad' ? '' : 'pin-blur'">
+      <button (click)='setIcon("sad")' [ngClass]="icon=='sad' ? '' : 'pin-blur'">
         <img src='assets/pin/sad.png'/>
       </button>
     </ion-col>
     <ion-col class="col">
-      <button (click)='addPin("trash")' [ngClass]="icon=='trash' ? '' : 'pin-blur'">
+      <button (click)='setIcon("trash")' [ngClass]="icon=='trash' ? '' : 'pin-blur'">
         <img src='assets/pin/trash.png'/>
       </button>
     </ion-col>

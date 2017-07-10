@@ -66,7 +66,7 @@ export class HomePage {
 
   displayPins(){
     let self = this;
-    this.pinsService.getPins().then((pinsResult) => {
+    this.pinsService.get().then((pinsResult) => {
       for(let pin of pinsResult["pins"]) {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
@@ -110,7 +110,7 @@ export class HomePage {
 
   popupPinIcon() {
     let popover = this.popoverCtrl.create(PinPopoverPage, {
-      'map': this.map, 'marker': this.marker 
+      'map': this.map, 'marker': this.marker
     }, {cssClass: 'pin-popover'});
     popover.present();
   }

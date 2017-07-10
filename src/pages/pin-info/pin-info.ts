@@ -29,7 +29,9 @@ export class PinInfoPage {
 
   changeIcon() {
     this.close();
-    let popover = this.popoverCtrl.create(PinPopoverPage, {"pin": this.pin, "marker": this.marker}, {cssClass: 'pin-popover'});
+    let popover = this.popoverCtrl.create(PinPopoverPage,
+      {"map": this.map, "pin": this.pin, "marker": this.marker},
+      {cssClass: 'pin-popover'});
     popover.present();
   }
 

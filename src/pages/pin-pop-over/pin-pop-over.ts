@@ -18,20 +18,27 @@ export class PinPopoverPage {
   map: any;
   marker: any;
   icon = '';
+  pin: any;
+
 
   constructor(public viewCtrl: ViewController, private navParams: NavParams,
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               private storage: Storage) {
     this.map = navParams.get('map');
     this.marker = navParams.get('marker');
-    this.icon = navParams.get('pin') ? navParams.get('pin').icon : '';
+    this.pin = navParams.get('pin');
+    this.icon = this.pin ? this.pin.icon : '';
   }
 
   ionViewDidLeave(){
-    this.submitPin();
+    console.log('this.pin : ', this.pin);
+    if(this.pin)
+      this.update(this.pin['id']);
+    else
+      this.create();
   }
 
-  submitPin(){
+  create(){
     let self = this;
     this.marker.getPosition((position) => {
       let lat = position.lat;
@@ -46,7 +53,7 @@ export class PinPopoverPage {
             marker_id: self.marker._objectInstance.id
           }
         }
-        self.pinsService.createPin(pinParams).then((pin) => {
+        self.pinsService.create(pinParams).then((pin) => {
           self.popupThanks(pin);
         }, (error) => {
           console.log('error : ', error);
@@ -55,7 +62,16 @@ export class PinPopoverPage {
     })
   }
 
-  addPin(param) {
+  update(pinId) {
+    console.log('this.icon update : ', this.icon);
+    let self = this;
+    console.log('thismap : ', this.map)
+    this.pinsService.update(pinId, {"icon": this.icon}).then(() => {
+      self.map.setClickable(true);
+    });
+  }
+
+  setIcon(param) {
     this.icon =  param;
     this.marker.setIcon('www/assets/pin/' + this.icon + '-small.png');
   }

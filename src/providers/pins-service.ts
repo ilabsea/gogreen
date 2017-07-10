@@ -10,7 +10,7 @@ export class PinsService {
   constructor(public http: Http, private endpoint: Endpoint) {
   }
 
-  createPin(pinParams){
+  create(pinParams){
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json' );
@@ -26,7 +26,7 @@ export class PinsService {
     })
   }
 
-  getPins(){
+  get(){
     return new Promise(resolve => {
       this.http.get(this.endpoint.api + "pins")
         .subscribe(data => {
@@ -56,6 +56,18 @@ export class PinsService {
         }, error => {
           resolve(error);
         })
+    })
+  }
+
+  update(pinId, param){
+    return new Promise(resolve => {
+      this.http.put(this.endpoint.api + "pins/" + pinId, param)
+      .subscribe(data => {
+        resolve(data.json());
+        console.log('test  service update : ', data.json());
+      }, error => {
+        resolve(error);
+      })
     })
   }
 

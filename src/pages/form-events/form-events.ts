@@ -10,22 +10,33 @@ import { EventPage } from '../event/event';
   templateUrl: 'form-events.html',
   providers: [Events, Camera]
 })
+
 export class FormEventsPage {
-  private event: any;
+  private event = {
+    'title': '',
+    'location': '',
+    'start_date': '',
+    'start_time': '',
+    'end_date': '',
+    'end_time': '',
+    'description': '',
+    'facebook_link': '',
+    'image': ''
+  };
 
   constructor(public navCtrl: NavController, private events: Events,
               private camera: Camera, public formBuilder: FormBuilder) {
-    this.event = formBuilder.group({
-      'title': ['', Validators.required],
-      'location': ['', Validators.required],
-      'start_date': [''],
-      'start_time': [''],
-      'end_date': [''],
-      'end_time': [''],
-      'description': [""],
-      'facebook_link': [""],
-      'image': ['']
-    });
+    // this.event = formBuilder.group({
+    //   'title': ['', Validators.required],
+    //   'location': ['', Validators.required],
+    //   'start_date': [''],
+    //   'start_time': [''],
+    //   'end_date': [''],
+    //   'end_time': [''],
+    //   'description': [""],
+    //   'facebook_link': [""],
+    //   'image': ['']
+    // });
   }
 
   submit(){

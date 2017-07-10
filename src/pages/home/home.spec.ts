@@ -63,7 +63,7 @@ describe('HomePage Component', () => {
       })));
     });
 
-    pinsService.getPins().then((pins) => {
+    pinsService.get().then((pins) => {
       console.log('pins : ', pins);
       expect(Array.isArray(pins["pins"])).toBeTruthy();
       expect(pins["pins"].length).toBeGreaterThan(0);
