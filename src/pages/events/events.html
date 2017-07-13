@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color='green-color'>
-    <ion-title>View events</ion-title>
+    <ion-title>Events</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -31,6 +31,10 @@
       </ion-item>
 
     </ion-card>
+
+    <ion-fab right bottom>
+      <button ion-fab color="green-color" (click)='goToForm()'><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
 
   </ion-list>
 </ion-content>

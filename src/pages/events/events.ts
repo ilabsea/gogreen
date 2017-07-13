@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Events } from '../../providers/events';
 import { ShowEventPage } from '../show-event/show-event';
 import { Loading } from '../../providers/loading';
 import { Endpoint } from '../../providers/endpoint';
 import { Facebook } from '@ionic-native/facebook';
+import { FormEventPage } from '../form-event/form-event';
 
 @Component({
-  selector: 'page-view-events',
-  templateUrl: 'view-events.html',
+  selector: 'page-events',
+  templateUrl: 'events.html',
   providers: [Events, Endpoint]
 })
-export class ViewEventsPage {
+
+export class EventsPage {
 
   private events: any;
   private url = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private eventsService: Events, private loading: Loading,
-              private endpoint: Endpoint, private facebook: Facebook) {
+  constructor(public navCtrl: NavController, private eventsService: Events,
+              private loading: Loading, private endpoint: Endpoint,
+              private facebook: Facebook) {
     this.url = endpoint.url;
   }
 
@@ -28,6 +30,10 @@ export class ViewEventsPage {
       this.events = events["events"];
       this.loading.hide();
     });
+  }
+
+  goToForm() {
+    this.navCtrl.push(FormEventPage);
   }
 
   showDetail(event, $event){

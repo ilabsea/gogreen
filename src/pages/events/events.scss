@@ -1,4 +1,4 @@
-page-view-events {
+page-events {
   .event-image {
     height: 20rem !important;
   }
@@ -17,9 +17,9 @@ page-view-events {
   }
 
   .month {
-    text-transform: 'uppercase';
+    text-transform: uppercase;
     color: #3AB54A;
-    font-weight: 'bold';
+    font-weight: bold;
   }
 
   .day {

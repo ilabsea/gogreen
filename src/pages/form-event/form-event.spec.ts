@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture, async, inject} from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { IonicModule, NavController } from 'ionic-angular';
 import { MyApp } from '../../app/app.component';
-import { FormEventsPage } from './form-events';
+import { FormEventPage } from './form-event';
 import { Http, HttpModule, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { Endpoint } from '../../providers/endpoint';
@@ -11,16 +11,16 @@ import { Camera } from '@ionic-native/camera';
 import { By } from '@angular/platform-browser';
 import { Events } from '../../providers/events';
 
-let comp: FormEventsPage;
-let fixture: ComponentFixture<FormEventsPage>;
+let comp: FormEventPage;
+let fixture: ComponentFixture<FormEventPage>;
 let de: DebugElement;
 let el: HTMLElement;
 
-describe('FormEventsPage Component', () => {
+describe('FormEventPage Component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MyApp, FormEventsPage],
+      declarations: [MyApp, FormEventPage],
       providers: [
         MockBackend,
         Endpoint,
@@ -45,7 +45,7 @@ describe('FormEventsPage Component', () => {
         IonicModule.forRoot(MyApp),
       ]
     }).compileComponents();
-    fixture = TestBed.createComponent(FormEventsPage);
+    fixture = TestBed.createComponent(FormEventPage);
     comp    = fixture.componentInstance;
   }));
 

@@ -10,23 +10,24 @@ import { Camera } from '../providers/camera';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
+
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
-import { EventPage } from '../pages/event/event';
 import { ProfilePage } from '../pages/profile/profile';
 import { PinPopoverPage } from '../pages/pin-pop-over/pin-pop-over';
 import { PinInfoPage } from '../pages/pin-info/pin-info';
 import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
+import { PhotoPage } from '../pages/photo/photo';
+import { FormEventPage } from '../pages/form-event/form-event';
+import { EventsPage } from '../pages/events/events';
+import { ShowEventPage } from '../pages/show-event/show-event';
+
+import { Loading } from '../providers/loading';
+import { Events } from '../providers/events';
+import { Endpoint } from '../providers/endpoint';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
-import { PhotoPage } from '../pages/photo/photo';
-import { FormEventsPage } from '../pages/form-events/form-events';
-import { Endpoint } from '../providers/endpoint';
-import { Events } from '../providers/events';
-import { ViewEventsPage } from '../pages/view-events/view-events';
-import { ShowEventPage } from '../pages/show-event/show-event';
-import { Loading } from '../providers/loading';
 
 @NgModule({
   declarations: [
@@ -34,14 +35,13 @@ import { Loading } from '../providers/loading';
     HomePage,
     LoginPage,
     TabsPage,
-    EventPage,
     ProfilePage,
     PinPopoverPage,
     ThanksPopOver,
     PinInfoPage,
     PhotoPage,
-    FormEventsPage,
-    ViewEventsPage,
+    EventsPage,
+    FormEventPage,
     ShowEventPage
   ],
   imports: [
@@ -56,14 +56,13 @@ import { Loading } from '../providers/loading';
     HomePage,
     LoginPage,
     TabsPage,
-    EventPage,
     ProfilePage,
     PinPopoverPage,
     ThanksPopOver,
     PinInfoPage,
     PhotoPage,
-    FormEventsPage,
-    ViewEventsPage,
+    EventsPage,
+    FormEventPage,
     ShowEventPage
   ],
   providers: [

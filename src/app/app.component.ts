@@ -12,7 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage:any = TabsPage;
   hasRoot: any = false;
 
   constructor(platform: Platform, private storage: Storage, statusBar: StatusBar,
