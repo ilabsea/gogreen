@@ -1,3 +1,28 @@
 page-view-events {
+  .event-image {
+    height: 20rem !important;
+  }
 
+  .wrapper-image {
+    max-height: 100% !important;
+  }
+
+  button.share{
+    float: right;
+    margin-top: -10%;
+    background-color: white;
+    border-radius: 50%;
+    width: 17%;
+    height: 5rem
+  }
+
+  .month {
+    text-transform: 'uppercase';
+    color: #3AB54A;
+    font-weight: 'bold';
+  }
+
+  .day {
+    font-size: 8vw;
+  }
 }

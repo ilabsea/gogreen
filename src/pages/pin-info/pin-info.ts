@@ -12,7 +12,7 @@ export class PinInfoPage {
   pin: any;
   marker: any;
   createdAt: any;
-  numberPhoto: any;
+  totolPhotos: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public popoverCtrl: PopoverController, public viewCtrl: ViewController) {
@@ -20,7 +20,7 @@ export class PinInfoPage {
     this.pin = navParams.get('pin');
     this.marker = navParams.get('marker');
     this.createdAt = this.pin["created_at"];
-    this.numberPhoto = 2;
+    this.totolPhotos = this.pin['total_photos'] ? this.pin['total_photos'] : 0;
   }
 
   showPhotos() {

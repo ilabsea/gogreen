@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color='green-color'>
     <ion-title>View events</ion-title>
   </ion-navbar>
 
@@ -8,16 +8,29 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let event of events">
-      <ion-thumbnail>
-        <img src="assets/advance-card-alaska.jpg">
-      </ion-thumbnail>
-      <h2>{{event.title}}</h2>
-      <p>{{event.location}}</p>
-      <p>{{event.start_date}} {{event.start_time}}</p>
-      <p>{{event.end_date}} {{event.end_time}} </p>
-      <button ion-button clear item-end (click)='showDetail(event)'>View</button>
-    </ion-item>
+
+    <ion-card *ngFor="let event of events" (click)='showDetail(event, $event)'>
+
+      <div class="wrapper-image" >
+        <img class='event-image' [src]="url + event['image']['url']">
+      </div>
+
+      <button (click)='share(event, $event)' ion-button round icon-right icon-only
+              class='share'>
+        <ion-icon name="share" color='light-black'></ion-icon>
+      </button>
+
+      <ion-item style='margin-bottom: 5%;'>
+        <div item-left style='margin-right: 10%;'>
+          <span class='month'>{{event.date | date: 'MMM'}}</span><br>
+          <span class='day'>{{event.date | date: 'dd'}}</span>
+        </div>
+
+        <h2>{{event.title}}</h2>
+        <p>{{event.location}}</p>
+      </ion-item>
+
+    </ion-card>
 
   </ion-list>
 </ion-content>

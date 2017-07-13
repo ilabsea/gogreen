@@ -16,9 +16,8 @@ export class FormEventsPage {
   private event = {
     'title': '',
     'location': '',
-    'start_date': '',
+    'date': '',
     'start_time': '',
-    'end_date': '',
     'end_time': '',
     'description': '',
     'facebook_link': '',
