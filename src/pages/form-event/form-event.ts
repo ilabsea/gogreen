@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Storage } from '@ionic/storage';
 
 import { EventsPage } from '../events/events';
 
@@ -23,33 +24,26 @@ export class FormEventPage {
     'end_time': '',
     'description': '',
     'facebook_link': '',
-    'image': ''
+    'image': '',
+    'user_id': ""
   };
 
   constructor(public navCtrl: NavController, private events: Events,
               private camera: Camera, public formBuilder: FormBuilder,
-              public loading: Loading) {
-    // this.event = formBuilder.group({
-    //   'title': ['', Validators.required],
-    //   'location': ['', Validators.required],
-    //   'start_date': [''],
-    //   'start_time': [''],
-    //   'end_date': [''],
-    //   'end_time': [''],
-    //   'description': [""],
-    //   'facebook_link': [""],
-    //   'image': ['']
-    // });
+              public loading: Loading, private storage: Storage) {
   }
 
   submit(){
-    console.log('this.event : ', this.event);
     this.loading.show();
     let self = this;
-    this.events.create(this.event).then(() => {
-      this.loading.hide();
-      self.navCtrl.pop(EventsPage);
-    });
+    this.storage.get("userID").then((userID) => {
+      self.event["user_id"] = userID;
+      self.events.create(self.event).then(() => {
+        this.loading.hide();
+        self.navCtrl.pop(EventsPage);
+      });
+    })
+
   }
 
   selectImage(){

@@ -32,7 +32,7 @@ export class ProfilePage {
     let self = this;
     this.facebook.logout().then(function(response) {
       self.storage.set('isLogged', false);
-      self.storage.set('userId', "");
+      self.storage.set('userID', "");
       self.app.getRootNav().setRoot(LoginPage);
     });
   }

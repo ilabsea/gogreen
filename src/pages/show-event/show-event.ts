@@ -18,7 +18,7 @@ export class ShowEventPage {
   constructor(public navParams: NavParams, private endpoint: Endpoint, private facebook: Facebook,) {
     this.event = navParams.get('event');
     this.url = endpoint.url;
-    this.creatorPicture = "https://graph.facebook.com/100000632243863/picture?type=small";
+    this.creatorPicture = "https://graph.facebook.com/" + this.event['user_id'] + "/picture?type=small";
     this.profileLink = "https://www.facebook.com/profile.php?id=" + this.event['user_id'];
   }
 
