@@ -1,7 +1,17 @@
 page-form-event {
-  .center{
+  .center {
     margin-left: auto;
     margin-right: auto;
     display: block;
+  }
+
+  .label-md.require:after {
+    content: " *";
+    font-size: 13px;
+    vertical-align: top;
+  }
+
+  .submit {
+    margin-top: 20px;
   }
 }

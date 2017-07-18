@@ -15,39 +15,35 @@ import { Events } from '../../providers/events';
 })
 
 export class FormEventPage {
-  private event = {
-    'title': '',
-    'location': '',
-    'date': '',
-    'start_time': '',
-    'end_time': '',
-    'description': '',
-    'facebook_link': '',
-    'image': ''
-  };
+  private event;
 
   constructor(public navCtrl: NavController, private events: Events,
               private camera: Camera, public formBuilder: FormBuilder,
               public loading: Loading) {
-    // this.event = formBuilder.group({
-    //   'title': ['', Validators.required],
-    //   'location': ['', Validators.required],
-    //   'start_date': [''],
-    //   'start_time': [''],
-    //   'end_date': [''],
-    //   'end_time': [''],
-    //   'description': [""],
-    //   'facebook_link': [""],
-    //   'image': ['']
-    // });
+
+    var urlPattern = /^((http|https):\/\/)?((www\.)?(xn--[\w-]+)(\.?xn--[\w-]+)*|[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*(\.[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*)*)\.((xn--[\w-]+)|aero|asia|biz|cat|com|coop|eus|gal|info|int|jobs|mobi|museum|name|net|org|post|pro|tel|travel|xxx|edu|gov|mil|[\w]{2}|[\u00BF-\u1FFF\u2C00-\uD7FF]{2,10})([\/?]\S*)?$/;
+
+    this.event = formBuilder.group({
+      'title': ['', Validators.required],
+      'location': ['', Validators.required],
+      'date': ['', Validators.required],
+      'start_time': ['', Validators.required],
+      'end_time': ['', Validators.required],
+      'description': [''],
+      'facebook_link': ['', Validators.compose([Validators.required, Validators.pattern(urlPattern)])],
+      'image': ['']
+    });
   }
 
   submit(){
+    if (this.event.invalid) { return; }
+
     console.log('this.event : ', this.event);
-    this.loading.show();
     let self = this;
-    this.events.create(this.event).then(() => {
-      this.loading.hide();
+
+    this.loading.show();
+    this.events.create(self.event.value).then(() => {
+      self.loading.hide();
       self.navCtrl.pop(EventsPage);
     });
   }

@@ -7,34 +7,34 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="submit()">
+  <form [formGroup]="event" (ngSubmit)="submit()">
     <ion-item>
-      <ion-label stacked>Title</ion-label>
-      <ion-input type="text" [(ngModel)]='event.title' name="title" required></ion-input>
+      <ion-label stacked class='require'>Title</ion-label>
+      <ion-input type="text" formControlName='title'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Location</ion-label>
-      <ion-input type="text" [(ngModel)]="event.location" name="location" required></ion-input>
+      <ion-label stacked class='require'>Location</ion-label>
+      <ion-input type="text" formControlName="location"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Date</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="event.date" name="date"></ion-datetime>
+      <ion-label stacked class='require'>Date</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
     </ion-item>
 
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label stacked>Start time</ion-label>
-          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.start_time" name="start_time"></ion-datetime>
+          <ion-label stacked class='require'>Start time</ion-label>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="start_time"></ion-datetime>
         </ion-item>
       </ion-col>
 
       <ion-col>
         <ion-item>
-          <ion-label stacked>End time</ion-label>
-          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.end_time" name="end_time"></ion-datetime>
+          <ion-label stacked class='require'>End time</ion-label>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="end_time"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -48,14 +48,14 @@
 
     <ion-item>
       <ion-label stacked>Description</ion-label>
-      <ion-textarea [(ngModel)]="event.description" name="description"></ion-textarea>
+      <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Facebook Link</ion-label>
-      <ion-input type="url" [(ngModel)]="event.facebook_link" name="facebook_link"></ion-input>
+      <ion-label stacked class='require'>Facebook Link</ion-label>
+      <ion-input type="url" formControlName="facebook_link"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" block color="green-color">Save</button>
+    <button ion-button type='submit' block color='green-color' [disabled]='event.invalid' class='submit'>Save</button>
   </form>
 </ion-content>
