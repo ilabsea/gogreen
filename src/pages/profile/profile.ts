@@ -22,8 +22,7 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     let self = this;
-    let params = new Array<string>();
-    this.facebook.api("/me?fields=name" , params).then(function(user) {
+    this.facebook.api("/me?fields=name" , []).then(function(user) {
       self.userProfile = "https://graph.facebook.com/" + user["id"] + "/picture?width=100";
       self.userName = user.name;
     })

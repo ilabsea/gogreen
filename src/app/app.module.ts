@@ -47,7 +47,9 @@ import { PinPhotosService } from '../providers/pin-photos-service';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

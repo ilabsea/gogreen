@@ -1,24 +1,43 @@
-<ion-header>
-
-  <ion-navbar color='green-color'>
-    <ion-title> Show event detail </ion-title>
+<ion-content>
+  <ion-navbar transparent>
   </ion-navbar>
 
-</ion-header>
+  <img [src]='url + event.image.url' class='cover'>
+  <div padding style='color: #8C8C8C;'>
+    <span class='title'> Clean up in Phnom Penh </span><br>
+    <p class='creator'>by {{creatorName}}</p>
 
-<ion-content padding>
-  <!-- <ion-card class="card-width-marginright" type="button" (click)="music()"> -->
-  <img [src]='url + event.image.url' width="100%">
-  <p>{{event.title}}</p>
-  <p>{{event.location}}</p>
-  <!-- </ion-card> -->
+    <ion-icon name="calendar" color='green-color'></ion-icon>
+    <span style='padding-left: 3%;'>{{event.date | date: 'EEEE, MMMM d'}}</span>
+    <br>
+    <span style='padding-left: 8%;'>{{event.start_time | date: 'h:mm a'}} - {{event.end_time | date: 'h:mm a Z'}}</span>
 
-  <!-- <h1>Title: {{event.title}}</h1>
-  <p>Location: {{event.location}}</p>
-  <p>Start date: {{event.start_date}}</p>
-  <p>Start time : {{event.start_time}}</p>
-  <p>End date: {{event.end_date}}</p>
-  <p>End time: {{event.end_time}}</p>
-  <p>Description: {{event.description}}</p>
-  <p>Facebook link: {{event.facebook_link}}</p> -->
+    <br><br>
+    <ion-icon name="pin" color='green-color'></ion-icon>
+    <span style='padding-left: 3%;'>{{event.location}}</span>
+    <hr>
+
+    <p style='color: black;'>Description</p>
+    <p>{{event.description}}</p>
+
+    <hr>
+    <img [src]='creatorPicture' class='profile'>
+
+    <div class='creator'>
+      <span>{{creatorName}}</span><br>
+      <a [href]='profileLink'>View profile</a>
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button round color='green-color' full> Join </button>
+      </ion-col>
+
+      <ion-col>
+        <button (click)='share(event, $event)' ion-fab mini color='white'>
+          <ion-icon name="share" color='light-black'></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>
