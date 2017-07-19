@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar color="green-color">
+    <ion-title>Language</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list radio-group [(ngModel)]="languageCode">
+    <ion-item *ngFor="let lang of languages">
+      <ion-label>{{lang.name}}</ion-label>
+      <ion-radio value="{{lang.code}}" (click)="selectLanguage()"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

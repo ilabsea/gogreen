@@ -7,6 +7,8 @@ import { LoginPage } from '../pages/login/login';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,8 +18,9 @@ export class MyApp {
   hasRoot: any = false;
 
   constructor(platform: Platform, private storage: Storage, statusBar: StatusBar,
-              splashScreen: SplashScreen ) {
+              splashScreen: SplashScreen, translate: TranslateService ) {
     platform.ready().then(() => {
+      translate.setDefaultLang(localStorage.getItem('languageCode') || 'en');
       statusBar.styleDefault();
       splashScreen.hide();
       this.storage.get('isLogged').then(logged => {

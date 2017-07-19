@@ -4,6 +4,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { PinsService } from '../../providers/pins-service';
+import { LanguagePage } from '../language/language';
 
 @Component({
   selector: 'page-profile',
@@ -63,6 +64,10 @@ export class ProfilePage {
         }
       })
     })
+  }
+
+  goToLanguage() {
+    this.navCtrl.push(LanguagePage);
   }
 
 }
