@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color='green-color'>
-    <ion-title>Frequently Asked Questions</ion-title>
+    <ion-title>{{'FREQUENTLY_ASKED_QUESTIONS' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,53 +9,25 @@
 <ion-content padding>
   <div>
     <img src='assets/logo.png' class='logo'>
-    <h4>WHAT IS THIS GOGREEN APP</h4>
+    <h4>{{ 'WHAT_IS_GOGREEN_APP' | translate }}</h4>
+    <p>{{ 'GOGREEN_DEFINITION' | translate }}</p>
+    <p>{{ 'GOGREEN_PURPOSE' | translate }}</p>
+
+    <h4>{{ 'HOW_TO_USE_GOGREEN_APP' | translate }}</h4>
+    <p>{{ 'GOGREEN_USAGE' | translate }}</p>
+
+    <h4>{{ 'IS_THIS_FREE' | translate }}</h4>
+    <p>{{ 'YES_IT_IS_FREE' | translate }}</p>
+
+    <h4>{{ 'HOW_CAN_I_ORGANISE_MY_OWN_CLEANUP' | translate }}</h4>
+    <p>{{ 'WAY_TO_ORGANISE_OWN_CLEANUP' | translate }}</p>
+
+    <h4>{{ 'CONTACT_US_OR_LEAVE_FEEDBACK' | translate }}</h4>
     <p>
-      GOGREEN app is a free tool to engage people into making Cambodia a cleaner
-      and greener place. Everyone can contribute by marking places which are clean
-      by dropping a happy green pin, or marking areas where waste hasn't been
-      cleaner up with an angry red pin. You also have the option to drop a pin in
-      areas where trash bins are necessary.
-    </p>
-    <p>
-      GOGREEN app gathers your feedback in order to engage communities, organisations
-      and institutions to join efforts in a more effective waste management system.
-      Together, we can be the change.
-    </p>
-
-    <h4>HOW CAN I USE THIS GOGREEN APP</h4>
-
-    <p>
-      Login using your Facebook account and activate the map service on your phone.
-      Once your are logged in, you can start pinning away. Tell us about the area
-      you live in or simply joint an event, and help us clean this city.
-    </p>
-
-    <h4>IS THIS FREE</h4>
-
-    <p>
-      Yes, this app was developed free of charge thanks to InSTEDD iLabSEA and
-      is free of charge for all.
-    </p>
-
-    <h4>HOW CAN I ORGANISE MY OWN CLEANUP</h4>
-
-    <p>
-      Please create an event on Facebook and submit a link to the event through
-      our "Events" page. Our team will review your request and if it aligns with
-      our goal and vision, we will include it to the public list of events for all
-      GoGreen users to see and join.
-    </p>
-
-    <h4>CONTACT US OR LEAVE FEEDBACK</h4>
-
-    <p>
-      Feel free to send an e-mail at <br>
+      {{ 'FEEL_FREE_TO_SEND_AN_EMAIL_AT' | translate }} <br>
       <a href="mailto:gogreenkhm@gmail.com">gogreenkhm@gmail.com</a> <br><br>
-      You can also join our Facebook Group @GoGreen Cambodia.
+      {{ 'YOU_CAN_JOIN_OUR_FACEBOOK_GROUP' | translate }}
     </p>
-
   </div>
-
 
 </ion-content>

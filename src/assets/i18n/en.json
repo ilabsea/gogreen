@@ -26,5 +26,19 @@
   "SHOW_EVENT_DETAIL": "Show event detail",
   "THANKS_FOR_CONTRIBUTION": "Thanks for contribution!",
   "SHARE_TO_YOUR_FRIENDS": "Share to your friends",
-  "ADD_PHOTOS": "Add photos"
+  "ADD_PHOTOS": "Add photos",
+  "FAQ": "FAQ",
+  "FREQUENTLY_ASKED_QUESTIONS": "Frequently Asked Questions",
+  "WHAT_IS_GOGREEN_APP": "WHAT IS THIS GOGREEN APP",
+  "GOGREEN_DEFINITION": "GOGREEN app is a free tool to engage people into making Cambodia a cleaner and greener place. Everyone can contribute by marking places which are clean by dropping a happy green pin, or marking areas where waste hasn't been cleaner up with an angry red pin. You also have the option to drop a pin in areas where trash bins are necessary.",
+  "GOGREEN_PURPOSE": "GOGREEN app gathers your feedback in order to engage communities, organisations and institutions to join efforts in a more effective waste management system. Together, we can be the change.",
+  "HOW_TO_USE_GOGREEN_APP": "HOW CAN I USE THIS GOGREEN APP",
+  "GOGREEN_USAGE": "Login using your Facebook account and activate the map service on your phone. Once your are logged in, you can start pinning away. Tell us about the area you live in or simply joint an event, and help us clean this city.",
+  "IS_THIS_FREE": "IS THIS FREE",
+  "YES_IT_IS_FREE": "Yes, this app was developed free of charge thanks to InSTEDD iLabSEA and is free of charge for all.",
+  "HOW_CAN_I_ORGANISE_MY_OWN_CLEANUP": "HOW CAN I ORGANISE MY OWN CLEANUP",
+  "WAY_TO_ORGANISE_OWN_CLEANUP": "Please create an event on Facebook and submit a link to the event through our \"Events\" page. Our team will review your request and if it aligns with our goal and vision, we will include it to the public list of events for all GoGreen users to see and join.",
+  "CONTACT_US_OR_LEAVE_FEEDBACK": "CONTACT US OR LEAVE FEEDBACK",
+  "FEEL_FREE_TO_SEND_AN_EMAIL_AT": "Feel free to send an e-mail at",
+  "YOU_CAN_JOIN_OUR_FACEBOOK_GROUP": "You can also join our Facebook Group @GoGreen Cambodia."
 }
