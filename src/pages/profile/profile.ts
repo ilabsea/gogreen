@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
+
 import { LoginPage } from '../login/login';
+import { FaqPage } from '../faq/faq';
 import { PinsService } from '../../providers/pins-service';
 import { LanguagePage } from '../language/language';
 
@@ -23,8 +25,7 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     let self = this;
-    let params = new Array<string>();
-    this.facebook.api("/me?fields=name" , params).then(function(user) {
+    this.facebook.api("/me?fields=name" , []).then(function(user) {
       self.userProfile = "https://graph.facebook.com/" + user["id"] + "/picture?width=100";
       self.userName = user.name;
     })
@@ -34,7 +35,7 @@ export class ProfilePage {
     let self = this;
     this.facebook.logout().then(function(response) {
       self.storage.set('isLogged', false);
-      self.storage.set('userId', "");
+      self.storage.set('userID', "");
       self.app.getRootNav().setRoot(LoginPage);
     });
   }
@@ -51,6 +52,10 @@ export class ProfilePage {
 
   aboutus(){
     alert("It is in the process of development.");
+  }
+
+  faq() {
+    this.navCtrl.push(FaqPage);
   }
 
   calculateBadges() {

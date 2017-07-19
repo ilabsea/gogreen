@@ -1,3 +1,47 @@
 page-show-event {
+  ion-navbar{
+    background-color: rgba(255,255,255, 0.5);
+  }
 
+  img.cover{
+    margin-top: -16%;
+    max-height: 35%;
+    width: 100%;
+  }
+
+  ion-icon, img{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.4em;
+  }
+
+  ion-col {
+    display: flex;
+    align-items: center;
+  }
+
+  div a {
+    text-decoration: none;
+    color: black;
+  }
+
+  div.creator{
+    display: inline-block;
+    margin-left: 3%;
+    margin-top: 5%;
+  }
+
+  img.profile{
+    border-radius: 50%;
+  }
+
+  span.title{
+    color: black;
+    font-size: 2rem;
+  }
+
+  p.creator {
+    color: black;
+    margin-top: 0.5em;
+  }
 }

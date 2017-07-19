@@ -23,6 +23,7 @@ import { FormEventPage } from '../pages/form-event/form-event';
 import { EventsPage } from '../pages/events/events';
 import { ShowEventPage } from '../pages/show-event/show-event';
 import { LanguagePage } from '../pages/language/language';
+import { FaqPage } from '../pages/faq/faq';
 
 import { Loading } from '../providers/loading';
 import { Events } from '../providers/events';
@@ -53,12 +54,15 @@ export function createTranslateLoader(http: Http) {
     EventsPage,
     FormEventPage,
     ShowEventPage,
-    LanguagePage
+    LanguagePage,
+    FaqPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    }),
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -82,7 +86,8 @@ export function createTranslateLoader(http: Http) {
     EventsPage,
     FormEventPage,
     ShowEventPage,
-    LanguagePage
+    LanguagePage,
+    FaqPage
   ],
   providers: [
     StatusBar,
