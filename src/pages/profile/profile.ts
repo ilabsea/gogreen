@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, App } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
+
 import { LoginPage } from '../login/login';
+import { FaqPage } from '../faq/faq';
 import { PinsService } from '../../providers/pins-service';
 
 @Component({
@@ -49,6 +51,10 @@ export class ProfilePage {
 
   aboutus(){
     alert("It is in the process of development.");
+  }
+
+  faq() {
+    this.navCtrl.push(FaqPage);
   }
 
   calculateBadges() {
