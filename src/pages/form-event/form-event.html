@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="green-color">
-    <ion-title>Create event</ion-title>
+    <ion-title>{{'CREATE_EVENT' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,53 +9,53 @@
 <ion-content padding>
   <form [formGroup]="event" (ngSubmit)="submit()">
     <ion-item>
-      <ion-label stacked class='require'>Title</ion-label>
+      <ion-label stacked class='require'>{{'TITLE' | translate}}</ion-label>
       <ion-input type="text" formControlName='title'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked class='require'>Location</ion-label>
+      <ion-label stacked class='require'>{{'LOCATION' | translate}}</ion-label>
       <ion-input type="text" formControlName="location"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked class='require'>Date</ion-label>
+      <ion-label stacked class='require'>{{'DATE' | translate}}</ion-label>
       <ion-datetime displayFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
     </ion-item>
 
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label stacked class='require'>Start time</ion-label>
+          <ion-label stacked class='require'>{{'START_TIME' | translate}}</ion-label>
           <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="start_time"></ion-datetime>
         </ion-item>
       </ion-col>
 
       <ion-col>
         <ion-item>
-          <ion-label stacked class='require'>End time</ion-label>
+          <ion-label stacked class='require'>{{'END_TIME' | translate}}</ion-label>
           <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="end_time"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-item>
-      <label style='font-size: 1.2rem; color: #999;'>Event image</label>
+      <label style='font-size: 1.2rem; color: #999;'>{{'EVENT_IMAGE' | translate}}</label>
       <div (click)='selectImage()'>
         <img width="50" height="50" [src]="event.image ? event.image : 'assets/event/image.png'" class='center'>
       </div>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Description</ion-label>
+      <ion-label stacked>{{'DESCRIPTION' | translate}}</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked class='require'>Facebook Link</ion-label>
+      <ion-label stacked class='require'>{{'FACEBOOK_LINK' | translate}}</ion-label>
       <ion-input type="url" formControlName="facebook_link"></ion-input>
     </ion-item>
 
-    <button ion-button type='submit' block color='green-color' [disabled]='event.invalid' class='submit'>Save</button>
+    <button ion-button type='submit' block color='green-color' [disabled]='event.invalid' class='submit'>{{'SAVE' | translate}}</button>
   </form>
 </ion-content>

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="green-color">
-    <ion-title>Profile</ion-title>
+    <ion-title>{{'PROFILE' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,35 +18,35 @@
       <ion-avatar item-left>
         <img src="assets/profile/badge.svg">
       </ion-avatar>
-      <h2>Your badges</h2>
+      <h2>{{'YOUR_BADGES' | translate}}</h2>
     </ion-item>
 
     <ion-item (click)='inviteFiends()'>
       <ion-avatar item-left>
         <img src="assets/profile/facebook.svg">
       </ion-avatar>
-      <h2>Invite friends</h2>
+      <h2>{{'INVITE_FRIENDS' | translate}}</h2>
     </ion-item>
 
     <ion-item (click)='goToLanguage()'>
       <ion-avatar item-left>
-        <img src="assets/profile/facebook.svg">
+        <img src="assets/profile/language.svg">
       </ion-avatar>
-      <h2>Language</h2>
+      <h2>{{'LANGUAGE' | translate}}</h2>
     </ion-item>
 
     <ion-item (click)='aboutus()'>
       <ion-avatar item-left>
         <img src="assets/profile/about.svg">
       </ion-avatar>
-      <h2>About us</h2>
+      <h2>{{'ABOUT_US' | translate}}</h2>
     </ion-item>
 
     <ion-item (click)='logout()'>
       <ion-avatar item-left>
         <img src="assets/profile/logout.svg">
       </ion-avatar>
-      <h2>Logout</h2>
+      <h2>{{'LOGOUT' | translate}}</h2>
     </ion-item>
 
   </ion-list>
