@@ -5,7 +5,7 @@
   <img [src]='url + event.image.url' class='cover'>
   <div padding style='color: #8C8C8C;'>
     <span class='title'> Clean up in Phnom Penh </span><br>
-    <p class='creator'>by {{creatorName}}</p>
+    <p class='creator'>{{'BY' | translate}} {{creatorName}}</p>
 
     <ion-icon name="calendar" color='green-color'></ion-icon>
     <span style='padding-left: 3%;'>{{event.date | date: 'EEEE, MMMM d'}}</span>
@@ -17,7 +17,7 @@
     <span style='padding-left: 3%;'>{{event.location}}</span>
     <hr>
 
-    <p style='color: black;'>Description</p>
+    <p style='color: black;'>{{'DESCRIPTION' | translate}}</p>
     <p>{{event.description}}</p>
 
     <hr>
@@ -25,12 +25,12 @@
 
     <div class='creator'>
       <span>{{creatorName}}</span><br>
-      <a [href]='profileLink'>View profile</a>
+      <a [href]='profileLink'>{{'VIEW_PROFILE' | translate}}</a>
     </div>
 
     <ion-row>
       <ion-col>
-        <button ion-button round color='green-color' full> Join </button>
+        <button ion-button round color='green-color' full> {{'JOIN' | translate}} </button>
       </ion-col>
 
       <ion-col>
