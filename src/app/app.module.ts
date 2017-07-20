@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Facebook } from '@ionic-native/facebook';
 import { GoogleMaps } from '../providers/google-maps';
-import { Camera } from '../providers/camera';
+import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';

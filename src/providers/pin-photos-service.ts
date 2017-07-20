@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 import { Endpoint } from './endpoint';
 
 @Injectable()
 export class PinPhotosService {
-
-  constructor(public http: Http, private endpoint: Endpoint) {
+  constructor(public http: Http, private endpoint: Endpoint, private camera: Camera) {
   }
 
   createPinPhoto(params){
@@ -31,6 +32,23 @@ export class PinPhotosService {
         }, (error) => {
           resolve(error.json());
         })
+    })
+  }
+
+  getPhoto(){
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+    }
+    return new Promise((resolve) => {
+      this.camera.getPicture(options).then((imageData) => {
+        resolve(imageData);
+      }, (err) => {
+        resolve(err);
+      });
     })
   }
 
