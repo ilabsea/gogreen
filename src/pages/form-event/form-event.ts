@@ -33,7 +33,7 @@ export class FormEventPage {
       'description': [''],
       'facebook_link': ['', Validators.compose([Validators.required, Validators.pattern(urlPattern)])],
       'image': '',
-      'user_id': ""
+      'user_id': ''
     });
   }
 
@@ -43,9 +43,10 @@ export class FormEventPage {
     let self = this;
     this.loading.show();
     this.storage.get("userID").then((userID) => {
-      self.event["user_id"] = userID;
-
-      this.events.create(self.event.value).then(() => {
+      var data = self.event.value;
+      data.user_id = userID;
+      data.image = self.event.image;
+      self.events.create(data).then(() => {
         self.loading.hide();
         self.navCtrl.pop(EventsPage);
       });

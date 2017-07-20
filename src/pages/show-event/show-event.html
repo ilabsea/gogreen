@@ -4,21 +4,23 @@
 
   <img [src]='url + event.image.url' class='cover'>
   <div padding style='color: #8C8C8C;'>
-    <span class='title'> Clean up in Phnom Penh </span><br>
+    <span class='title'> {{event.title}} </span><br>
     <p class='creator'>{{'BY' | translate}} {{creatorName}}</p>
 
     <ion-icon name="calendar" color='green-color'></ion-icon>
     <span style='padding-left: 3%;'>{{event.date | date: 'EEEE, MMMM d'}}</span>
     <br>
-    <span style='padding-left: 8%;'>{{event.start_time | date: 'h:mm a'}} - {{event.end_time | date: 'h:mm a Z'}}</span>
+    <span style='padding-left: 8%;'>{{event.start_time | date: 'h:mm a' : 'UTC +00:00'}} - {{event.end_time | date: 'h:mm a' : 'UTC +00:00'}}</span>
 
     <br><br>
     <ion-icon name="pin" color='green-color'></ion-icon>
     <span style='padding-left: 3%;'>{{event.location}}</span>
-    <hr>
 
-    <p style='color: black;'>{{'DESCRIPTION' | translate}}</p>
-    <p>{{event.description}}</p>
+    <div *ngIf="event.description">
+      <hr>
+      <p style='color: black;'>{{'DESCRIPTION' | translate}}</p>
+      <p>{{event.description}}</p>
+    </div>
 
     <hr>
     <img [src]='creatorPicture' class='profile'>
