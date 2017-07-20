@@ -118,7 +118,7 @@ export class HomePage {
   popupPinInfo(pin, marker) {
     let popover = this.popoverCtrl.create(PinInfoPage, {
       'map': this.map, 'pin': pin , 'marker': marker
-    });
+    }, {cssClass: 'pin-info-popover'});
     popover.present();
   }
 }

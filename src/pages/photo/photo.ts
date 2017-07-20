@@ -10,10 +10,11 @@ import { Endpoint } from '../../providers/endpoint';
 
 })
 export class PhotoPage {
-  pin: any;
-  pinPhotos: any;
-  map: any;
-  url: any;
+  private pin: any;
+  private pinPhotos: any;
+  private map: any;
+  private url: any;
+  private imageBase64: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private pinPhotosService: PinPhotosService, private endpoint: Endpoint) {
@@ -49,6 +50,20 @@ export class PhotoPage {
       n = n + 3;
     }
     return res;
+  }
+
+  addPhoto(){
+    let self = this;
+    this.pinPhotosService.getPhoto().then((imageData) => {
+      self.imageBase64 = 'data:image/jpeg;base64,' + imageData;
+      let params = {
+        "photo": self.imageBase64,
+        "pin_id": self.pin["id"]
+      }
+      self.pinPhotosService.createPinPhoto(params);
+    }, (err) => {
+      console.log('error : ', err);
+    });
   }
 
 }

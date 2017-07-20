@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
 import { FaqPage } from '../faq/faq';
+import { AboutusPage } from '../aboutus/aboutus';
 import { PinsService } from '../../providers/pins-service';
 import { LanguagePage } from '../language/language';
 
@@ -51,7 +52,7 @@ export class ProfilePage {
   }
 
   aboutus(){
-    alert("It is in the process of development.");
+    this.navCtrl.push(AboutusPage);
   }
 
   faq() {

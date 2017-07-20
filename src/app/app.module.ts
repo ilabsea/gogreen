@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Facebook } from '@ionic-native/facebook';
 import { GoogleMaps } from '../providers/google-maps';
-import { Camera } from '../providers/camera';
+import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
@@ -24,6 +24,7 @@ import { EventsPage } from '../pages/events/events';
 import { ShowEventPage } from '../pages/show-event/show-event';
 import { LanguagePage } from '../pages/language/language';
 import { FaqPage } from '../pages/faq/faq';
+import { AboutusPage } from '../pages/aboutus/aboutus'
 
 import { Loading } from '../providers/loading';
 import { Events } from '../providers/events';
@@ -55,7 +56,8 @@ export function createTranslateLoader(http: Http) {
     FormEventPage,
     ShowEventPage,
     LanguagePage,
-    FaqPage
+    FaqPage,
+    AboutusPage
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ export function createTranslateLoader(http: Http) {
     FormEventPage,
     ShowEventPage,
     LanguagePage,
-    FaqPage
+    FaqPage,
+    AboutusPage
   ],
   providers: [
     StatusBar,
