@@ -39,7 +39,6 @@ export class ThanksPopOver {
         description: "Much description"
       })
     })
-
   }
 
   AddPhoto(){

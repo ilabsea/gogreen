@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
 import { FaqPage } from '../faq/faq';
+import { AboutusPage } from '../aboutus/aboutus';
 import { PinsService } from '../../providers/pins-service';
 
 @Component({
@@ -50,7 +51,7 @@ export class ProfilePage {
   }
 
   aboutus(){
-    alert("It is in the process of development.");
+    this.navCtrl.push(AboutusPage);
   }
 
   faq() {

@@ -23,6 +23,7 @@ import { FormEventPage } from '../pages/form-event/form-event';
 import { EventsPage } from '../pages/events/events';
 import { ShowEventPage } from '../pages/show-event/show-event';
 import { FaqPage } from '../pages/faq/faq';
+import { AboutusPage } from '../pages/aboutus/aboutus'
 
 import { Loading } from '../providers/loading';
 import { Events } from '../providers/events';
@@ -44,7 +45,8 @@ import { PinPhotosService } from '../providers/pin-photos-service';
     EventsPage,
     FormEventPage,
     ShowEventPage,
-    FaqPage
+    FaqPage,
+    AboutusPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { PinPhotosService } from '../providers/pin-photos-service';
     EventsPage,
     FormEventPage,
     ShowEventPage,
-    FaqPage
+    FaqPage,
+    AboutusPage
   ],
   providers: [
     StatusBar,
