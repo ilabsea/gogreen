@@ -1,4 +1,6 @@
 page-show-event {
+  color: rgba(0, 0, 0, 0.87);
+
   ion-navbar{
     background-color: rgba(255,255,255, 0.5);
   }
@@ -12,7 +14,7 @@ page-show-event {
   ion-icon, img{
     display: inline-block;
     vertical-align: middle;
-    font-size: 1.4em;
+    font-size: 24px;
   }
 
   ion-col {
@@ -22,26 +24,91 @@ page-show-event {
 
   div a {
     text-decoration: none;
-    color: black;
-  }
-
-  div.creator{
-    display: inline-block;
-    margin-left: 3%;
-    margin-top: 5%;
-  }
-
-  img.profile{
-    border-radius: 50%;
-  }
-
-  span.title{
-    color: black;
-    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.87);
   }
 
   p.creator {
-    color: black;
-    margin-top: 0.5em;
+    margin-top: -6px;
+  }
+
+  .back-button {
+    // color: #fff !important;
+  }
+
+  .btn-join-wrapper {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+
+  .btn-join {
+    width: 80%;
+  }
+
+  .profile {
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: normal;
+
+    .user-avatar {
+      border-radius: 50%;
+    }
+
+    .md-title, .md-subhead {
+      font-size: 14px;
+    }
+
+    .md-subhead {
+      color: rgba(0,0,0,0.54);
+    }
+
+    .avata {
+      margin-right: 12px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .text {
+      max-height: 40px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }
+
+  .desc-wrapper {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    padding-top: 16px;
+    margin-bottom: 30px;
+  }
+
+  .info-grid {
+    margin-bottom: 16px;
+  }
+
+  .left-column {
+    width: 24px;
+    vertical-align: top;
+  }
+
+  .right-column > div {
+    margin: 4px 0;
+  }
+
+  .column {
+    display: inline-block;
   }
 }

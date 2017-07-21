@@ -1,16 +1,33 @@
-// http://ionicframework.com/docs/v2/theming/
+// Typography
 
+.md-title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: .005em;
+}
 
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+.md-subhead {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+
+.md-body-1 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+
+.md-body-2 {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  line-height: 24px;
+}
+
+.md-caption {
+  font-size: 12px;
+  letter-spacing: .02em;
+}

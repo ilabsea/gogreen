@@ -1,45 +1,59 @@
 <ion-content>
   <ion-navbar transparent>
+    <ion-buttons end>
+      <!-- <button ion-button icon-only (click)='share(event, $event)' class='btn-share' color='white'> -->
+      <button ion-button icon-only (click)='share(event, $event)' class='btn-share'>
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
   <img [src]='url + event.image.url' class='cover'>
-  <div padding style='color: #8C8C8C;'>
-    <span class='title'> {{event.title}} </span><br>
-    <p class='creator'>{{'BY' | translate}} {{creatorName}}</p>
 
-    <ion-icon name="calendar" color='green-color'></ion-icon>
-    <span style='padding-left: 3%;'>{{event.date | date: 'EEEE, MMMM d'}}</span>
-    <br>
-    <span style='padding-left: 8%;'>{{event.start_time | date: 'h:mm a' : 'UTC +00:00'}} - {{event.end_time | date: 'h:mm a' : 'UTC +00:00'}}</span>
+  <div padding>
+    <h3 class='md-title'> {{event.title}} </h3>
+    <p class='creator'>{{'BY' | translate}} <span class="md-body-2">{{creatorName}}</span></p>
 
-    <br><br>
-    <ion-icon name="pin" color='green-color'></ion-icon>
-    <span style='padding-left: 3%;'>{{event.location}}</span>
+    <div clss='info-grid'>
+      <div class="left-column column">
+        <ion-icon name="calendar" color='green-color'></ion-icon>
+      </div>
 
-    <div *ngIf="event.description">
-      <hr>
-      <p style='color: black;'>{{'DESCRIPTION' | translate}}</p>
-      <p>{{event.description}}</p>
+      <div class='right-column column'>
+        <div style="margin-bottom: 4px;">{{event.date | date: 'EEEE, MMMM d'}}</div>
+        <div>{{event.start_time | date: 'h:mm a' : 'UTC +00:00'}} - {{event.end_time | date: 'h:mm a' : 'UTC +00:00'}}</div>
+      </div>
     </div>
 
-    <hr>
-    <img [src]='creatorPicture' class='profile'>
+    <div clss='info-grid'>
+      <div class="left-column column">
+        <ion-icon name="pin" color='green-color'></ion-icon>
+      </div>
 
-    <div class='creator'>
-      <span>{{creatorName}}</span><br>
-      <a [href]='profileLink'>{{'VIEW_PROFILE' | translate}}</a>
+      <div class="right-column column">
+        <div>{{event.location}} </div>
+      </div>
     </div>
 
-    <ion-row>
-      <ion-col>
-        <button ion-button round color='green-color' full> {{'JOIN' | translate}} </button>
-      </ion-col>
+    <section class='btn-join-wrapper'>
+      <button ion-button round color='green-color' class='btn-join'> {{'JOIN' | translate}} </button>
+    </section>
 
-      <ion-col>
-        <button (click)='share(event, $event)' ion-fab mini color='white'>
-          <ion-icon name="share" color='light-black'></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
+    <section *ngIf="event.description" class='desc-wrapper'>
+      <h4 class='md-body-2'>{{'DESCRIPTION' | translate}}</h4>
+      <p class='md-body-1'>{{event.description}}</p>
+    </section>
+
+    <section class='profile'>
+      <div class='avata'>
+        <img [src]='creatorPicture' class='user-avatar'>
+      </div>
+
+      <div class='text'>
+        <span class='md-title'>{{creatorName}}</span>
+        <a class='md-subhead' [href]='profileLink'>{{'VIEW_PROFILE' | translate}}</a>
+      </div>
+    </section>
+
   </div>
 </ion-content>
