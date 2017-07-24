@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams } from 'ionic-angular';
 import { BadgeInfoPage } from '../badge-info/badge-info';
+import { UserService } from '../../providers/user-service';
+import { Storage } from '@ionic/storage';
+import { Loading } from '../../providers/loading';
 
 @Component({
   selector: 'page-badge',
@@ -8,8 +11,8 @@ import { BadgeInfoPage } from '../badge-info/badge-info';
 })
 
 export class BadgePage {
-
-  private user;
+  private hasUser = false;
+  private user = { name: '', user_id: '', pin_count: 0, event_count: 0 };
   private badges = [
    {
      name: 'help',
@@ -33,12 +36,33 @@ export class BadgePage {
    }
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public appCtrl: App) {
-    this.user = { name: 'sokly', user_id: '11', pin_count: 1, event_count: 3 };
+  constructor(public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private storage: Storage, public userService: UserService, private loading: Loading) {
+    this.loading.show();
   }
 
   ionViewDidLoad(){
-    this.formatData();
+    this.getUser();
+  }
+
+  getUser() {
+    var self = this;
+    this.storage.get('userID').then((userId) => {
+      self.userService.get(userId).then((user) => {
+        self.assignUser(user);
+        self.formatData();
+        self.loading.hide();
+      }, (error) => {
+        console.log('error : ', error);
+      });
+    });
+  }
+
+  assignUser(user) {
+    this.user.name = user.name;
+    this.user.user_id = user.user_id;
+    this.user.pin_count = user.pin_count;
+    this.user.event_count = user.event_count;
+    this.hasUser = true;
   }
 
   formatData() {

@@ -33,6 +33,7 @@ import { Events } from '../providers/events';
 import { Endpoint } from '../providers/endpoint';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
+import { UserService } from '../providers/user-service';
 
 // Translation
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -105,6 +106,7 @@ export function createTranslateLoader(http: Http) {
     GoogleMaps,
     PinsService,
     PinPhotosService,
+    UserService,
     Endpoint,
     Camera,
     Events,

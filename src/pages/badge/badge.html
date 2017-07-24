@@ -9,10 +9,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3 class="md-title text-center">{{'BADGE_COLLECTION' | translate}}</h3>
+<ion-content padding >
+  <h3 class="md-title text-center" [hidden]='!hasUser'>{{'BADGE_COLLECTION' | translate}}</h3>
 
-  <section class='badges'>
+  <section class='badges' [hidden]='!hasUser'>
     <div *ngFor="let badge of badges" class='badge'>
       <div class="badge-layer" *ngIf='!badge.active'></div>
       <img [src]='badge.icon'>
