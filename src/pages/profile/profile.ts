@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
 import { FaqPage } from '../faq/faq';
+import { BadgePage } from '../badge/badge';
 import { AboutusPage } from '../aboutus/aboutus';
 import { PinsService } from '../../providers/pins-service';
 import { LanguagePage } from '../language/language';
@@ -76,4 +77,7 @@ export class ProfilePage {
     this.navCtrl.push(LanguagePage);
   }
 
+  viewBadges() {
+    this.navCtrl.push(BadgePage);
+  }
 }

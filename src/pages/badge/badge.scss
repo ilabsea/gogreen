@@ -1,0 +1,21 @@
+page-badge {
+  .badges {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .badge {
+    width: 30%;
+    margin: 1%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .badge-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

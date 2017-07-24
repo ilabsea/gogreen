@@ -24,6 +24,8 @@ import { EventsPage } from '../pages/events/events';
 import { ShowEventPage } from '../pages/show-event/show-event';
 import { LanguagePage } from '../pages/language/language';
 import { FaqPage } from '../pages/faq/faq';
+import { BadgePage } from '../pages/badge/badge';
+import { BadgeInfoPage } from '../pages/badge-info/badge-info';
 import { AboutusPage } from '../pages/aboutus/aboutus'
 
 import { Loading } from '../providers/loading';
@@ -57,6 +59,8 @@ export function createTranslateLoader(http: Http) {
     ShowEventPage,
     LanguagePage,
     FaqPage,
+    BadgePage,
+    BadgeInfoPage,
     AboutusPage
   ],
   imports: [
@@ -90,6 +94,8 @@ export function createTranslateLoader(http: Http) {
     ShowEventPage,
     LanguagePage,
     FaqPage,
+    BadgePage,
+    BadgeInfoPage,
     AboutusPage
   ],
   providers: [

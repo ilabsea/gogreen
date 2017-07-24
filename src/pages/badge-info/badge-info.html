@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="green-color">
+    <ion-title>{{'BADGE_INFO' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor='let badge of badges'>
+      <ion-avatar item-left>
+        <img [src]='badge.icon'>
+      </ion-avatar>
+      <h2>{{ badge.name }}</h2>
+      <p>{{ badge.description }}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
