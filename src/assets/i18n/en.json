@@ -44,5 +44,11 @@
   "VIEW_PROFILE": "View Profile",
   "JOIN": "Join",
   "BY": "by",
-  "BADGE_INFO": "Badge information"
+  "BADGE_INFO": "Badge information",
+  "BADGE_COLLECTION": "Badge Collection",
+  "GREEN_HELPER_DESCRIPTION": "Place pin on map at least 3 times",
+  "GREEN_WARRIOR_DESCRIPTION": "Place pin on the map at least 10 times",
+  "GREEN_HERO_DESCRIPTION": "Organize at least 3 events",
+  "GREEN_STAR_DESCRIPTION": "Organize at least 10 events",
+  "GREEN_HEART_DESCRIPTION": "Place pin on map and organize event more than 10 times"
 }

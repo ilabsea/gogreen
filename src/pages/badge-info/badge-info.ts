@@ -11,27 +11,27 @@ export class BadgeInfoPage {
    {
      name: 'Green Helper',
      icon: 'assets/badge/help.png',
-     description: 'Place pin on map at least 3 times'
+     description: 'GREEN_HELPER_DESCRIPTION'
    },
    {
      name: 'Green Warrior',
      icon: 'assets/badge/warrior.png',
-     description: 'Place pin on the map at least 10 times'
+     description: 'GREEN_WARRIOR_DESCRIPTION'
    },
    {
      name: 'Green Hero',
      icon: 'assets/badge/hero.png',
-     description: 'Organize at least 3 events'
+     description: 'GREEN_HERO_DESCRIPTION'
    },
    {
      name: 'Green Star',
      icon: 'assets/badge/star.png',
-     description: 'Organize at least 10 events'
+     description: 'GREEN_STAR_DESCRIPTION'
    },
    {
      name: 'Green Heart',
      icon: 'assets/badge/heart.png',
-     description: 'Place pin on map and organize event more than 10 times'
+     description: 'GREEN_HEART_DESCRIPTION'
    }
   ];
 

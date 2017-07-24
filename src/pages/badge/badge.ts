@@ -58,11 +58,8 @@ export class BadgePage {
   }
 
   assignUser(user) {
-    this.user.name = user.name;
-    this.user.user_id = user.user_id;
-    this.user.pin_count = user.pin_count;
-    this.user.event_count = user.event_count;
     this.hasUser = true;
+    this.user = user;
   }
 
   formatData() {
