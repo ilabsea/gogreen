@@ -32,8 +32,12 @@ export class EventsPage {
     });
   }
 
+  appendEvent(event) {
+    this.events.push(event);
+  }
+
   goToForm() {
-    this.navCtrl.push(FormEventPage);
+    this.navCtrl.push(FormEventPage, { "parentPage": this });
   }
 
   showDetail(event, $event){

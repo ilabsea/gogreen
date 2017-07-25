@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
+// import { Events } from '@ionic/storage';
 
 import { EventsPage } from '../events/events';
 
@@ -19,7 +20,7 @@ export class FormEventPage {
   private event;
 
   constructor(public navCtrl: NavController, private events: Events,
-              private camera: Camera, public formBuilder: FormBuilder,
+              private camera: Camera, public formBuilder: FormBuilder, public navParams: NavParams,
               public loading: Loading, private storage: Storage) {
 
     var urlPattern = /^((http|https):\/\/)?((www\.)?(xn--[\w-]+)(\.?xn--[\w-]+)*|[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*(\.[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*)*)\.((xn--[\w-]+)|aero|asia|biz|cat|com|coop|eus|gal|info|int|jobs|mobi|museum|name|net|org|post|pro|tel|travel|xxx|edu|gov|mil|[\w]{2}|[\u00BF-\u1FFF\u2C00-\uD7FF]{2,10})([\/?]\S*)?$/;
@@ -46,9 +47,10 @@ export class FormEventPage {
       var data = self.event.value;
       data.user_id = userID;
       data.image = self.event.image;
-      self.events.create(data).then(() => {
+      self.events.create(data).then((event) => {
         self.loading.hide();
         self.navCtrl.pop(EventsPage);
+        self.navParams.get("parentPage").appendEvent(event);
       });
     })
   }
