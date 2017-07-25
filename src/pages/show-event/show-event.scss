@@ -11,7 +11,24 @@ page-show-event {
     width: 100%;
   }
 
-  ion-icon, img{
+  .default-image {
+    background-color: #6e6e6e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -16%;
+    max-height: 35%;
+    min-height: 260px;
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      max-height: 50%;
+      max-width: 50%;
+    }
+  }
+
+  ion-icon{
     display: inline-block;
     vertical-align: middle;
     font-size: 24px;

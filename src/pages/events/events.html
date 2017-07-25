@@ -12,7 +12,8 @@
     <ion-card *ngFor="let event of events" (click)='showDetail(event, $event)'>
 
       <div class="wrapper-image" >
-        <img class='event-image' [src]="url + event['image']['url']">
+        <img *ngIf="(event.image && event.image.url)" class='event-image' [src]="url + event.image.url">
+        <img *ngIf="!(event.image && event.image.url)" class='default-image' src="assets/event/default_img.png">
       </div>
 
       <button (click)='share(event, $event)' ion-button round icon-right icon-only

@@ -1,14 +1,16 @@
 <ion-content>
   <ion-navbar transparent>
     <ion-buttons end>
-      <!-- <button ion-button icon-only (click)='share(event, $event)' class='btn-share' color='white'> -->
       <button ion-button icon-only (click)='share(event, $event)' class='btn-share'>
         <ion-icon name="share"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
-  <img [src]='url + event.image.url' class='cover'>
+  <img [src]='url + event.image.url' class='cover' *ngIf="event.image && event.image.url">
+  <div class="default-image" *ngIf="!(event.image && event.image.url)">
+    <img src="assets/event/default_img.png">
+  </div>
 
   <div padding>
     <h3 class='md-title'> {{event.title}} </h3>

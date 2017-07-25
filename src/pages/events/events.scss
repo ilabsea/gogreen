@@ -1,10 +1,19 @@
 page-events {
   .event-image {
     height: 20rem !important;
+    margin: 0 auto;
   }
 
   .wrapper-image {
-    max-height: 100% !important;
+    height: 20rem !important;
+    background-color: #6e6e6e;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .default-image {
+    width: 50%;
+    margin: 0 auto;
   }
 
   button.share{
