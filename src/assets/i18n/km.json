@@ -46,9 +46,10 @@
   "BY": "ដោយ",
   "BADGE_INFO": "ព័ត៌មានពីផ្លាកសញ្ញា",
   "BADGE_COLLECTION": "ការប្រមូលផ្លាក",
-  "GREEN_HELPER_DESCRIPTION": "Place pin on map at least 3 times",
-  "GREEN_WARRIOR_DESCRIPTION": "Place pin on the map at least 10 times",
-  "GREEN_HERO_DESCRIPTION": "Organize at least 3 events",
-  "GREEN_STAR_DESCRIPTION": "Organize at least 10 events",
-  "GREEN_HEART_DESCRIPTION": "Place pin on map and organize event more than 10 times"
+  "GREEN_HELPER_DESCRIPTION": "ដាក់ម្ជុលនៅលើផែនទីយ៉ាងហោចណាស់ 3 ដង",
+  "GREEN_WARRIOR_DESCRIPTION": "ដាក់ម្ជុលនៅលើផែនទីយ៉ាងហោចណាស់ 10 ដង",
+  "GREEN_HERO_DESCRIPTION": "រៀបចំយ៉ាងហោចណាស់ 3 ព្រឹត្តិការណ៍",
+  "GREEN_STAR_DESCRIPTION": "រៀបចំយ៉ាងហោចណាស់ ១០ ព្រឹត្តិការណ៍",
+  "GREEN_HEART_DESCRIPTION": "ដាក់ម្ជុលនៅលើផែនទីនិងរៀបចំព្រឹត្តិការណ៍ច្រើនជាង 10 ដង",
+  "GOGREEN_APP_IS_CREATED_BY": "កម្មវិធី GOGREEN ត្រូវបានបង្កើតឡើងដោយអង្គការ GOGREEN Cambodia ដែលជាអង្គការស្ម័គ្រចិត្តនិងអង្គការ InSTEDD iLab SEA ។"
 }
