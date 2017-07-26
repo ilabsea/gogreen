@@ -60,19 +60,6 @@ export class ProfilePage {
     this.navCtrl.push(FaqPage);
   }
 
-  calculateBadges() {
-    this.storage.get('userID').then(userId => {
-      this.pinsService.getNumberPinsByUserId(userId).then(nbPins => {
-        let number = nbPins["number_of_pins"];
-        if(number >= 3 && number <10){
-          this.badgeType = 'warrior';
-        }else if(number >= 10 && number <20){
-          this.badgeType = 'hero';
-        }
-      })
-    })
-  }
-
   goToLanguage() {
     this.navCtrl.push(LanguagePage);
   }

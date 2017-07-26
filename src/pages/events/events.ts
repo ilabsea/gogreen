@@ -17,6 +17,7 @@ export class EventsPage {
 
   private events: any;
   private url = '';
+  private pageNum = 1;
 
   constructor(public navCtrl: NavController, private eventsService: Events,
               private loading: Loading, private endpoint: Endpoint,
@@ -26,14 +27,15 @@ export class EventsPage {
 
   ionViewDidLoad() {
     this.loading.show();
-    this.eventsService.get().then((events) => {
-      this.events = events["events"];
+    this.eventsService.getAll(this.pageNum).then((events) => {
+      this.pageNum += 1;
+      this.events = events;
       this.loading.hide();
     });
   }
 
   appendEvent(event) {
-    this.events.push(event);
+    this.events.unshift(event);
   }
 
   goToForm() {

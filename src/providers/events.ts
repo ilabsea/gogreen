@@ -26,9 +26,9 @@ export class Events {
     })
   }
 
-  get(){
+  getAll(pageNum) {
     return new Promise(resolve => {
-      this.http.get(this.endpoint.api + "events")
+      this.http.get(this.endpoint.api + "events?page=" + pageNum)
         .subscribe(data => {
           resolve(data.json());
         }, error => {

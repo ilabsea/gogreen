@@ -12,7 +12,7 @@ import { Loading } from '../../providers/loading';
 
 export class BadgePage {
   private hasUser = false;
-  private user = { name: '', user_id: '', pin_count: 0, event_count: 0 };
+  private user = { name: '', user_id: '', pins_count: 0, events_count: 0 };
   private badges = [
    {
      name: 'help',
@@ -36,7 +36,9 @@ export class BadgePage {
    }
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private storage: Storage, public userService: UserService, private loading: Loading) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public appCtrl: App, private storage: Storage,
+              public userService: UserService, private loading: Loading) {
     this.loading.show();
   }
 
@@ -64,11 +66,11 @@ export class BadgePage {
 
   formatData() {
     for(var i = 0; i < this.badges.length; i++){
-      if ((this.badges[i].name == 'help' && this.user.pin_count >= 3) ||
-          (this.badges[i].name == 'warrior' && this.user.pin_count >= 10) ||
-          (this.badges[i].name == 'hero' && this.user.event_count >= 3) ||
-          (this.badges[i].name == 'star' && this.user.event_count >= 10) ||
-          (this.badges[i].name == 'heart' && this.user.pin_count >= 10 && this.user.event_count >= 10)) {
+      if ((this.badges[i].name == 'help' && this.user.pins_count >= 3) ||
+          (this.badges[i].name == 'warrior' && this.user.pins_count >= 10) ||
+          (this.badges[i].name == 'hero' && this.user.events_count >= 3) ||
+          (this.badges[i].name == 'star' && this.user.events_count >= 10) ||
+          (this.badges[i].name == 'heart' && this.user.pins_count >= 10 && this.user.events_count >= 10)) {
         this.badges[i]['active'] = true;
       }
     }
