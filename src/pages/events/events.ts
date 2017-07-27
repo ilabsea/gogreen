@@ -17,7 +17,7 @@ export class EventsPage {
 
   private events: any;
   private url = '';
-  private pageNum = 1;
+  private pageNum;
 
   constructor(public navCtrl: NavController, private eventsService: Events,
               private loading: Loading, private endpoint: Endpoint,
@@ -26,6 +26,11 @@ export class EventsPage {
   }
 
   ionViewDidLoad() {
+    this.getEvents();
+  }
+
+  getEvents() {
+    this.pageNum = 1;
     this.loading.show();
     this.eventsService.getAll(this.pageNum).then((events) => {
       this.pageNum += 1;
@@ -34,8 +39,19 @@ export class EventsPage {
     });
   }
 
-  appendEvent(event) {
-    this.events.unshift(event);
+  getMoreItems(infiniteScroll) {
+    this.eventsService.getAll(this.pageNum).then((events) => {
+      if (events['length'] > 0) {
+        this.pageNum += 1;
+      }
+      this.events = this.events.concat(events);
+
+      infiniteScroll.complete();
+    });
+  }
+
+  refreshPage() {
+    this.getEvents();
   }
 
   goToForm() {

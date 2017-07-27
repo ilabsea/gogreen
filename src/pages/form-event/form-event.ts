@@ -59,7 +59,7 @@ export class FormEventPage {
       self.events.create(data).then((event) => {
         self.loading.hide();
         self.navCtrl.pop(EventsPage);
-        self.navParams.get("parentPage").appendEvent(event);
+        self.navParams.get("parentPage").refreshPage();
       });
     })
   }
