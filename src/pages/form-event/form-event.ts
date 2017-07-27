@@ -17,17 +17,23 @@ import { Events } from '../../providers/events';
 
 export class FormEventPage {
   private event;
+  private minDate;
+  private maxDate;
 
   constructor(public navCtrl: NavController, private events: Events,
               private camera: Camera, public formBuilder: FormBuilder, public navParams: NavParams,
               public loading: Loading, private storage: Storage) {
 
     var urlPattern = /^((http|https):\/\/)?((www\.)?(xn--[\w-]+)(\.?xn--[\w-]+)*|[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*(\.[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*)*)\.((xn--[\w-]+)|aero|asia|biz|cat|com|coop|eus|gal|info|int|jobs|mobi|museum|name|net|org|post|pro|tel|travel|xxx|edu|gov|mil|[\w]{2}|[\u00BF-\u1FFF\u2C00-\uD7FF]{2,10})([\/?]\S*)?$/;
+    var now = new Date();
+    var nextDate = new Date((now.getFullYear() + 2).toString() + '-12-31');
 
+    this.minDate = this.formatDate(now);
+    this.maxDate = this.formatDate(nextDate);
     this.event = formBuilder.group({
       'title': ['', Validators.required],
       'location': ['', Validators.required],
-      'date': ['', Validators.required],
+      'date': [this.minDate, Validators.required],
       'start_time': ['', Validators.required],
       'end_time': ['', Validators.required],
       'description': [''],
@@ -35,6 +41,10 @@ export class FormEventPage {
       'image': '',
       'user_id': ''
     });
+  }
+
+  formatDate(date) {
+    return date.toISOString().split('T')[0];
   }
 
   submit(){

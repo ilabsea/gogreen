@@ -20,7 +20,7 @@
 
     <ion-item>
       <ion-label stacked class='require'>{{'DATE' | translate}}</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
+      <ion-datetime displayFormat="DD MMM YYYY" formControlName="date" [min]='minDate' [max]="maxDate"></ion-datetime>
     </ion-item>
 
     <ion-row>
