@@ -27,6 +27,7 @@ import { FaqPage } from '../pages/faq/faq';
 import { BadgePage } from '../pages/badge/badge';
 import { BadgeInfoPage } from '../pages/badge-info/badge-info';
 import { AboutusPage } from '../pages/aboutus/aboutus'
+import { IntroPage } from '../pages/intro/intro'
 
 import { Loading } from '../providers/loading';
 import { Events } from '../providers/events';
@@ -62,7 +63,8 @@ export function createTranslateLoader(http: Http) {
     FaqPage,
     BadgePage,
     BadgeInfoPage,
-    AboutusPage
+    AboutusPage,
+    IntroPage
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,8 @@ export function createTranslateLoader(http: Http) {
     FaqPage,
     BadgePage,
     BadgeInfoPage,
-    AboutusPage
+    AboutusPage,
+    IntroPage
   ],
   providers: [
     StatusBar,
