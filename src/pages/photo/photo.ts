@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PinPhotosService } from '../../providers/pin-photos-service';
 import { Endpoint } from '../../providers/endpoint';
+import { Loading } from '../../providers/loading';
 
 @Component({
   selector: 'page-photo',
@@ -17,21 +18,27 @@ export class PhotoPage {
   private imageBase64: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private pinPhotosService: PinPhotosService, private endpoint: Endpoint) {
-    this.pin = navParams.get('pin');
-    this.map = navParams.get('map');
+              public loading: Loading, private pinPhotosService: PinPhotosService,
+              private endpoint: Endpoint) {
+    this.pin = navParams.data.pin;
+    this.map = navParams.data.map;
   }
 
   ionViewDidEnter(){
     this.url = this.endpoint.url;
-    this.showPhotos();
+    this.loading.show();
+    this.renderPhotos();
   }
 
-  showPhotos() {
-    let pinId = this.pin["id"];
+  ionViewDidLeave() {
+    // this.map.setClickable(true);
+  }
+
+  renderPhotos() {
     this.map.setClickable(false);
-    this.pinPhotosService.getPinPhotosByPinId(pinId).then(pinPhotos => {
-      this.pinPhotos = this.buildPhotosRowCol(pinPhotos["pin_photos"]);
+    this.pinPhotosService.getPinPhotosByPinId(this.pin.id).then(photos => {
+      this.pinPhotos = this.buildPhotosRowCol(photos);
+      this.loading.hide();
     })
   }
 
@@ -57,10 +64,16 @@ export class PhotoPage {
     this.pinPhotosService.getPhoto().then((imageData) => {
       self.imageBase64 = 'data:image/jpeg;base64,' + imageData;
       let params = {
-        "photo": self.imageBase64,
-        "pin_id": self.pin["id"]
+        'photo': {
+          'name': self.imageBase64,
+          'pin_id': self.pin.id
+        }
       }
-      self.pinPhotosService.createPinPhoto(params);
+
+      this.loading.show();
+      self.pinPhotosService.createPinPhoto(params).then((imageData) => {
+        self.renderPhotos();
+      });
     }, (err) => {
       console.log('error : ', err);
     });

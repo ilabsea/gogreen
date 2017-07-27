@@ -16,18 +16,18 @@
     <h3 class='md-title'> {{event.title}} </h3>
     <p class='creator'>{{'BY' | translate}} <span class="md-body-2">{{creatorName}}</span></p>
 
-    <div clss='info-grid'>
+    <div class='info-grid'>
       <div class="left-column column">
         <ion-icon name="calendar" color='green-color'></ion-icon>
       </div>
 
       <div class='right-column column'>
-        <div style="margin-bottom: 4px;">{{event.date | date: 'EEEE, MMMM d'}}</div>
+        <div>{{event.date | date: 'EEEE, MMMM d'}}</div>
         <div>{{event.start_time | date: 'h:mm a' : 'UTC +00:00'}} - {{event.end_time | date: 'h:mm a' : 'UTC +00:00'}}</div>
       </div>
     </div>
 
-    <div clss='info-grid'>
+    <div class='info-grid'>
       <div class="left-column column">
         <ion-icon name="pin" color='green-color'></ion-icon>
       </div>
@@ -38,7 +38,7 @@
     </div>
 
     <section class='btn-join-wrapper'>
-      <button ion-button round color='green-color' class='btn-join'> {{'JOIN' | translate}} </button>
+      <button ion-button round color='green-color' class='btn-join' (click)="viewEvent()"> {{'JOIN' | translate}} </button>
     </section>
 
     <section *ngIf="event.description" class='desc-wrapper'>
@@ -53,7 +53,7 @@
 
       <div class='text'>
         <span class='md-title'>{{creatorName}}</span>
-        <a class='md-subhead' [href]='profileLink'>{{'VIEW_PROFILE' | translate}}</a>
+        <a class='md-subhead' [href]='profileLink' target='_blank'>{{'VIEW_PROFILE' | translate}}</a>
       </div>
     </section>
 

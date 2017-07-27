@@ -26,7 +26,7 @@ export class PinsService {
     })
   }
 
-  get(){
+  getAll(){
     return new Promise(resolve => {
       this.http.get(this.endpoint.api + "pins")
         .subscribe(data => {
@@ -37,26 +37,15 @@ export class PinsService {
     });
   }
 
-  getPinByMarkerId(markerId){
+  get(id){
     return new Promise(resolve => {
-      this.http.get(this.endpoint.api + "pins/" + markerId + "/get_by_marker_id")
+      this.http.get(this.endpoint.api + "pins/" + id)
         .subscribe(data => {
           resolve(data.json());
         }, error => {
           resolve(error);
         })
     });
-  }
-
-  getNumberPinsByUserId(userId){
-    return new Promise(resolve => {
-      this.http.get(this.endpoint.api + "pins/" + userId + "count_by_user")
-        .subscribe(data => {
-          resolve(data.json());
-        }, error => {
-          resolve(error);
-        })
-    })
   }
 
   update(pinId, param){

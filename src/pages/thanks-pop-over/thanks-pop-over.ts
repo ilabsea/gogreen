@@ -17,9 +17,9 @@ export class ThanksPopOver {
 
   constructor(public navParams: NavParams, private facebook: Facebook,
               private pinPhotosService: PinPhotosService) {
-    this.map = navParams.get('map');
-    this.marker = navParams.get('marker');
-    this.pin = navParams.get('pin');
+    this.map = navParams.data.map;
+    this.marker = navParams.data.marker;
+    this.pin = navParams.data.pin;
   }
 
   ionViewDidLeave(){
@@ -46,9 +46,12 @@ export class ThanksPopOver {
     this.pinPhotosService.getPhoto().then((imageData) => {
       self.imageBase64 = 'data:image/jpeg;base64,' + imageData;
       let params = {
-        "photo": self.imageBase64,
-        "pin_id": self.pin["id"]
+        'photo': {
+          'name': self.imageBase64,
+          'pin_id': self.pin.id
+        }
       }
+
       self.pinPhotosService.createPinPhoto(params);
     }, (err) => {
       console.log('error : ', err);

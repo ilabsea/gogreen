@@ -15,12 +15,11 @@ export class ShowEventPage {
   private creatorName: any = 'Sopheak Kim';
   private profileLink: any;
 
-  constructor(public navParams: NavParams, private endpoint: Endpoint, private facebook: Facebook,) {
+  constructor(public navParams: NavParams, private endpoint: Endpoint, private facebook: Facebook) {
     this.event = navParams.get('event');
     this.url = endpoint.url;
-    this.creatorPicture = "https://graph.facebook.com/" + this.event['user_id'] + "/picture?type=small";
-    // this.creatorPicture = 'https://scontent.fpnh4-1.fna.fbcdn.net/v/t1.0-9/13001255_1133639440000791_989390100380862014_n.jpg?oh=2eb1a18499cd7c4bec944b35a5090b37&oe=59F3F553';
-    this.profileLink = "https://www.facebook.com/profile.php?id=" + this.event['user_id'];
+    this.creatorPicture = "https://graph.facebook.com/" + this.event.user.facebook_id + "/picture?type=small";
+    this.profileLink = "https://www.facebook.com/" + this.event.user.facebook_id;
   }
 
   ionViewDidLoad(){
@@ -29,8 +28,12 @@ export class ShowEventPage {
 
   setCreatorName() {
     let self = this;
-    this.facebook.api("/" + this.event['user_id'] +"?fields=name" , []).then(function(user) {
+    this.facebook.api("/" + this.event.user.facebook_id +"?fields=name" , []).then(function(user) {
       self.creatorName = user.name || 'Sopheak Kim';
     })
+  }
+
+  viewEvent() {
+    window.open(this.event.facebook_link, '_blank');
   }
 }

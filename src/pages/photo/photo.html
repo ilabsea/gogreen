@@ -15,7 +15,7 @@
 
   <ion-row class="row" *ngFor="let rows of pinPhotos">
     <ion-col class="col"  *ngFor="let column of rows" no-lines>
-      <img src='{{url}}{{column["photo"]["url"]}}'>
+      <img src='{{url}}{{column["name"]["url"]}}'>
     </ion-col>
   </ion-row>
 

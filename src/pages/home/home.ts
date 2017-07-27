@@ -66,7 +66,7 @@ export class HomePage {
 
   displayPins(){
     let self = this;
-    this.pinsService.get().then((pinsResult) => {
+    this.pinsService.getAll().then((pinsResult) => {
       for(let pin of pinsResult["pins"]) {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
@@ -92,7 +92,7 @@ export class HomePage {
         draggable: true,
         markerClick: function(marker){
           self.map.setClickable(false);
-          self.pinsService.getPinByMarkerId(marker.id).then((pin) => {
+          self.pinsService.get(marker.id).then((pin) => {
             self.popupPinInfo(pin, marker);
           }, (error) => {
             console.log('error : ', error)

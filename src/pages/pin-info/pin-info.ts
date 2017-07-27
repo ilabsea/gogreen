@@ -12,15 +12,15 @@ export class PinInfoPage {
   pin: any;
   marker: any;
   createdAt: any;
-  totolPhotos: any;
+  totalPhotos: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public popoverCtrl: PopoverController, public viewCtrl: ViewController) {
-    this.map = navParams.get('map');
-    this.pin = navParams.get('pin');
-    this.marker = navParams.get('marker');
-    this.createdAt = this.pin["created_at"];
-    this.totolPhotos = this.pin['total_photos'] ? this.pin['total_photos'] : 0;
+    this.map = navParams.data.map;
+    this.pin = navParams.data.pin;
+    this.marker = navParams.data.marker;
+    this.createdAt = this.pin.created_at;
+    this.totalPhotos = this.pin.total_photos ? this.pin.total_photos : 0;
   }
 
   showPhotos() {

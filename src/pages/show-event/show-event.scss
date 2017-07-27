@@ -113,12 +113,13 @@ page-show-event {
   }
 
   .info-grid {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    overflow: hidden;
   }
 
   .left-column {
     width: 24px;
-    vertical-align: top;
+    margin-right: 4px;
   }
 
   .right-column > div {
@@ -126,6 +127,6 @@ page-show-event {
   }
 
   .column {
-    display: inline-block;
+    float: left;
   }
 }

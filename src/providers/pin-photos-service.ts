@@ -16,17 +16,19 @@ export class PinPhotosService {
     headers.append('Content-Type', 'application/json' );
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post(this.endpoint.api + "pin_photos", params, options)
-      .subscribe((response) => {
-        console.log('response : ', response);
-      }, (error) => {
-        console.log(error);
-      });
+    return new Promise((resolve) => {
+      this.http.post(this.endpoint.api + "pins/" + params.photo.pin_id + "/photos", params, options)
+        .subscribe(data => {
+          resolve(data.json());
+        }, (error) => {
+          resolve(error.json());
+        })
+    })
   }
 
   getPinPhotosByPinId(pinId) {
     return new Promise((resolve) => {
-      this.http.get(this.endpoint.api + "pin_photos/" + pinId + "/get_by_pin_id")
+      this.http.get(this.endpoint.api + "pins/" + pinId + "/photos")
         .subscribe(data => {
           resolve(data.json());
         }, (error) => {
