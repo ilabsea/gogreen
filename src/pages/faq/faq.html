@@ -1,33 +1,24 @@
 <ion-header>
 
   <ion-navbar color='green-color'>
-    <ion-title>{{'FREQUENTLY_ASKED_QUESTIONS' | translate}}</ion-title>
+    <ion-title>{{'FAQ' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <img src='assets/logo.png' class='logo'>
-    <h4>{{ 'WHAT_IS_GOGREEN_APP' | translate }}</h4>
-    <p>{{ 'GOGREEN_DEFINITION' | translate }}</p>
-    <p>{{ 'GOGREEN_PURPOSE' | translate }}</p>
 
-    <h4>{{ 'HOW_TO_USE_GOGREEN_APP' | translate }}</h4>
-    <p>{{ 'GOGREEN_USAGE' | translate }}</p>
+  <ion-list class='accordion-list'>
 
-    <h4>{{ 'IS_THIS_FREE' | translate }}</h4>
-    <p>{{ 'YES_IT_IS_FREE' | translate }}</p>
+    <ion-item *ngFor='let question of questions; let i=index' text-wrap (click)='toggleGroup(i)' [ngClass]='{active: isGroupShown(i)}'>
+      <h3>
+        {{ question.title | translate }}
+        <ion-icon color="success" class='my-icon' item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+      </h3>
 
-    <h4>{{ 'HOW_CAN_I_ORGANISE_MY_OWN_CLEANUP' | translate }}</h4>
-    <p>{{ 'WAY_TO_ORGANISE_OWN_CLEANUP' | translate }}</p>
+      <p *ngIf='isGroupShown(i)' [innerHTML]='question.answer' class='text-justify'></p>
+    </ion-item>
 
-    <h4>{{ 'CONTACT_US_OR_LEAVE_FEEDBACK' | translate }}</h4>
-    <p>
-      {{ 'FEEL_FREE_TO_SEND_AN_EMAIL_AT' | translate }} <br>
-      <a href="mailto:gogreenkhm@gmail.com">gogreenkhm@gmail.com</a> <br><br>
-      {{ 'YOU_CAN_JOIN_OUR_FACEBOOK_GROUP' | translate }}
-    </p>
-  </div>
+  </ion-list>
 
 </ion-content>
