@@ -15,24 +15,29 @@ export class BadgePage {
   private user = { name: '', user_id: '', pins_count: 0, events_count: 0 };
   private badges = [
    {
-     name: 'help',
-     icon: 'assets/badge/help.png'
+     name: 'Green Helper',
+     icon: 'assets/badge/help.png',
+     grey_icon: 'assets/badge/help_grey.png'
    },
    {
-     name: 'warrior',
-     icon: 'assets/badge/warrior.png'
+     name: 'Green Warrior',
+     icon: 'assets/badge/warrior.png',
+     grey_icon: 'assets/badge/warrior_grey.png'
    },
    {
-     name: 'hero',
-     icon: 'assets/badge/hero.png'
+     name: 'Green Hero',
+     icon: 'assets/badge/hero.png',
+     grey_icon: 'assets/badge/hero_grey.png'
    },
    {
-     name: 'star',
-     icon: 'assets/badge/star.png'
+     name: 'Green Star',
+     icon: 'assets/badge/star.png',
+     grey_icon: 'assets/badge/star_grey.png'
    },
    {
-     name: 'heart',
-     icon: 'assets/badge/heart.png'
+     name: 'Green Heart',
+     icon: 'assets/badge/heart.png',
+     grey_icon: 'assets/badge/heart_grey.png'
    }
   ];
 

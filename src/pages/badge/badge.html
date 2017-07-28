@@ -14,8 +14,8 @@
 
   <section class='badges' [hidden]='!hasUser'>
     <div *ngFor="let badge of badges" class='badge'>
-      <div class="badge-layer" *ngIf='!badge.active'></div>
-      <img [src]='badge.icon'>
+      <img [src]="badge.active ? badge.icon : badge.grey_icon">
+      <div>{{badge.name}}</div>
     </div>
   </section>
 </ion-content>
