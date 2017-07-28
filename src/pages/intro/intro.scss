@@ -1,7 +1,5 @@
 .ios, .md {
-
   page-intro {
-
     ion-slide {
       background-color: #fff;
     }
@@ -18,12 +16,16 @@
         top: 4px;
         z-index: 1;
         background: none;
+        box-shadow: none;
         font-weight: 500;
+        &:hover:not(.disable-hover) {
+          background: none;
+        }
       }
 
       .img-wrapper {
         background: #10A225;
-        height: 60vh !important;
+        height: 55vh !important;
         position: relative;
         display: table;
         width: 100% !important;
@@ -35,7 +37,7 @@
 
         img.small {
           width: 170px;
-          margin-bottom: -5px;
+          margin-bottom: -4px;
         }
 
         .welcome {
@@ -47,8 +49,28 @@
       }
 
       .text {
-        height: 40vh !important;
+        height: 45vh !important;
         padding: 24px;
+        font-size: 1.4rem;
+        color: #333;
+      }
+
+      .pin-text {
+        .item-inner {
+          border: none;
+        }
+
+        ion-label {
+          white-space: normal;
+        }
+
+        .item-md {
+          padding-left: 0;
+        }
+
+        p {
+          color: #333;
+        }
       }
     }
 

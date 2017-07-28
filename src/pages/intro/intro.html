@@ -2,7 +2,7 @@
 
   <ion-slide>
     <div class="content">
-      <button ion-button large class='btn-skip' (click)="goToHome()">Skip</button>
+      <button ion-button class='btn-skip' (click)="goToHome()">Skip</button>
 
       <div class="img-wrapper">
         <div class='cell'>
@@ -20,11 +20,11 @@
 
   <ion-slide>
     <div class="content">
-      <button ion-button large class='btn-skip' (click)="goToHome()">Skip</button>
+      <button ion-button class='btn-skip' (click)="goToHome()">Skip</button>
 
       <div class="img-wrapper">
         <div class='cell'>
-          <img src="assets/intro/city.png" />
+          <img src="assets/intro/city.png" style='margin-bottom: 20px;' />
         </div>
       </div>
 
@@ -36,7 +36,7 @@
 
   <ion-slide>
     <div class="content">
-      <button ion-button large class='btn-skip' (click)="goToHome()">Skip</button>
+      <button ion-button class='btn-skip' (click)="goToHome()">Skip</button>
 
       <div class="img-wrapper">
         <div class='cell'>
@@ -44,12 +44,29 @@
         </div>
       </div>
 
-      <div class="text text-justify">
-        <p>Place this green happy pin on the map if you notice an area that is really clean</p>
+      <div class="pin-text text text-justify">
+        <ion-list>
+          <ion-item>
+            <ion-avatar item-left>
+              <img src="assets/pin/happy.png">
+            </ion-avatar>
+            <p>Place this green happy pin on the map if you notice an area that is really clean</p>
+          </ion-item>
 
-        <p>Place this red angry pin on the map if you notice an area that needs cleaning up</p>
+          <ion-item>
+            <ion-avatar item-left>
+              <img src="assets/pin/sad.png">
+            </ion-avatar>
+            <p>Place this red angry pin on the map if you notice an area that needs cleaning up</p>
+          </ion-item>
 
-        <p>Place this bin symbol on the map if you notice an area that needs a trash bin</p>
+          <ion-item>
+            <ion-avatar item-left>
+              <img src="assets/pin/trash.png">
+            </ion-avatar>
+            <p>Place this bin symbol on the map if you notice an area that needs a trash bin</p>
+          </ion-item>
+        </ion-list>
       </div>
     </div>
   </ion-slide>
@@ -73,19 +90,6 @@
       </div>
     </div>
   </ion-slide>
-
-  <!-- <ion-slide>
-    <ion-row>
-      <ion-col>
-        <img src="images/slide4.png" />
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button color="light" (click)="goToHome()">Start Using My App</button>
-      </ion-col>
-    </ion-row>
-  </ion-slide> -->
 
 </ion-slides>
 
