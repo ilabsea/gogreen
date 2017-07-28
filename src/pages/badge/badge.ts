@@ -71,11 +71,11 @@ export class BadgePage {
 
   formatData() {
     for(var i = 0; i < this.badges.length; i++){
-      if ((this.badges[i].name == 'help' && this.user.pins_count >= 3) ||
-          (this.badges[i].name == 'warrior' && this.user.pins_count >= 10) ||
-          (this.badges[i].name == 'hero' && this.user.events_count >= 3) ||
-          (this.badges[i].name == 'star' && this.user.events_count >= 10) ||
-          (this.badges[i].name == 'heart' && this.user.pins_count >= 10 && this.user.events_count >= 10)) {
+      if ((this.badges[i].name == 'Green Helper' && this.user.pins_count >= 3) ||
+          (this.badges[i].name == 'Green Warrior' && this.user.pins_count >= 10) ||
+          (this.badges[i].name == 'Green Hero' && this.user.events_count >= 3) ||
+          (this.badges[i].name == 'Green Star' && this.user.events_count >= 10) ||
+          (this.badges[i].name == 'Green Heart' && this.user.pins_count >= 10 && this.user.events_count >= 10)) {
         this.badges[i]['active'] = true;
       }
     }

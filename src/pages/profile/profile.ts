@@ -27,10 +27,13 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     let self = this;
-    this.facebook.api("/me?fields=name" , []).then(function(user) {
-      self.userProfile = "https://graph.facebook.com/" + user["id"] + "/picture?width=100";
-      self.userName = user.name;
-    })
+
+    this.storage.get('userFacebookID').then(fbUerId => {
+      this.userProfile = "https://graph.facebook.com/" + fbUerId + "/picture?width=100";
+      this.facebook.api("/" + fbUerId + "?fields=name" , []).then(function(user) {
+        self.userName = user.name || 'Sopheak Kim';
+      })
+    });
   }
 
   logout() {
