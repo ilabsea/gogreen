@@ -30,12 +30,18 @@ export class PinPopoverPage {
     this.icon = this.pin ? this.pin.icon : '';
   }
 
+  ionViewDidEnter(){
+    this.map.setClickable(false);
+  }
+
   ionViewDidLeave(){
     console.log('this.pin : ', this.pin);
     if(this.pin)
       this.update(this.pin['id']);
     else
       this.create();
+
+    this.map.setClickable(true);
   }
 
   create(){

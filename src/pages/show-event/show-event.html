@@ -7,7 +7,7 @@
     </ion-buttons>
   </ion-navbar>
 
-  <img [src]='url + event.image' class='cover' *ngIf="event.image">
+  <img [src]='event.image' class='cover' *ngIf="event.image">
   <div class="default-image" *ngIf="!event.image">
     <img src="assets/event/default_img.png">
   </div>

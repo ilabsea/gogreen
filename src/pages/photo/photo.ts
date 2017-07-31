@@ -30,13 +30,9 @@ export class PhotoPage {
     this.renderPhotos();
   }
 
-  ionViewDidLeave() {
-    // this.map.setClickable(true);
-  }
-
   renderPhotos() {
-    this.map.setClickable(false);
     this.pinPhotosService.getPinPhotosByPinId(this.pin.id).then(photos => {
+      this.map.setClickable(false);
       this.pinPhotos = this.buildPhotosRowCol(photos);
       this.loading.hide();
     })
