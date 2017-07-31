@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-intro',
@@ -8,9 +9,12 @@ import { LoginPage } from '../login/login';
 })
 
 export class IntroPage {
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public translate: TranslateService) {}
 
   ngOnInit() {
+    localStorage.setItem('languageCode', 'km');
+    this.translate.setDefaultLang('km');
+
     if (localStorage.getItem('introVisited') == 'true') {
       this.navCtrl.setRoot(LoginPage);
     }

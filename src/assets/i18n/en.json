@@ -51,5 +51,16 @@
   "GREEN_HERO_DESCRIPTION": "Organize at least 3 events",
   "GREEN_STAR_DESCRIPTION": "Organize at least 10 events",
   "GREEN_HEART_DESCRIPTION": "Place pin on map and organize event more than 10 times",
-  "GOGREEN_APP_IS_CREATED_BY": "GOGREEN app is created by GOGREEN Cambodia, a volounteering organization and inSTEDD iLabSEA."
+  "GOGREEN_APP_IS_CREATED_BY": "GOGREEN app is created by GOGREEN Cambodia, a volounteering organization and inSTEDD iLabSEA.",
+  "SKIP": "Skip",
+  "WELCOME_TO_GOGREEN": "Welcome To Gogreen",
+  "YOU_ARE_NOW_A_MEMBER": "You are now a member of our community of eco-warrior",
+  "WELCOME_ON_BOARD": "Welcome on board.",
+  "OUR_AIM": "Our aim is to make Cambodia greener and cleaner together, and to make this happen, we need your help.",
+  "PLACE_THIS_GREEN": "Place this green happy pin on the map if you notice an area that is really clean",
+  "PLACE_THIS_RED": "Place this red angry pin on the map if you notice an area that needs cleaning up",
+  "PLACE_THIS_BIN": "Place this bin symbol on the map if you notice an area that needs a trash bin",
+  "YOU_CAN_ALSO_CREATE_EVENT": "You can also create your own cleaning event and invite your friends and family to join. And if you simply want to join a clean-up,",
+  "PLEASE_VISIT_OUR_EVENT_PAGE": "Please visit our EVEMTS page to view our calendar.",
+  "LET_GET_START": "Let’s get Start"
 }
