@@ -30,13 +30,20 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    this.loadMap();
+    setTimeout(() => {
+      if (!this.map) {
+        console.log('load Map');
+        this.loadMap();
+        this.createMarker();
+      }
+    }, 500);
   }
 
   loadMap() {
     let latlng: LatLng = new LatLng(11.562108, 104.888535);
+    this.googleMaps
 
-    this.map = new GoogleMap('map', {
+    this.map = new GoogleMap('map_canvas', {
       'backgroundColor': 'white',
       'controls': {
         'compass': true,
@@ -61,17 +68,19 @@ export class HomePage {
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
       this.displayPins();
     });
-    this.createMarker();
+
   }
 
   displayPins(){
     let self = this;
+    this.map.clear();
+
     this.pinsService.getAll().then((pinsResult) => {
       for(let pin of pinsResult["pins"]) {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
           icon: 'www/assets/pin/' + pin.icon + '-small.png',
-          markerClick: function(marker){
+          markerClick: function(marker) {
             console.log('e : ', marker);
             self.map.setClickable(false);
             self.popupPinInfo(pin, marker);
@@ -83,7 +92,7 @@ export class HomePage {
   }
 
   createMarker(){
-    this.map.addEventListener(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((e) => {
+    this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((e) => {
       this.map.setCenter(e);
       let self = this;
       let markerOptions: MarkerOptions = {

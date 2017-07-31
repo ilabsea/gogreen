@@ -22,6 +22,10 @@ export class ThanksPopOver {
     this.pin = navParams.data.pin;
   }
 
+  ionViewDidEnter(){
+    this.map.setClickable(false);
+  }
+
   ionViewDidLeave(){
     this.map.setClickable(true);
   }
