@@ -65,9 +65,9 @@ export class EventsPage {
   share(event, $event) {
     this.facebook.showDialog({
       method: 'share',
-      href: event.link,
-      caption: event["title"],
-      description: event["description"]
+      href: event.facebook_link,
+      caption: event.title,
+      description: event.description
     });
     $event.stopPropagation();
   }

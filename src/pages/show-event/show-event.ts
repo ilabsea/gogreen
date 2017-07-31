@@ -36,4 +36,14 @@ export class ShowEventPage {
   viewEvent() {
     window.open(this.event.facebook_link, '_blank');
   }
+
+  share(event, $event) {
+    this.facebook.showDialog({
+      method: 'share',
+      href: event.facebook_link,
+      caption: event.title,
+      description: event.description
+    });
+    $event.stopPropagation();
+  }
 }
