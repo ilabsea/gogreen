@@ -29,7 +29,7 @@ export class MyApp {
               splashScreen: SplashScreen, translate: TranslateService ) {
     platform.ready().then(() => {
       translate.setDefaultLang(localStorage.getItem('languageCode') || 'en');
-      statusBar.styleDefault();
+      statusBar.backgroundColorByHexString("#39B54A");
       splashScreen.hide();
       this.storage.get('isLogged').then(logged => {
         if (logged) {
