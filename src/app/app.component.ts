@@ -7,6 +7,9 @@ import { LoginPage } from '../pages/login/login';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
+import { BadgePage } from '../pages/badge/badge';
+import { FaqPage } from '../pages/faq/faq';
+import { FlashPage } from '../pages/flash/flash';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,9 +18,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class MyApp {
+  // rootPage:any = FaqPage;
   // rootPage:any = TabsPage;
   // rootPage:any = LoginPage;
-  rootPage:any = IntroPage;
+  // rootPage:any = IntroPage;
+  rootPage:any = FlashPage;
   hasRoot: any = false;
 
   constructor(platform: Platform, private storage: Storage, statusBar: StatusBar,
