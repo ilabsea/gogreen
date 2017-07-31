@@ -23,6 +23,10 @@ export class PinInfoPage {
     this.totalPhotos = this.pin.total_photos ? this.pin.total_photos : 0;
   }
 
+  ionViewDidLeave(){
+    this.map.setClickable(true);
+  }
+
   showPhotos() {
     this.navCtrl.push(PhotoPage, {'pin': this.pin, 'map': this.map});
   }
