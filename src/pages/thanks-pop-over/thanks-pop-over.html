@@ -1,24 +1,7 @@
-<ion-card class="card-popover">
-  <ion-item class="item-icon-left">
-    <ion-avatar item-left>
-      <img src="assets/icon/thank.png" />
-    </ion-avatar>
-    {{'THANKS_FOR_CONTRIBUTION' | translate}}
-  </ion-item>
-</ion-card>
-<ion-card class="card-popover">
-  <ion-item class="item-icon-left item-popover" (click)="shareToFacebook()">
-    <ion-avatar item-left>
-      <img src="assets/icon/facebook.png"/>
-    </ion-avatar>
-    {{'SHARE_TO_YOUR_FRIENDS' | translate}}
-  </ion-item>
-</ion-card>
-<ion-card class="card-popover">
-  <ion-item class="item-icon-left" (click)="AddPhoto()">
-    <ion-avatar item-left>
-      <img src="assets/icon/camera.png"/>
-    </ion-avatar>
-    {{'ADD_PHOTOS' | translate}}
-  </ion-item>
-</ion-card>
+<div class='alert-dismissable text-center'>
+  <a href="#" (click)='close()' class='close'>x</a>
+  <img src="assets/thank/thank.png" class='thank-img'>
+
+  <div class='text'>Thank you for contribution!</div>
+</div>
+

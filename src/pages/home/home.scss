@@ -3,4 +3,53 @@ page-home {
   #map_canvas {
     height: 100%;
   }
+
+}
+
+.pin-buttons {
+  .action-sheet-wrapper {
+    text-align: center;
+  }
+
+  .action-sheet-title {
+    text-align: center;
+  }
+
+  .action-sheet-button {
+    width: 33.33%;
+    height: 90px;
+    border-right: 1px solid #ccc;
+
+    .button-inner {
+      border-radius: 50%;
+      background-size: 102%;
+    }
+  }
+
+  .happy .button-inner{
+    background-image: url('../assets/pin/happy.png');
+  }
+
+  .sad .button-inner{
+    background-image: url('../assets/pin/sad.png');
+  }
+
+  .trash {
+    border-right: none;
+
+    .button-inner{
+      background-image: url('../assets/pin/trash.png');
+    }
+  }
+
+  .cancel {
+    display: none;
+  }
+
+}
+
+.gogreen-action-sheets {
+  .popover-wrapper {
+    opacity: 0 !important;
+  }
 }

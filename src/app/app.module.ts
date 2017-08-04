@@ -29,6 +29,7 @@ import { BadgeInfoPage } from '../pages/badge-info/badge-info';
 import { AboutusPage } from '../pages/aboutus/aboutus'
 import { IntroPage } from '../pages/intro/intro'
 import { FlashPage } from '../pages/flash/flash'
+import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet'
 
 import { Loading } from '../providers/loading';
 import { Events } from '../providers/events';
@@ -66,7 +67,8 @@ export function createTranslateLoader(http: Http) {
     BadgeInfoPage,
     AboutusPage,
     IntroPage,
-    FlashPage
+    FlashPage,
+    NewPinActionSheetPage
   ],
   imports: [
     BrowserModule,
@@ -103,7 +105,8 @@ export function createTranslateLoader(http: Http) {
     BadgeInfoPage,
     AboutusPage,
     IntroPage,
-    FlashPage
+    FlashPage,
+    NewPinActionSheetPage
   ],
   providers: [
     StatusBar,

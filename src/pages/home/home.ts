@@ -9,9 +9,14 @@ import {
   Marker,
   GoogleMapsAnimation
 } from '@ionic-native/google-maps';
+import { Facebook } from '@ionic-native/facebook';
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 import { PinsService } from '../../providers/pins-service';
-import { PinInfoPage } from '../pin-info/pin-info';
+import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
+
+import { Storage } from '@ionic/storage';
+import { App, ViewController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -22,21 +27,54 @@ import { PinInfoPage } from '../pin-info/pin-info';
 export class HomePage {
   marker: Marker;
   map: GoogleMap;
+  subscription: any;
+  currentPin: any;
+  userId: any;
+  markers: any;
 
   constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
-              public pinsService: PinsService) {
-    this.map = null;
-    this.marker = null;
+              public pinsService: PinsService, private storage: Storage,
+              public viewCtrl: ViewController, private facebook: Facebook,
+              private app: App) {
+    this.markers = [];
   }
 
-  ionViewDidLoad(){
+  ngOnInit() {
+    this.storage.get('userID').then((userId) => {
+      if(!userId) {
+        this.logout();
+      }
+
+      this.userId = userId;
+    })
+  }
+
+  ionViewDidLoad() {
     setTimeout(() => {
       if (!this.map) {
         console.log('load Map');
         this.loadMap();
-        this.createMarker();
+        this.onSubscribeLongClickMap();
       }
     }, 500);
+  }
+
+  logout() {
+    let self = this;
+    this.facebook.logout().then(function(response) {
+      self.storage.set('isLogged', false);
+      self.app.getRootNav().setRoot(LoginPage);
+    });
+  }
+
+  ionViewDidLeave() {
+    if (!!this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  clickMe() {
+    this.showFeelingIconActionSheet()
   }
 
   loadMap() {
@@ -66,68 +104,83 @@ export class HomePage {
     });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-      this.displayPins();
+      this.map.setClickable(true);
+      this.renderMarkers();
     });
 
   }
 
-  displayPins(){
+  renderMarkers(){
     let self = this;
     this.map.clear();
 
     this.pinsService.getAll().then((pinsResult) => {
-      for(let pin of pinsResult["pins"]) {
+      let pins = [].concat(pinsResult);
+
+      for(let pin of pins) {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
           icon: 'www/assets/pin/' + pin.icon + '-small.png',
           markerClick: function(marker) {
-            console.log('e : ', marker);
-            self.map.setClickable(false);
-            self.popupPinInfo(pin, marker);
+            self.currentPin = pin;
+            self.marker = marker;
+            self.showFeelingIconActionSheet();
           }
         }
+
         this.map.addMarker(option);
+        this.map.addMarker(option).then((marker: Marker) => {
+          this.markers.push(marker);
+        });
       }
     });
   }
 
-  createMarker(){
-    this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((e) => {
-      this.map.setCenter(e);
-      let self = this;
-      let markerOptions: MarkerOptions = {
-        position: e,
-        animation: GoogleMapsAnimation.DROP,
-        draggable: true,
-        markerClick: function(marker){
-          self.map.setClickable(false);
-          self.pinsService.get(marker.id).then((pin) => {
-            self.popupPinInfo(pin, marker);
-          }, (error) => {
-            console.log('error : ', error)
-          });
-
-        }
-      };
-      this.map.addMarker(markerOptions).then((marker: Marker) => {
-        this.marker = marker;
-        this.map.setClickable(false);
-        this.popupPinIcon();
-      });
+  onSubscribeLongClickMap() {
+    this.subscription = this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((pos) => {
+      this.map.setCenter(pos);
+      this.addMarker(pos);
     });
   }
 
-  popupPinIcon() {
-    let popover = this.popoverCtrl.create(PinPopoverPage, {
-      'map': this.map, 'marker': this.marker
-    }, {cssClass: 'pin-popover'});
+  addMarker(pos) {
+    let markerOptions: MarkerOptions = {
+      position: pos,
+      animation: GoogleMapsAnimation.DROP,
+      draggable: true,
+      markerClick: (marker) => {
+        this.map.setClickable(false);
+        this.marker = this.findMarker(marker.id);
+        this.currentPin = { id: this.marker['pinId'] };
+        this.showFeelingIconActionSheet();
+      }
+    };
+
+    this.map.addMarker(markerOptions).then((marker: Marker) => {
+      this.map.setClickable(false);
+      this.marker = marker;
+      this.currentPin = { id: null, latitude: pos.lat, longitude: pos.lng };
+      this.showFeelingIconActionSheet();
+    });
+  }
+
+  showFeelingIconActionSheet() {
+    let popover = this.popoverCtrl.create(NewPinActionSheetPage, {
+      'map': this.map, 'pin': this.currentPin, 'marker': this.marker, 'userId': this.userId
+    }, {cssClass: 'gogreen-action-sheets'});
+
+    popover.onDidDismiss(pin => {
+      if(!!pin) {
+        this.marker['pinId'] = pin.pinId;
+        this.markers.push(this.marker);
+      }
+    });
+
     popover.present();
   }
 
-  popupPinInfo(pin, marker) {
-    let popover = this.popoverCtrl.create(PinInfoPage, {
-      'map': this.map, 'pin': pin , 'marker': marker
-    }, {cssClass: 'pin-info-popover'});
-    popover.present();
+  findMarker(id) {
+    return this.markers.find(x => x['_objectInstance']['id'] === id);
   }
+
 }

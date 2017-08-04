@@ -1,24 +1,44 @@
 $popover-width: 280px;
 
 page-thanks-pop-over {
-  .card-popover {
-    margin-bottom: 1%;
-    border-radius: 1em;
-  }
-
-  .item {
-    background-color: rgba(58, 182, 74, 0.65);
-  }
-
-  .item-inner{
-    color: white;
-  }
 
 }
 
-
 .thanks-popover .popover-content {
-  background-color: transparent;
-  box-shadow: none;
-  width: $popover-width;
+  border-radius: 4px;
+
+  .alert-dismissable {
+    padding: 15px;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    color: inherit;
+    text-decoration: none !important;
+    font-size: 18px !important;
+    line-height: 1.2;
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+  }
+
+  .close:hover {
+    color: black !important;
+  }
+
+  .thank-img {
+    margin: 0 auto;
+    width: 70px;
+  }
+
+  .text {
+    margin: 15px;
+  }
 }

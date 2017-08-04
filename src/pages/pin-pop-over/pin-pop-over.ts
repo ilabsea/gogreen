@@ -39,7 +39,11 @@ export class PinPopoverPage {
     if(this.pin)
       this.update(this.pin['id']);
     else
-      this.create();
+      if (this.icon) {
+        this.create();
+      } else {
+        this.marker.remove();
+      }
 
     this.map.setClickable(true);
   }

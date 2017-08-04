@@ -37,7 +37,7 @@ export class PinsService {
     });
   }
 
-  get(id){
+  get(id) {
     return new Promise(resolve => {
       this.http.get(this.endpoint.api + "pins/" + id)
         .subscribe(data => {
