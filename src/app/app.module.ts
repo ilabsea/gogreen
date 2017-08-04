@@ -30,6 +30,7 @@ import { AboutusPage } from '../pages/aboutus/aboutus'
 import { IntroPage } from '../pages/intro/intro'
 import { FlashPage } from '../pages/flash/flash'
 import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet'
+import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet'
 
 import { Loading } from '../providers/loading';
 import { Events } from '../providers/events';
@@ -68,7 +69,8 @@ export function createTranslateLoader(http: Http) {
     AboutusPage,
     IntroPage,
     FlashPage,
-    NewPinActionSheetPage
+    NewPinActionSheetPage,
+    ChangeOptionActionSheetPage
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,8 @@ export function createTranslateLoader(http: Http) {
     AboutusPage,
     IntroPage,
     FlashPage,
-    NewPinActionSheetPage
+    NewPinActionSheetPage,
+    ChangeOptionActionSheetPage
   ],
   providers: [
     StatusBar,

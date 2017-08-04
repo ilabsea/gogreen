@@ -13,6 +13,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 import { PinsService } from '../../providers/pins-service';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
+import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/change-option-action-sheet';
 
 import { Storage } from '@ionic/storage';
 import { App, ViewController } from 'ionic-angular';
@@ -111,9 +112,7 @@ export class HomePage {
   }
 
   renderMarkers(){
-    let self = this;
     this.map.clear();
-
     this.pinsService.getAll().then((pinsResult) => {
       let pins = [].concat(pinsResult);
 
@@ -121,19 +120,28 @@ export class HomePage {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
           icon: 'www/assets/pin/' + pin.icon + '-small.png',
-          markerClick: function(marker) {
-            self.currentPin = pin;
-            self.marker = marker;
-            self.showFeelingIconActionSheet();
+          markerClick: (marker) => {
+            this.currentPin = pin;
+            this.marker = this.findMarker(marker.id);
+            this.openChangeOptionsActionSheet();
           }
         }
 
-        this.map.addMarker(option);
         this.map.addMarker(option).then((marker: Marker) => {
           this.markers.push(marker);
         });
       }
     });
+  }
+
+  openChangeOptionsActionSheet() {
+    this.map.setClickable(false);
+
+    let popover = this.popoverCtrl.create(ChangeOptionActionSheetPage, {
+      'map': this.map, 'pin': this.currentPin, 'marker': this.marker, 'userId': this.userId
+    }, {cssClass: 'gogreen-action-sheets'});
+
+    popover.present();
   }
 
   onSubscribeLongClickMap() {
@@ -152,7 +160,7 @@ export class HomePage {
         this.map.setClickable(false);
         this.marker = this.findMarker(marker.id);
         this.currentPin = { id: this.marker['pinId'] };
-        this.showFeelingIconActionSheet();
+        this.openChangeOptionsActionSheet();
       }
     };
 

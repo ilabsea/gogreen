@@ -41,7 +41,7 @@ export class NewPinActionSheetPage {
   showFeelingIconActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Place your pin',
-      cssClass: 'pin-buttons',
+      cssClass: 'pin-buttons my-action-sheets',
       buttons: [
         {
           cssClass: 'happy',
@@ -93,7 +93,7 @@ export class NewPinActionSheetPage {
     this.pinsService.update(this.pin.id, {"icon": icon}).then(() => {
       this.marker.setIcon('www/assets/pin/' + icon + '-small.png');
       this.map.setClickable(true);
-      this.sayThankYou();
+      this.viewCtrl.dismiss();
     });
   }
 
@@ -122,7 +122,7 @@ export class NewPinActionSheetPage {
   showAddPhotoAndShareActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What do you want to do?',
-      cssClass: '',
+      cssClass: 'my-action-sheets',
       buttons: [
         {
           text: 'Add Photos',

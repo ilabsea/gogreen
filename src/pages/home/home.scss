@@ -53,3 +53,9 @@ page-home {
     opacity: 0 !important;
   }
 }
+
+.my-action-sheets {
+  .action-sheet-group:nth-child(2) {
+    display: none !important;
+  }
+}

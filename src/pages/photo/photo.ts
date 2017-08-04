@@ -28,11 +28,15 @@ export class PhotoPage {
     this.url = this.endpoint.url;
     this.loading.show();
     this.renderPhotos();
+    this.map.setClickable(false);
+  }
+
+  ionViewDidLeave() {
+    this.map.setClickable(true);
   }
 
   renderPhotos() {
     this.pinPhotosService.getPinPhotosByPinId(this.pin.id).then(photos => {
-      this.map.setClickable(false);
       this.pinPhotos = this.buildPhotosRowCol(photos);
       this.loading.hide();
     })
