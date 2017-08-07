@@ -10,7 +10,7 @@ export class PinPhotosService {
   constructor(public http: Http, private endpoint: Endpoint, private camera: Camera) {
   }
 
-  createPinPhoto(params){
+  create(params){
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json' );
@@ -26,7 +26,7 @@ export class PinPhotosService {
     })
   }
 
-  getPinPhotosByPinId(pinId) {
+  getPhotosByPinId(pinId) {
     return new Promise((resolve) => {
       this.http.get(this.endpoint.api + "pins/" + pinId + "/photos")
         .subscribe(data => {

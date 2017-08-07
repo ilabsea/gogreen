@@ -6,25 +6,32 @@ import { PinPhotosService } from '../../providers/pin-photos-service';
 import { Loading } from '../../providers/loading';
 import { PhotoPage } from '../photo/photo';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
-
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'page-change-option-action-sheet',
-  template: ''
+  template: '',
+  providers: [DatePipe]
 })
 
 export class ChangeOptionActionSheetPage {
   map: any;
   marker: any;
   pin: any;
+  userId: any;
 
   constructor(public viewCtrl: ViewController, private navParams: NavParams,
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, public navCtrl: NavController,
-              private pinPhotosService: PinPhotosService, private loading: Loading) {
+              private pinPhotosService: PinPhotosService, private loading: Loading,
+              private datePipe: DatePipe) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
+    this.userId = navParams.data.userId;
+
+    // this.pin = { id: 1, created_at: '2017-08-05T03:11:52.000Z'};
+    // this.userId = 1;
   }
 
   ngOnInit() {
@@ -33,7 +40,7 @@ export class ChangeOptionActionSheetPage {
 
   showActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'What do you want to do?',
+      title: 'Created on ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy'),
       cssClass: 'my-action-sheets',
       buttons: [
         {
@@ -45,7 +52,7 @@ export class ChangeOptionActionSheetPage {
             this.openChangePin();
           }
         },{
-          text: 'View images ()',
+          text: 'View images',
           cssClass: 'share',
           icon: 'images',
           handler: () => {
@@ -67,7 +74,6 @@ export class ChangeOptionActionSheetPage {
     actionSheet.present();
   }
 
-
   openChangePin() {
     this.viewCtrl.dismiss();
 
@@ -79,6 +85,6 @@ export class ChangeOptionActionSheetPage {
   }
 
   viewImages() {
-    this.navCtrl.push(PhotoPage, {'pin': this.pin, 'map': this.map});
+    this.navCtrl.push(PhotoPage, {'pin': this.pin, 'map': this.map, 'userId': this.userId});
   }
 }

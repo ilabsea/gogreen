@@ -159,7 +159,7 @@ export class HomePage {
       markerClick: (marker) => {
         this.map.setClickable(false);
         this.marker = this.findMarker(marker.id);
-        this.currentPin = { id: this.marker['pinId'] };
+        this.currentPin = this.marker['pin'];
         this.openChangeOptionsActionSheet();
       }
     };
@@ -179,7 +179,7 @@ export class HomePage {
 
     popover.onDidDismiss(pin => {
       if(!!pin) {
-        this.marker['pinId'] = pin.pinId;
+        this.marker['pin'] = pin;
         this.markers.push(this.marker);
       }
     });

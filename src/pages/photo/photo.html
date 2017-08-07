@@ -12,11 +12,14 @@
 </ion-header>
 
 <ion-content padding>
-
-  <ion-row class="row" *ngFor="let rows of pinPhotos">
-    <ion-col class="col"  *ngFor="let column of rows" no-lines>
-      <img src='{{url}}{{column["name"]["url"]}}'>
-    </ion-col>
-  </ion-row>
-
+  <div class="photos">
+    <div *ngFor="let photo of photos">
+      <div class="photo-wrap" *ngIf="photo.status == 'approved' || photo.is_mine">
+        <div class="photo">
+          <img [src]="url + photo.url">
+          <div [ngClass]="['status', photo.status]" *ngIf="photo.is_mine">{{ photo.status }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

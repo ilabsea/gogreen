@@ -11,21 +11,27 @@ import { Loading } from '../../providers/loading';
 
 })
 export class PhotoPage {
-  private pin: any;
-  private pinPhotos: any;
-  private map: any;
-  private url: any;
-  private imageBase64: any;
+  pin: any;
+  photos: any;
+  map: any;
+  url: any;
+  imageBase64: any;
+  userId: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loading: Loading, private pinPhotosService: PinPhotosService,
               private endpoint: Endpoint) {
     this.pin = navParams.data.pin;
     this.map = navParams.data.map;
+    this.userId = navParams.data.userId;
+
+    // this.pin = { id: 1 };
+    // this.userId = 1;
   }
 
   ionViewDidEnter(){
     this.url = this.endpoint.url;
+    this.photos =[];
     this.loading.show();
     this.renderPhotos();
     this.map.setClickable(false);
@@ -36,43 +42,34 @@ export class PhotoPage {
   }
 
   renderPhotos() {
-    this.pinPhotosService.getPinPhotosByPinId(this.pin.id).then(photos => {
-      this.pinPhotos = this.buildPhotosRowCol(photos);
+    this.pinPhotosService.getPhotosByPinId(this.pin.id).then(photos => {
+      this.photos = this.formatData(photos);
       this.loading.hide();
     })
   }
 
-  buildPhotosRowCol(photos) {
-    let n = 0 ;
-    let res = [];
-    while( n < photos.length ) {
-      let row = [];
-      let i = n;
-      while ( i < 3 + n ) {
-        if(photos[i])
-          row.push(photos[i]);
-        i++;
-      }
-      res.push(row);
-      n = n + 3;
+  formatData(photos) {
+    for (let i=0; i<photos.length; i++) {
+      photos[i]['is_mine'] = (photos[i].user_id == this.userId);
     }
-    return res;
+
+    return photos;
   }
 
   addPhoto(){
-    let self = this;
     this.pinPhotosService.getPhoto().then((imageData) => {
-      self.imageBase64 = 'data:image/jpeg;base64,' + imageData;
+      this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
       let params = {
         'photo': {
-          'name': self.imageBase64,
-          'pin_id': self.pin.id
+          'name': this.imageBase64,
+          'pin_id': this.pin.id,
+          'user_id': this.userId
         }
       }
 
       this.loading.show();
-      self.pinPhotosService.createPinPhoto(params).then((imageData) => {
-        self.renderPhotos();
+      this.pinPhotosService.create(params).then((imageData) => {
+        this.renderPhotos();
       });
     }, (err) => {
       console.log('error : ', err);

@@ -39,8 +39,9 @@ export class NewPinActionSheetPage {
   }
 
   showFeelingIconActionSheet() {
+    let title = this.pin.id ? 'Change your pin' : 'Place your pin';
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Place your pin',
+      title: title,
       cssClass: 'pin-buttons my-action-sheets',
       buttons: [
         {
@@ -112,7 +113,7 @@ export class NewPinActionSheetPage {
     this.pinsService.create(pinParams).then((pin) => {
       this.marker.setIcon('www/assets/pin/' + icon + '-small.png');
       this.pin = pin;
-      this.viewCtrl.dismiss({pinId: pin['id']});
+      this.viewCtrl.dismiss(pin);
       this.showAddPhotoAndShareActionSheet();
     }, (error) => {
       console.log('error : ', error);
@@ -160,12 +161,13 @@ export class NewPinActionSheetPage {
       let params = {
         'photo': {
           'name': this.imageBase64,
-          'pin_id': this.pin.id
+          'pin_id': this.pin.id,
+          'user_id': this.userId
         }
       }
 
       this.loading.show();
-      this.pinPhotosService.createPinPhoto(params).then((photo) => {
+      this.pinPhotosService.create(params).then((photo) => {
         this.loading.hide();
         this.sayThankYou();
       });
@@ -184,8 +186,8 @@ export class NewPinActionSheetPage {
         href: "https://maps.googleapis.com/maps/api/staticmap?center=" + latlngUrl
               + "&zoom=13&scale=2&size=600x300&markers=color:blue|label:S|"
               + latlngUrl,
-        caption: 'What should be in caption?',
-        description: 'Much description'
+        caption: '',
+        description: ''
       }).then((data) => {
         this.sayThankYou();
       }, (erro) => {

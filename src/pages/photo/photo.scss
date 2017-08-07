@@ -1,3 +1,45 @@
 page-photo {
+  .photos {
+    overflow: hidden;
+    margin: 0 -2px;
+  }
 
+  .photo-wrap {
+    width: 33.33%;
+    float: left;
+    padding: 0 2px 4px 2px;
+  }
+
+  .photo {
+    height: 150px;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .status {
+    position: absolute;
+    right: -1px;
+    top: 0;
+    z-index: 1;
+    padding: 0 4px;
+    border-radius: 3px 0 0 3px;
+    color: #fff;
+    text-transform: capitalize;
+  }
+
+  .pending {
+    background-color: orange;
+  }
+
+  .approved {
+    background-color: green;
+  }
+
+  .rejected {
+    background-color: red;
+  }
 }
