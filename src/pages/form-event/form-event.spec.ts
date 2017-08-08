@@ -9,7 +9,7 @@ import { Endpoint } from '../../providers/endpoint';
 import { CameraMock, EventMock } from '../../mocks';
 import { Camera } from '@ionic-native/camera';
 import { By } from '@angular/platform-browser';
-import { Events } from '../../providers/events';
+import { EventService } from '../../providers/events';
 
 let comp: FormEventPage;
 let fixture: ComponentFixture<FormEventPage>;
@@ -30,7 +30,7 @@ describe('FormEventPage Component', () => {
           useClass: CameraMock
         },
         {
-          provide: Events,
+          provide: EventService,
           useClass: EventMock
         },
         {

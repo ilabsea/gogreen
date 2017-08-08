@@ -18,6 +18,7 @@ import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/chang
 import { Storage } from '@ionic/storage';
 import { App, ViewController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -36,8 +37,19 @@ export class HomePage {
   constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
               public pinsService: PinsService, private storage: Storage,
               public viewCtrl: ViewController, private facebook: Facebook,
-              private app: App) {
+              private app: App, public events: Events) {
     this.markers = [];
+
+    events.unsubscribe('tab:leave');
+    events.subscribe('tab:leave', (obj) => {
+      if (!!this.subscription) {
+        this.subscription.unsubscribe();
+      }
+
+      if (!!this.map) {
+        this.onSubscribeLongClickMap();
+      }
+    });
   }
 
   ngOnInit() {

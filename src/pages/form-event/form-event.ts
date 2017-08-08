@@ -7,12 +7,12 @@ import { Storage } from '@ionic/storage';
 import { EventsPage } from '../events/events';
 
 import { Loading } from '../../providers/loading';
-import { Events } from '../../providers/events';
+import { EventService } from '../../providers/events';
 
 @Component({
   selector: 'page-form-event',
   templateUrl: 'form-event.html',
-  providers: [Events, Camera, Loading]
+  providers: [EventService, Camera, Loading]
 })
 
 export class FormEventPage {
@@ -20,7 +20,7 @@ export class FormEventPage {
   private minDate;
   private maxDate;
 
-  constructor(public navCtrl: NavController, private events: Events,
+  constructor(public navCtrl: NavController, private events: EventService,
               private camera: Camera, public formBuilder: FormBuilder, public navParams: NavParams,
               public loading: Loading, private storage: Storage) {
 

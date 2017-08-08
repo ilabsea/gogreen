@@ -9,6 +9,7 @@ import { BadgePage } from '../badge/badge';
 import { AboutusPage } from '../aboutus/aboutus';
 import { PinsService } from '../../providers/pins-service';
 import { LanguagePage } from '../language/language';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-profile',
@@ -22,7 +23,11 @@ export class ProfilePage {
 
   constructor(private facebook: Facebook, public navCtrl: NavController,
               private storage: Storage, private app: App,
-              private pinsService: PinsService) {
+              private pinsService: PinsService, public events: Events) {
+  }
+
+  ionViewDidLeave() {
+    this.events.publish('tab:leave', {});
   }
 
   ionViewDidLoad() {

@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Endpoint } from './endpoint';
 
 @Injectable()
-export class Events {
+export class EventService {
 
   constructor(public http: Http, private endpoint: Endpoint) {
     console.log('Hello Events Provider');

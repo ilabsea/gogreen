@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Events } from '../../providers/events';
+import { EventService } from '../../providers/events';
 import { ShowEventPage } from '../show-event/show-event';
 import { Loading } from '../../providers/loading';
 import { Endpoint } from '../../providers/endpoint';
 import { Facebook } from '@ionic-native/facebook';
 import { FormEventPage } from '../form-event/form-event';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html',
-  providers: [Events, Endpoint]
+  providers: [EventService, Endpoint]
 })
 
 export class EventsPage {
@@ -19,14 +20,18 @@ export class EventsPage {
   private url = '';
   private pageNum;
 
-  constructor(public navCtrl: NavController, private eventsService: Events,
+  constructor(public navCtrl: NavController, private eventsService: EventService,
               private loading: Loading, private endpoint: Endpoint,
-              private facebook: Facebook) {
+              private facebook: Facebook, public ionEvents: Events) {
     this.url = endpoint.url;
   }
 
   ionViewDidLoad() {
     this.getEvents();
+  }
+
+  ionViewDidLeave() {
+    this.ionEvents.publish('tab:leave', {});
   }
 
   getEvents() {

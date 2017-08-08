@@ -8,10 +8,14 @@ import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
 import { BadgePage } from '../pages/badge/badge';
+import { BadgeInfoPage } from '../pages/badge-info/badge-info';
 import { FaqPage } from '../pages/faq/faq';
 import { FlashPage } from '../pages/flash/flash';
 import { PhotoPage } from '../pages/photo/photo';
 import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet';
+import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet';
+import { LanguagePage } from '../pages/language/language';
+
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -25,7 +29,11 @@ export class MyApp {
   // rootPage:any = LoginPage;
   // rootPage:any = IntroPage;
   // rootPage:any = ChangeOptionActionSheetPage;
+  // rootPage:any = NewPinActionSheetPage;
   rootPage:any = FlashPage;
+  // rootPage:any = BadgeInfoPage;
+  // rootPage:any = LanguagePage;
+
   hasRoot: any = false;
 
   constructor(platform: Platform, private storage: Storage, statusBar: StatusBar,

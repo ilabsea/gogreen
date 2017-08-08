@@ -33,7 +33,7 @@ import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-act
 import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet'
 
 import { Loading } from '../providers/loading';
-import { Events } from '../providers/events';
+import { EventService } from '../providers/events';
 import { Endpoint } from '../providers/endpoint';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
@@ -121,7 +121,7 @@ export function createTranslateLoader(http: Http) {
     UserService,
     Endpoint,
     Camera,
-    Events,
+    EventService,
     Loading,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
