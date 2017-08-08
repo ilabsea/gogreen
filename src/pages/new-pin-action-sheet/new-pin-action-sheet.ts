@@ -28,6 +28,9 @@ export class NewPinActionSheetPage {
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
     this.userId = navParams.data.userId;
+
+    // this.pin = { id: 1, created_at: '2017-08-05T03:11:52.000Z', icon: 'happy'};
+    // this.userId = 1;
   }
 
   ngOnInit() {
@@ -38,6 +41,12 @@ export class NewPinActionSheetPage {
     this.map.setClickable(false);
   }
 
+  getActiveClass(status) {
+    if (!this.pin.id) { return ''; }
+
+    return this.pin.icon == status ? 'status active' : 'status';
+  }
+
   showFeelingIconActionSheet() {
     let title = this.pin.id ? 'Change your pin' : 'Place your pin';
     let actionSheet = this.actionSheetCtrl.create({
@@ -45,29 +54,24 @@ export class NewPinActionSheetPage {
       cssClass: 'pin-buttons my-action-sheets',
       buttons: [
         {
-          cssClass: 'happy',
+          cssClass: 'happy ' + this.getActiveClass('happy'),
           handler: () => {
-            console.log('happy');
             this.upsertPin('happy');
           }
         },{
-          cssClass: 'sad',
+          cssClass: 'sad ' + this.getActiveClass('sad'),
           handler: () => {
-            console.log('sad');
             this.upsertPin('sad');
           }
         },{
-          cssClass: 'trash',
+          cssClass: 'trash ' + this.getActiveClass('trash'),
           handler: () => {
-            console.log('trash');
             this.upsertPin('trash');
           }
         },{
           cssClass: 'cancel',
           role: 'cancel',
           handler: () => {
-            console.log('cancel pin');
-
             this.map.setClickable(true);
             this.viewCtrl.dismiss();
             if (!this.pin.id) {
@@ -93,6 +97,7 @@ export class NewPinActionSheetPage {
     console.log('update');
     this.pinsService.update(this.pin.id, {"icon": icon}).then(() => {
       this.marker.setIcon('www/assets/pin/' + icon + '-small.png');
+      this.pin.icon = icon;
       this.map.setClickable(true);
       this.viewCtrl.dismiss();
     });

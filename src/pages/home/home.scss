@@ -48,6 +48,15 @@ page-home {
     display: none;
   }
 
+  .status {
+    .button-inner {
+      opacity: 0.5;
+    }
+
+    &.active .button-inner {
+      opacity: 1;
+    }
+  }
 }
 
 .gogreen-action-sheets {
