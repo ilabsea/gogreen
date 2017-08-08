@@ -33,7 +33,8 @@ $colors: (
   light-black: rgba(0, 0, 0, 0.54),
   black: #000,
   light-gray: #fafafa,
-  white: #fff
+  white: #fff,
+  dark-green: #10A224
 );
 
 
@@ -80,7 +81,7 @@ $gray: #747272;
 
 @import "ionic.ionicons";
 $tabs-tab-color-active: color($colors, black) !important;
-
+$radio-md-color-on: color($colors, dark-green);
 
 // Fonts
 // --------------------------------------------------
