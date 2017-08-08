@@ -5,16 +5,15 @@
       <button ion-button class='btn-skip' (click)="goToHome()">{{'SKIP' | translate}}</button>
 
       <div class="img-wrapper">
-        <div class='cell'>
+        <div class='cell logo'>
           <img src="assets/logo.png" class='small' />
-          <p class='welcome'>{{'WELCOME_TO_GOGREEN' | translate}}</p>
-
         </div>
       </div>
 
       <div class="text text-center">
-        <p>{{'YOU_ARE_NOW_A_MEMBER' | translate}}</p>
-        <p>{{'WELCOME_ON_BOARD' | translate}}</p>
+        <h4>{{'WELCOME_TO_GOGREEN' | translate}}</h4>
+        <p>{{'THIS_APP_IS_FOR' | translate}} </p>
+        <p>{{'JOIN_US' | translate}}</p>
       </div>
     </div>
   </ion-slide>
@@ -24,13 +23,14 @@
       <button ion-button class='btn-skip' (click)="goToHome()">{{'SKIP' | translate}}</button>
 
       <div class="img-wrapper">
-        <div class='cell'>
-          <img src="assets/intro/city.png" style='margin-bottom: 20px;' />
+        <div class='cell logo'>
+          <img src="assets/logo.png" class='small' />
         </div>
       </div>
 
-      <div class="text text-justify">
-        <p>{{'OUR_AIM' | translate}}</p>
+      <div class="text">
+        <h4 class='text-center'>{{'OUR_AIM' | translate}}</h4>
+        <p class='text-justify'>{{'OUR_AIM_IS' | translate}}</p>
       </div>
     </div>
   </ion-slide>
@@ -41,11 +41,12 @@
 
       <div class="img-wrapper">
         <div class='cell'>
-          <img src="assets/intro/pin.png" class='small' />
+          <img src="assets/intro/pin.png" class='small' style='margin-bottom: -4px;' />
         </div>
       </div>
 
       <div class="pin-text text text-justify">
+        <h4 class='text-center'>{{'HOW_TO_USE' | translate}}</h4>
         <ion-list>
           <ion-item>
             <ion-avatar item-left>
@@ -76,11 +77,12 @@
     <div class="content">
       <div class="img-wrapper">
         <div class='cell'>
-          <img src="assets/intro/event.png" class='small' />
+          <img src="assets/intro/event.png" class='small' style='margin-bottom: -4px;' />
         </div>
       </div>
 
       <div class="text text-justify">
+        <h4 class='text-center'>{{'CREATE_EVENTS' | translate}}</h4>
         <p>{{'YOU_CAN_ALSO_CREATE_EVENT' | translate}}</p>
 
         <p>{{'PLEASE_VISIT_OUR_EVENT_PAGE' | translate}}</p>

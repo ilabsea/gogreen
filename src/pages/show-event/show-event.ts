@@ -12,7 +12,7 @@ export class ShowEventPage {
   private event: any;
   private url = '';
   private creatorPicture: any;
-  private creatorName: any = 'Sopheak Kim';
+  private creatorName: any;
   private profileLink: any;
 
   constructor(public navParams: NavParams, private endpoint: Endpoint, private facebook: Facebook) {
@@ -29,7 +29,7 @@ export class ShowEventPage {
   setCreatorName() {
     let self = this;
     this.facebook.api("/" + this.event.user.facebook_id +"?fields=name" , []).then(function(user) {
-      self.creatorName = user.name || 'Sopheak Kim';
+      self.creatorName = user.name;
     })
   }
 

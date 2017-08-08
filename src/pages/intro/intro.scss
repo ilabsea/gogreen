@@ -35,9 +35,12 @@
           vertical-align: bottom;
         }
 
+        > .cell.logo {
+          vertical-align: middle;
+        }
+
         img.small {
           width: 170px;
-          margin-bottom: -4px;
         }
 
         .welcome {
@@ -53,6 +56,7 @@
         padding: 24px;
         font-size: 1.4rem;
         color: #333;
+        // line-height: 1.5em;
       }
 
       .pin-text {
@@ -68,10 +72,23 @@
           padding-left: 0;
         }
 
-        p {
-          color: #333;
+
+        ion-label {
+          margin: 2px 0;
         }
       }
+
+      p {
+        color: #333;
+        line-height: 1.5em;
+        font-size: 14px;
+      }
+    }
+
+    h4 {
+      margin-top: 0;
+      font-size: 16px;
+      font-weight: bold;
     }
 
     .swiper-pagination-bullet-active {
