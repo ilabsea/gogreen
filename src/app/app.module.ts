@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Facebook } from '@ionic-native/facebook';
 import { GoogleMaps } from '../providers/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -116,6 +117,7 @@ export function createTranslateLoader(http: Http) {
     SplashScreen,
     Facebook,
     GoogleMaps,
+    Geolocation,
     PinsService,
     PinPhotosService,
     UserService,

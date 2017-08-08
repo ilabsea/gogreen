@@ -7,18 +7,20 @@ import {
   LatLng,
   MarkerOptions,
   Marker,
-  GoogleMapsAnimation
+  GoogleMapsAnimation,
+  CameraPosition
 } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 import { Facebook } from '@ionic-native/facebook';
+import { Storage } from '@ionic/storage';
+import { App, ViewController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
+
+import { LoginPage } from '../login/login';
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 import { PinsService } from '../../providers/pins-service';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
 import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/change-option-action-sheet';
-
-import { Storage } from '@ionic/storage';
-import { App, ViewController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
-import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -34,12 +36,13 @@ export class HomePage {
   userId: any;
   markers: any;
 
-  constructor(private googleMaps: GoogleMaps, public popoverCtrl: PopoverController,
+  constructor(public popoverCtrl: PopoverController,
               public pinsService: PinsService, private storage: Storage,
               public viewCtrl: ViewController, private facebook: Facebook,
-              private app: App, public events: Events) {
+              private app: App, public events: Events, private geolocation: Geolocation) {
     this.markers = [];
 
+    // Resole subscribe event long click map
     events.unsubscribe('tab:leave');
     events.subscribe('tab:leave', (obj) => {
       if (!!this.subscription) {
@@ -67,7 +70,6 @@ export class HomePage {
       if (!this.map) {
         console.log('load Map');
         this.loadMap();
-        this.onSubscribeLongClickMap();
       }
     }, 500);
   }
@@ -90,10 +92,7 @@ export class HomePage {
     this.showFeelingIconActionSheet()
   }
 
-  loadMap() {
-    let latlng: LatLng = new LatLng(11.562108, 104.888535);
-    this.googleMaps
-
+  initMap(latlng) {
     this.map = new GoogleMap('map_canvas', {
       'backgroundColor': 'white',
       'controls': {
@@ -109,7 +108,7 @@ export class HomePage {
         'zoom': true
       },
       'camera': {
-        'latLng': latlng,
+        'target': latlng,
         'tilt': 30,
         'zoom': 15,
         'bearing': 50
@@ -117,10 +116,26 @@ export class HomePage {
     });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+        this.geolocation.getCurrentPosition().then((resp) => {
+          this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
+        }).catch((error) => {});
+
       this.map.setClickable(true);
       this.renderMarkers();
+      this.onSubscribeLongClickMap();
     });
+  }
 
+  loadMap() {
+    let latlng: LatLng;
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+      latlng = new LatLng(resp.coords.latitude, resp.coords.longitude);
+      this.initMap(latlng);
+    }).catch((error) => {
+      latlng = new LatLng(11.562108, 104.888535);
+      this.initMap(latlng);
+    });
   }
 
   renderMarkers(){
