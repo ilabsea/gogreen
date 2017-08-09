@@ -51,6 +51,23 @@
         }
       }
 
+      .slide1 {
+        background: url('../assets/intro/slide1.jpg');
+      }
+
+      .slide2 {
+        background: url('../assets/intro/slide2.jpg');
+      }
+
+      .slide3 {
+        background: url('../assets/intro/slide3.jpg');
+      }
+
+      .bg {
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+
       .text {
         height: 45vh !important;
         padding: 24px;
