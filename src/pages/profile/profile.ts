@@ -11,6 +11,9 @@ import { PinsService } from '../../providers/pins-service';
 import { LanguagePage } from '../language/language';
 import { Events } from 'ionic-angular';
 
+import { Network } from '@ionic-native/network';
+import { Toast } from '@ionic-native/toast';
+
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -20,14 +23,18 @@ export class ProfilePage {
   userProfile: any;
   userName: any;
   badgeType: any;
+  disconnected: any;
 
   constructor(private facebook: Facebook, public navCtrl: NavController,
               private storage: Storage, private app: App,
-              private pinsService: PinsService, public events: Events) {
+              private pinsService: PinsService, public events: Events,
+              private network: Network, private toast: Toast) {
   }
 
   ionViewDidLeave() {
     this.events.publish('tab:leave', {});
+    this.disconnected.unsubscribe();
+    this.toast.hide();
   }
 
   ionViewDidLoad() {
@@ -39,6 +46,23 @@ export class ProfilePage {
         self.userName = user.name || 'Sopheak Kim';
       })
     });
+
+    this.onSubscribeNetwork();
+  }
+
+  onSubscribeNetwork() {
+    this.disconnected = this.network.onDisconnect().subscribe(() => {
+      console.log('network was disconnected :-(');
+      this.alertDisconnect();
+    });
+  }
+
+  alertDisconnect() {
+    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
   logout() {

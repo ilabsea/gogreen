@@ -44,6 +44,9 @@ import { UserService } from '../providers/user-service';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http';
+// Network
+import { Network } from '@ionic-native/network';
+import { Toast } from '@ionic-native/toast';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -123,6 +126,8 @@ export function createTranslateLoader(http: Http) {
     UserService,
     Endpoint,
     Camera,
+    Network,
+    Toast,
     EventService,
     Loading,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

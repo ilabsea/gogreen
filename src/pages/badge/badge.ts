@@ -4,6 +4,7 @@ import { BadgeInfoPage } from '../badge-info/badge-info';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { Loading } from '../../providers/loading';
+import { Toast } from '@ionic-native/toast';
 
 @Component({
   selector: 'page-badge',
@@ -43,15 +44,26 @@ export class BadgePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public appCtrl: App, private storage: Storage,
-              public userService: UserService, private loading: Loading) {
-    this.loading.show();
+              public userService: UserService, private loading: Loading,
+              private toast: Toast) {
   }
 
   ionViewDidLoad(){
     this.getUser();
   }
 
+  ionViewDidLeave() {
+    this.toast.hide();
+  }
+
   getUser() {
+    if (!navigator.onLine) {
+      this.alertDisconnect();
+      return;
+    }
+
+    this.loading.show();
+
     var self = this;
     this.storage.get('userID').then((userId) => {
       self.userService.get(userId).then((user) => {
@@ -62,6 +74,14 @@ export class BadgePage {
         console.log('error : ', error);
       });
     });
+  }
+
+  alertDisconnect() {
+    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
   assignUser(user) {

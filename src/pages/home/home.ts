@@ -15,6 +15,8 @@ import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { App, ViewController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
+import { Toast } from '@ionic-native/toast';
 
 import { LoginPage } from '../login/login';
 import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
@@ -35,11 +37,13 @@ export class HomePage {
   currentPin: any;
   userId: any;
   markers: any;
+  disconnected: any;
 
-  constructor(public popoverCtrl: PopoverController,
+  constructor(public popoverCtrl: PopoverController, private toast: Toast,
               public pinsService: PinsService, private storage: Storage,
               public viewCtrl: ViewController, private facebook: Facebook,
-              private app: App, public events: Events, private geolocation: Geolocation) {
+              private app: App, public events: Events, private geolocation: Geolocation,
+              private network: Network) {
     this.markers = [];
 
     // Resolve subscribe event long click map
@@ -52,6 +56,9 @@ export class HomePage {
       if (!!this.map) {
         this.onSubscribeLongClickMap();
       }
+
+      this.disconnected.unsubscribe();
+      this.onSubscribeNetwork();
     });
   }
 
@@ -72,6 +79,8 @@ export class HomePage {
         this.loadMap();
       }
     }, 500);
+
+    this.onSubscribeNetwork();
   }
 
   logout() {
@@ -86,6 +95,22 @@ export class HomePage {
     if (!!this.subscription) {
       this.subscription.unsubscribe();
     }
+    this.disconnected.unsubscribe();
+  }
+
+  onSubscribeNetwork() {
+    this.disconnected = this.network.onDisconnect().subscribe(() => {
+      console.log('network was disconnected :-(');
+      this.alertDisconnect();
+    });
+  }
+
+  alertDisconnect() {
+    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
   clickMe() {
@@ -138,7 +163,12 @@ export class HomePage {
     });
   }
 
-  renderMarkers(){
+  renderMarkers() {
+    if (!navigator.onLine) {
+      this.alertDisconnect();
+      return;
+    }
+
     this.map.clear();
     this.pinsService.getAll().then((pinsResult) => {
       let pins = [].concat(pinsResult);
