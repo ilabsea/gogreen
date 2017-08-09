@@ -94,9 +94,8 @@ export class NewPinActionSheetPage {
   }
 
   update(icon) {
-    console.log('update');
     this.pinsService.update(this.pin.id, {"icon": icon}).then(() => {
-      this.marker.setIcon('www/assets/pin/' + icon + '-small.png');
+      this.marker.setIcon(this.getIcon(icon));
       this.pin.icon = icon;
       this.map.setClickable(true);
       this.viewCtrl.dismiss();
@@ -104,7 +103,6 @@ export class NewPinActionSheetPage {
   }
 
   create(icon) {
-    console.log('create');
     let pinParams = {
       "pin": {
         latitude: this.pin.latitude,
@@ -116,13 +114,17 @@ export class NewPinActionSheetPage {
     }
 
     this.pinsService.create(pinParams).then((pin) => {
-      this.marker.setIcon('www/assets/pin/' + icon + '-small.png');
+      this.marker.setIcon(this.getIcon(icon));
       this.pin = pin;
       this.viewCtrl.dismiss(pin);
       this.showAddPhotoAndShareActionSheet();
     }, (error) => {
       console.log('error : ', error);
     });
+  }
+
+  getIcon(icon) {
+    return { url: 'www/assets/pin/' + icon + '.png', size: { width: 16, height: 16 } };
   }
 
   showAddPhotoAndShareActionSheet() {
@@ -135,7 +137,6 @@ export class NewPinActionSheetPage {
           cssClass: 'add-photo',
           icon: 'camera',
           handler: () => {
-            console.log('add photo');
             this.addPhoto();
           }
         },{
@@ -143,14 +144,12 @@ export class NewPinActionSheetPage {
           cssClass: 'share',
           icon: 'share',
           handler: () => {
-            console.log('share to fb');
             this.shareToFacebook();
           }
         },{
           cssClass: 'cancel',
           role: 'cancel',
           handler: () => {
-            console.log('cancel');
             this.sayThankYou();
           }
         }

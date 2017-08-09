@@ -42,7 +42,7 @@ export class HomePage {
               private app: App, public events: Events, private geolocation: Geolocation) {
     this.markers = [];
 
-    // Resole subscribe event long click map
+    // Resolve subscribe event long click map
     events.unsubscribe('tab:leave');
     events.subscribe('tab:leave', (obj) => {
       if (!!this.subscription) {
@@ -146,7 +146,7 @@ export class HomePage {
       for(let pin of pins) {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
-          icon: 'www/assets/pin/' + pin.icon + '-small.png',
+          icon: { url: 'www/assets/pin/' + pin.icon + '.png', size: { width: 16, height: 16 } },
           markerClick: (marker) => {
             this.currentPin = pin;
             this.marker = this.findMarker(marker.id);
