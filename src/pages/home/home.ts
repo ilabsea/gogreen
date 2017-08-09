@@ -146,7 +146,7 @@ export class HomePage {
       for(let pin of pins) {
         let option = {
           position: new LatLng (pin.latitude, pin.longitude),
-          icon: { url: 'www/assets/pin/' + pin.icon + '.png', size: { width: 16, height: 16 } },
+          icon: { url: 'www/assets/pin/' + pin.icon + '-small.png', size: { width: 16, height: 16 } },
           markerClick: (marker) => {
             this.currentPin = pin;
             this.marker = this.findMarker(marker.id);

@@ -1,5 +1,7 @@
 import { ViewController, NavParams , PopoverController} from 'ionic-angular';
 import { Component } from '@angular/core';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 import { PinsService } from '../../providers/pins-service';
 import { ActionSheetController } from 'ionic-angular';
 import { PinPhotosService } from '../../providers/pin-photos-service';
@@ -124,7 +126,7 @@ export class NewPinActionSheetPage {
   }
 
   getIcon(icon) {
-    return { url: 'www/assets/pin/' + icon + '.png', size: { width: 16, height: 16 } };
+    return { url: 'www/assets/pin/' + icon + '-small.png', size: { width: 16, height: 16 } };
   }
 
   showAddPhotoAndShareActionSheet() {
