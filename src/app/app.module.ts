@@ -16,8 +16,6 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
-import { PinPopoverPage } from '../pages/pin-pop-over/pin-pop-over';
-import { PinInfoPage } from '../pages/pin-info/pin-info';
 import { ThanksPopOver } from '../pages/thanks-pop-over/thanks-pop-over';
 import { PhotoPage } from '../pages/photo/photo';
 import { FormEventPage } from '../pages/form-event/form-event';
@@ -58,9 +56,7 @@ export function createTranslateLoader(http: Http) {
     LoginPage,
     TabsPage,
     ProfilePage,
-    PinPopoverPage,
     ThanksPopOver,
-    PinInfoPage,
     PhotoPage,
     EventsPage,
     FormEventPage,
@@ -96,9 +92,7 @@ export function createTranslateLoader(http: Http) {
     LoginPage,
     TabsPage,
     ProfilePage,
-    PinPopoverPage,
     ThanksPopOver,
-    PinInfoPage,
     PhotoPage,
     EventsPage,
     FormEventPage,

@@ -101,15 +101,15 @@
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-facebook4": {
-                "APP_ID": "1037998802999974",
+                "APP_ID": "xxx",
                 "APP_NAME": "GoGreen"
             },
             "cordova-plugin-geolocation": {
                 "GEOLOCATION_USAGE_DESCRIPTION": " "
             },
             "cordova-plugin-googlemaps": {
-                "API_KEY_FOR_ANDROID": "AIzaSyBk-fefN4mc2RpN1hsjUSqq4fKLx5OqWTM",
-                "API_KEY_FOR_IOS": "AIzaSyCEJqfYy1Z0mQ6ZlxXJc7zHpYctNKXdcvU",
+                "API_KEY_FOR_ANDROID": "xxx",
+                "API_KEY_FOR_IOS": "xxx",
                 "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
                 "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
             },

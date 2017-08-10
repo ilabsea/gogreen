@@ -19,7 +19,6 @@ import { Network } from '@ionic-native/network';
 import { Toast } from '@ionic-native/toast';
 
 import { LoginPage } from '../login/login';
-import { PinPopoverPage } from '../pin-pop-over/pin-pop-over';
 import { PinsService } from '../../providers/pins-service';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
 import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/change-option-action-sheet';
@@ -110,10 +109,6 @@ export class HomePage {
         console.log(toast);
       }
     );
-  }
-
-  clickMe() {
-    this.showFeelingIconActionSheet()
   }
 
   initMap(latlng) {

@@ -75,8 +75,8 @@ export class ProfilePage {
   }
 
   inviteFiends() {
-    this.facebook.appInvite({ url: "https://fb.me/1096318540501333",
-        picture: "https://www.logogarden.com/wp-content/uploads/lg-index/Example-Logo-6.jpg"
+    this.facebook.appInvite({ url: "https://fb.me/1145545555578631",
+        picture: "http://laoblogger.com/images/children-cleaning-up-montessori-work-clipart-7.jpg"
     }).then((obj) => {
       console.log('obj : ', obj);
     }, (obj) => {
