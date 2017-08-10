@@ -29,7 +29,6 @@ import { BadgePage } from '../pages/badge/badge';
 import { BadgeInfoPage } from '../pages/badge-info/badge-info';
 import { AboutusPage } from '../pages/aboutus/aboutus'
 import { IntroPage } from '../pages/intro/intro'
-import { FlashPage } from '../pages/flash/flash'
 import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet'
 import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet'
 
@@ -72,7 +71,6 @@ export function createTranslateLoader(http: Http) {
     BadgeInfoPage,
     AboutusPage,
     IntroPage,
-    FlashPage,
     NewPinActionSheetPage,
     ChangeOptionActionSheetPage
   ],
@@ -111,7 +109,6 @@ export function createTranslateLoader(http: Http) {
     BadgeInfoPage,
     AboutusPage,
     IntroPage,
-    FlashPage,
     NewPinActionSheetPage,
     ChangeOptionActionSheetPage
   ],

@@ -75,7 +75,6 @@ export class HomePage {
   ionViewDidLoad() {
     setTimeout(() => {
       if (!this.map) {
-        console.log('load Map');
         this.loadMap();
       }
     }, 500);

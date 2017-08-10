@@ -43,6 +43,8 @@ export class PinPhotosService {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 800,
+      targetHeight: 800,
       correctOrientation: true
     }
     return new Promise((resolve) => {
