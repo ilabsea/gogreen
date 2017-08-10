@@ -141,9 +141,9 @@ export class HomePage {
     });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-        this.geolocation.getCurrentPosition().then((resp) => {
-          this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
-        }).catch((error) => {});
+      this.geolocation.getCurrentPosition().then((resp) => {
+        this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
+      }).catch((error) => {});
 
       this.map.setClickable(true);
       this.renderMarkers();
@@ -154,13 +154,8 @@ export class HomePage {
   loadMap() {
     let latlng: LatLng;
 
-    this.geolocation.getCurrentPosition().then((resp) => {
-      latlng = new LatLng(resp.coords.latitude, resp.coords.longitude);
-      this.initMap(latlng);
-    }).catch((error) => {
-      latlng = new LatLng(11.562108, 104.888535);
-      this.initMap(latlng);
-    });
+    latlng = new LatLng(11.562108, 104.888535);
+    this.initMap(latlng);
   }
 
   renderMarkers() {
