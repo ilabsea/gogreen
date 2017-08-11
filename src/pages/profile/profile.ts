@@ -13,6 +13,7 @@ import { Events } from 'ionic-angular';
 
 import { Network } from '@ionic-native/network';
 import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-profile',
@@ -28,7 +29,8 @@ export class ProfilePage {
   constructor(private facebook: Facebook, public navCtrl: NavController,
               private storage: Storage, private app: App,
               private pinsService: PinsService, public events: Events,
-              private network: Network, private toast: Toast) {
+              private network: Network, private toast: Toast,
+              public translate: TranslateService) {
   }
 
   ionViewDidLeave() {
@@ -43,7 +45,7 @@ export class ProfilePage {
     this.storage.get('userFacebookID').then(fbUerId => {
       this.userProfile = "https://graph.facebook.com/" + fbUerId + "/picture?width=100";
       this.facebook.api("/" + fbUerId + "?fields=name" , []).then(function(user) {
-        self.userName = user.name || 'Sopheak Kim';
+        self.userName = user.name;
       })
     });
 
@@ -58,7 +60,8 @@ export class ProfilePage {
   }
 
   alertDisconnect() {
-    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
+    this.toast.show(msg, '10000', 'center').subscribe(
       toast => {
         console.log(toast);
       }

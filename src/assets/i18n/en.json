@@ -67,5 +67,12 @@
   "THIS_APP_IS_FOR": "This app is created for people who want to get involved into making our city cleaner!",
   "JOIN_US": "Join Us!",
   "HOW_TO_USE": "How to use",
-  "CREATE_EVENTS": "Create Events"
+  "CREATE_EVENTS": "Create Events",
+  "CANNOT_CONNECT_RIGHT_NOW": "Can't connect right now.",
+  "CHANGE_YOUR_PIN": "Change your pin",
+  "PLACE_YOUR_PIN": "Place your pin",
+  "WHAT_DO_WANT_TO_DO": "What do you want to do?",
+  "THANK_YOU_FOR_CONTRIBUTION": "Thank you for contribution!",
+  "VIEW_IMAGES": "View images",
+  "SELECT_YOUR_OPTION": "Please select following options"
 }

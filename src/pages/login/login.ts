@@ -5,6 +5,7 @@ import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../providers/user-service';
 import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-login',
@@ -14,7 +15,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, private facebook: Facebook,
               private storage: Storage, public userService: UserService,
-              private toast: Toast) {
+              private toast: Toast, public translate: TranslateService) {
   }
 
   facebookLogin() {
@@ -37,7 +38,8 @@ export class LoginPage {
   }
 
   alertDisconnect() {
-    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
+    this.toast.show(msg, '10000', 'center').subscribe(
       toast => {
         console.log(toast);
       }

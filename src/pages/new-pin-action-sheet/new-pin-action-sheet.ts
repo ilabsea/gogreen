@@ -8,6 +8,7 @@ import { PinPhotosService } from '../../providers/pin-photos-service';
 import { Facebook } from '@ionic-native/facebook';
 import { Loading } from '../../providers/loading';
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-new-pin-action-sheet',
@@ -25,7 +26,8 @@ export class NewPinActionSheetPage {
   constructor(public viewCtrl: ViewController, private navParams: NavParams,
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, private facebook: Facebook,
-              private pinPhotosService: PinPhotosService, private loading: Loading) {
+              private pinPhotosService: PinPhotosService, private loading: Loading,
+              public translate: TranslateService) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
@@ -49,10 +51,13 @@ export class NewPinActionSheetPage {
     return this.pin.icon == status ? 'status active' : 'status';
   }
 
+  te(keyword) {
+    return this.translate.instant(keyword);
+  }
+
   showFeelingIconActionSheet() {
-    let title = this.pin.id ? 'Change your pin' : 'Place your pin';
     let actionSheet = this.actionSheetCtrl.create({
-      title: title,
+      title: this.te('SELECT_YOUR_OPTION'),
       cssClass: 'pin-buttons my-action-sheets',
       buttons: [
         {
@@ -131,18 +136,18 @@ export class NewPinActionSheetPage {
 
   showAddPhotoAndShareActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'What do you want to do?',
+      title: this.te('WHAT_DO_WANT_TO_DO'),
       cssClass: 'my-action-sheets',
       buttons: [
         {
-          text: 'Add Photos',
+          text: this.te('ADD_PHOTOS'),
           cssClass: 'add-photo',
           icon: 'camera',
           handler: () => {
             this.addPhoto();
           }
         },{
-          text: 'Share to your friend',
+          text: this.te('SHARE_TO_YOUR_FRIENDS'),
           cssClass: 'share',
           icon: 'share',
           handler: () => {

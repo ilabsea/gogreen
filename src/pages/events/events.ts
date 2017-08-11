@@ -10,6 +10,7 @@ import { Events } from 'ionic-angular';
 
 import { Network } from '@ionic-native/network';
 import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-events',
@@ -27,7 +28,8 @@ export class EventsPage {
   constructor(public navCtrl: NavController, private eventsService: EventService,
               private loading: Loading, private endpoint: Endpoint,
               private facebook: Facebook, public ionEvents: Events,
-              private network: Network, private toast: Toast) {
+              private network: Network, private toast: Toast,
+              public translate: TranslateService) {
     this.url = endpoint.url;
   }
 
@@ -50,7 +52,8 @@ export class EventsPage {
   }
 
   alertDisconnect() {
-    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
+    this.toast.show(msg, '10000', 'center').subscribe(
       toast => {
         console.log(toast);
       }

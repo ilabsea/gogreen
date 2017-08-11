@@ -7,6 +7,7 @@ import { Loading } from '../../providers/loading';
 import { PhotoPage } from '../photo/photo';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
 import { DatePipe } from '@angular/common'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-change-option-action-sheet',
@@ -24,7 +25,7 @@ export class ChangeOptionActionSheetPage {
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, public navCtrl: NavController,
               private pinPhotosService: PinPhotosService, private loading: Loading,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe, public translate: TranslateService) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
@@ -38,32 +39,33 @@ export class ChangeOptionActionSheetPage {
     this.showActionSheet();
   }
 
+  te(keyword) {
+    return this.translate.instant(keyword);
+  }
+
   showActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Created on ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy'),
+      title: this.te('CREATED_ON') + ' ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy'),
       cssClass: 'my-action-sheets',
       buttons: [
         {
-          text: 'Change your pin',
+          text: this.te('CHANGE_YOUR_PIN'),
           cssClass: 'change-pin',
           icon: 'pin',
           handler: () => {
-            console.log('change pin');
             this.openChangePin();
           }
         },{
-          text: 'View images',
+          text: this.te('VIEW_IMAGES'),
           cssClass: 'share',
           icon: 'images',
           handler: () => {
-            console.log('view image');
             this.viewImages();
           }
         },{
           cssClass: 'cancel',
           role: 'cancel',
           handler: () => {
-            console.log('cancel');
             this.map.setClickable(true);
             this.viewCtrl.dismiss();
           }

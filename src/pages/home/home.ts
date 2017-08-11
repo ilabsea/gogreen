@@ -22,6 +22,7 @@ import { LoginPage } from '../login/login';
 import { PinsService } from '../../providers/pins-service';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
 import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/change-option-action-sheet';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-home',
@@ -42,7 +43,7 @@ export class HomePage {
               public pinsService: PinsService, private storage: Storage,
               public viewCtrl: ViewController, private facebook: Facebook,
               private app: App, public events: Events, private geolocation: Geolocation,
-              private network: Network) {
+              private network: Network, public translate: TranslateService) {
     this.markers = [];
 
     // Resolve subscribe event long click map
@@ -104,7 +105,8 @@ export class HomePage {
   }
 
   alertDisconnect() {
-    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
+    this.toast.show(msg, '10000', 'center').subscribe(
       toast => {
         console.log(toast);
       }

@@ -16,7 +16,7 @@
     <div *ngFor="let photo of photos">
       <div class="photo-wrap" *ngIf="photo.status == 'approved' || photo.is_mine">
         <div class="photo">
-          <img [src]="url + photo.url">
+          <img [src]="photo.url">
           <div [ngClass]="['status', photo.status]" *ngIf="photo.is_mine">{{ photo.status }}</div>
         </div>
       </div>

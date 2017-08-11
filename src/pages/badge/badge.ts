@@ -5,6 +5,7 @@ import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { Loading } from '../../providers/loading';
 import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-badge',
@@ -45,7 +46,7 @@ export class BadgePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public appCtrl: App, private storage: Storage,
               public userService: UserService, private loading: Loading,
-              private toast: Toast) {
+              private toast: Toast, public translate: TranslateService) {
   }
 
   ionViewDidLoad(){
@@ -77,7 +78,8 @@ export class BadgePage {
   }
 
   alertDisconnect() {
-    this.toast.show(`Can't connect right now.`, '10000', 'center').subscribe(
+    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
+    this.toast.show(msg, '10000', 'center').subscribe(
       toast => {
         console.log(toast);
       }
