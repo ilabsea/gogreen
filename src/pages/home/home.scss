@@ -60,8 +60,12 @@ page-home {
 }
 
 .gogreen-action-sheets {
-  .popover-wrapper {
-    opacity: 0 !important;
+  .popover-content {
+    margin-top: -35px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -72,5 +76,11 @@ page-home {
 
   .action-sheet-icon {
     color: #10A224;
+  }
+
+  .focus-marker{
+    width: 50%;
+    height: 50%;
+    background-color: red;
   }
 }

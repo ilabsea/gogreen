@@ -32,9 +32,6 @@ export class NewPinActionSheetPage {
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
     this.userId = navParams.data.userId;
-
-    // this.pin = { id: 1, created_at: '2017-08-05T03:11:52.000Z', icon: 'happy'};
-    // this.userId = 1;
   }
 
   ngOnInit() {
@@ -88,8 +85,9 @@ export class NewPinActionSheetPage {
         }
       ]
     });
-
+    console.log('actionSheet : ', actionSheet);
     actionSheet.present();
+
   }
 
   upsertPin(icon) {

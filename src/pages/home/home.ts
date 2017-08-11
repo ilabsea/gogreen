@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Platform, PopoverController} from 'ionic-angular';
 import {
   GoogleMaps,
