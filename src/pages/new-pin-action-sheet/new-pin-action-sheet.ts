@@ -166,21 +166,24 @@ export class NewPinActionSheetPage {
 
   addPhoto() {
     this.pinPhotosService.getPhoto().then((imageData) => {
-      this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
-      let params = {
-        'photo': {
-          'name': this.imageBase64,
-          'pin_id': this.pin.id,
-          'user_id': this.userId
-        }
-      }
-
-      this.loading.show();
-      this.pinPhotosService.create(params).then((photo) => {
-        this.loading.hide();
+      if(imageData == 'Camera cancelled.'){
         this.sayThankYou();
-      });
+      }else{
+        this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
+        let params = {
+          'photo': {
+            'name': this.imageBase64,
+            'pin_id': this.pin.id,
+            'user_id': this.userId
+          }
+        }
 
+        this.loading.show();
+        this.pinPhotosService.create(params).then((photo) => {
+          this.loading.hide();
+          this.sayThankYou();
+        });
+      }
     }, (err) => {
       console.log('error : ', err);
     });

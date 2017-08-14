@@ -24,9 +24,6 @@ export class PhotoPage {
     this.pin = navParams.data.pin;
     this.map = navParams.data.map;
     this.userId = navParams.data.userId;
-
-    // this.pin = { id: 1 };
-    // this.userId = 1;
   }
 
   ionViewDidEnter(){
@@ -58,19 +55,21 @@ export class PhotoPage {
 
   addPhoto(){
     this.pinPhotosService.getPhoto().then((imageData) => {
-      this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
-      let params = {
-        'photo': {
-          'name': this.imageBase64,
-          'pin_id': this.pin.id,
-          'user_id': this.userId
+      if(imageData != 'Camera cancelled.'){
+        this.imageBase64 = 'data:image/jpeg;base64,' + imageData;
+        let params = {
+          'photo': {
+            'name': this.imageBase64,
+            'pin_id': this.pin.id,
+            'user_id': this.userId
+          }
         }
-      }
 
-      this.loading.show();
-      this.pinPhotosService.create(params).then((imageData) => {
-        this.renderPhotos();
-      });
+        this.loading.show();
+        this.pinPhotosService.create(params).then((imageData) => {
+          this.renderPhotos();
+        });
+      }
     }, (err) => {
       console.log('error : ', err);
     });
