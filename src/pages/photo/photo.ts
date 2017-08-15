@@ -38,6 +38,10 @@ export class PhotoPage {
     this.map.setClickable(true);
   }
 
+  goBack() {
+    this.navCtrl.pop();
+  }
+
   renderPhotos() {
     this.pinPhotosService.getPhotosByPinId(this.pin.id).then(photos => {
       this.photos = this.formatData(photos);

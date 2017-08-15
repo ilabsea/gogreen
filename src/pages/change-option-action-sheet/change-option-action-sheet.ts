@@ -1,5 +1,5 @@
 import { ViewController, NavParams , PopoverController} from 'ionic-angular';
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { PinsService } from '../../providers/pins-service';
 import { ActionSheetController, NavController } from 'ionic-angular';
 import { PinPhotosService } from '../../providers/pin-photos-service';
@@ -25,14 +25,11 @@ export class ChangeOptionActionSheetPage {
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, public navCtrl: NavController,
               private pinPhotosService: PinPhotosService, private loading: Loading,
-              private datePipe: DatePipe, public translate: TranslateService) {
+              private datePipe: DatePipe, public translate: TranslateService, private elementRef: ElementRef) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
     this.userId = navParams.data.userId;
-
-    // this.pin = { id: 1, created_at: '2017-08-05T03:11:52.000Z'};
-    // this.userId = 1;
   }
 
   ngOnInit() {
@@ -83,10 +80,12 @@ export class ChangeOptionActionSheetPage {
       {"map": this.map, "pin": this.pin, "marker": this.marker},
       {cssClass: 'gogreen-action-sheets'}
     );
+
     popover.present();
   }
 
   viewImages() {
+    this.viewCtrl.dismiss();
     this.navCtrl.push(PhotoPage, {'pin': this.pin, 'map': this.map, 'userId': this.userId});
   }
 }
