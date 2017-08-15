@@ -27,6 +27,7 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // rootPage:any = LoginPage;
   rootPage:any = IntroPage;
+  // rootPage:any = PhotoPage;
   // rootPage:any = ChangeOptionActionSheetPage;
   // rootPage:any = NewPinActionSheetPage;
   // rootPage:any = BadgeInfoPage;

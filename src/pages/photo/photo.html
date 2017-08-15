@@ -7,11 +7,6 @@
       </button>
     </ion-buttons>
     <ion-title>{{'VIEW_PHOTOS' | translate}}</ion-title>
-    <ion-buttons end>
-      <button ion-button clear color='white' (click)='addPhoto()' style="font-size: 2rem;">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -27,4 +22,10 @@
       </div>
     </div>
   </div>
+
+  <ion-fab right bottom>
+    <button ion-fab color="green-color" (click)='addPhoto()'>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
