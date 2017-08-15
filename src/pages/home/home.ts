@@ -203,7 +203,6 @@ export class HomePage {
     let markerOptions: MarkerOptions = {
       position: pos,
       animation: GoogleMapsAnimation.DROP,
-      draggable: true,
       markerClick: (marker) => {
         this.map.setClickable(false);
         this.marker = this.findMarker(marker.id);
@@ -223,7 +222,7 @@ export class HomePage {
   showFeelingIconActionSheet() {
     let popover = this.popoverCtrl.create(NewPinActionSheetPage, {
       'map': this.map, 'pin': this.currentPin, 'marker': this.marker, 'userId': this.userId
-    }, {cssClass: 'gogreen-action-sheets'});
+    }, {cssClass: 'gogreen-action-sheets disable-focus'});
 
     popover.onDidDismiss(pin => {
       if(!!pin) {

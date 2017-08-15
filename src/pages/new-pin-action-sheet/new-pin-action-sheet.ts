@@ -85,7 +85,6 @@ export class NewPinActionSheetPage {
         }
       ]
     });
-    console.log('actionSheet : ', actionSheet);
     actionSheet.present();
 
   }

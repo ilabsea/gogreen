@@ -69,6 +69,12 @@ page-home {
   }
 }
 
+.gogreen-action-sheets.disable-focus{
+  .popover-wrapper {
+    opacity: 0 !important;
+  }
+}
+
 .my-action-sheets {
   .action-sheet-group:nth-child(2) {
     display: none !important;
