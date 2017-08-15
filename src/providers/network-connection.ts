@@ -18,6 +18,10 @@ export class NetworkConnection {
     });
   }
 
+  unsubscribe() {
+    this.disconnected.unsubscribe();
+  }
+
   alertDisconnect() {
     let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
     this.toast.show(msg, '10000', 'center').subscribe(

@@ -15,19 +15,18 @@ import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { App, ViewController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
-import { Network } from '@ionic-native/network';
-import { Toast } from '@ionic-native/toast';
 
 import { LoginPage } from '../login/login';
 import { PinsService } from '../../providers/pins-service';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
 import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/change-option-action-sheet';
 import { TranslateService } from '@ngx-translate/core';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [GoogleMaps, PinsService]
+  providers: [GoogleMaps, PinsService, NetworkConnection]
 })
 
 export class HomePage {
@@ -37,13 +36,12 @@ export class HomePage {
   currentPin: any;
   userId: any;
   markers: any;
-  disconnected: any;
 
-  constructor(public popoverCtrl: PopoverController, private toast: Toast,
+  constructor(public popoverCtrl: PopoverController,
               public pinsService: PinsService, private storage: Storage,
               public viewCtrl: ViewController, private facebook: Facebook,
               private app: App, public events: Events, private geolocation: Geolocation,
-              private network: Network, public translate: TranslateService) {
+              private network: NetworkConnection, public translate: TranslateService) {
     this.markers = [];
 
     // Resolve subscribe event long click map
@@ -57,8 +55,8 @@ export class HomePage {
         this.onSubscribeLongClickMap();
       }
 
-      this.disconnected.unsubscribe();
-      this.onSubscribeNetwork();
+      this.network.unsubscribe();
+      this.network.onSubscribeNetwork();
     });
   }
 
@@ -79,7 +77,7 @@ export class HomePage {
       }
     }, 500);
 
-    this.onSubscribeNetwork();
+    this.network.onSubscribeNetwork();
   }
 
   logout() {
@@ -94,23 +92,7 @@ export class HomePage {
     if (!!this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.disconnected.unsubscribe();
-  }
-
-  onSubscribeNetwork() {
-    this.disconnected = this.network.onDisconnect().subscribe(() => {
-      console.log('network was disconnected :-(');
-      this.alertDisconnect();
-    });
-  }
-
-  alertDisconnect() {
-    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
+    this.network.unsubscribe();
   }
 
   initMap(latlng) {
@@ -156,7 +138,7 @@ export class HomePage {
 
   renderMarkers() {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       return;
     }
 

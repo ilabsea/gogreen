@@ -8,13 +8,12 @@ import { PinPhotosService } from '../../providers/pin-photos-service';
 import { Facebook } from '@ionic-native/facebook';
 import { Loading } from '../../providers/loading';
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
-import { TranslateService } from '@ngx-translate/core';
-import { Toast } from '@ionic-native/toast';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-new-pin-action-sheet',
   template: '',
-  providers: [PinsService, PinPhotosService]
+  providers: [PinsService, PinPhotosService, NetworkConnection]
 })
 
 export class NewPinActionSheetPage {
@@ -28,7 +27,7 @@ export class NewPinActionSheetPage {
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, private facebook: Facebook,
               private pinPhotosService: PinPhotosService, private loading: Loading,
-              public translate: TranslateService, private toast: Toast) {
+              private network: NetworkConnection) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
@@ -94,18 +93,9 @@ export class NewPinActionSheetPage {
     }
   }
 
-  alertDisconnect() {
-    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
-  }
-
   upsertPin(icon) {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       this.cancelPin();
       return;
     }

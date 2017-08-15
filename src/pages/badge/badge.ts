@@ -4,12 +4,13 @@ import { BadgeInfoPage } from '../badge-info/badge-info';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { Loading } from '../../providers/loading';
-import { Toast } from '@ionic-native/toast';
 import { TranslateService } from '@ngx-translate/core';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-badge',
   templateUrl: 'badge.html',
+  providers: [NetworkConnection]
 })
 
 export class BadgePage {
@@ -46,7 +47,7 @@ export class BadgePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public appCtrl: App, private storage: Storage,
               public userService: UserService, private loading: Loading,
-              private toast: Toast, public translate: TranslateService) {
+              private network: NetworkConnection, public translate: TranslateService) {
   }
 
   ionViewDidLoad(){
@@ -54,12 +55,12 @@ export class BadgePage {
   }
 
   ionViewDidLeave() {
-    this.toast.hide();
+    this.network.hideToast();
   }
 
   getUser() {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       return;
     }
 
@@ -75,15 +76,6 @@ export class BadgePage {
         console.log('error : ', error);
       });
     });
-  }
-
-  alertDisconnect() {
-    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
   }
 
   assignUser(user) {

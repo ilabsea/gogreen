@@ -3,13 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PinPhotosService } from '../../providers/pin-photos-service';
 import { Endpoint } from '../../providers/endpoint';
 import { Loading } from '../../providers/loading';
-import { Toast } from '@ionic-native/toast';
-import { TranslateService } from '@ngx-translate/core';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-photo',
   templateUrl: 'photo.html',
-  providers: [PinPhotosService, Endpoint]
+  providers: [PinPhotosService, Endpoint, NetworkConnection]
 
 })
 export class PhotoPage {
@@ -22,8 +21,7 @@ export class PhotoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loading: Loading, private pinPhotosService: PinPhotosService,
-              private endpoint: Endpoint, private toast: Toast,
-              public translate: TranslateService) {
+              private endpoint: Endpoint, private network: NetworkConnection) {
     this.pin = navParams.data.pin;
     this.map = navParams.data.map;
     this.userId = navParams.data.userId;
@@ -31,7 +29,7 @@ export class PhotoPage {
 
   ionViewDidEnter() {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       return;
     }
 
@@ -40,15 +38,6 @@ export class PhotoPage {
     this.loading.show();
     this.renderPhotos();
     this.map.setClickable(false);
-  }
-
-  alertDisconnect() {
-    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
   }
 
   ionViewDidLeave() {
@@ -76,7 +65,7 @@ export class PhotoPage {
 
   addPhoto() {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       return;
     }
 
