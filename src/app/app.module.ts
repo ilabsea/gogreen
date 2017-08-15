@@ -36,6 +36,7 @@ import { Endpoint } from '../providers/endpoint';
 import { PinsService } from '../providers/pins-service';
 import { PinPhotosService } from '../providers/pin-photos-service';
 import { UserService } from '../providers/user-service';
+import { NetworkConnection } from '../providers/network-connection';
 
 // Translation
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -121,6 +122,7 @@ export function createTranslateLoader(http: Http) {
     Toast,
     EventService,
     Loading,
+    NetworkConnection,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

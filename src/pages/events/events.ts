@@ -7,15 +7,12 @@ import { Endpoint } from '../../providers/endpoint';
 import { Facebook } from '@ionic-native/facebook';
 import { FormEventPage } from '../form-event/form-event';
 import { Events } from 'ionic-angular';
-
-import { Network } from '@ionic-native/network';
-import { Toast } from '@ionic-native/toast';
-import { TranslateService } from '@ngx-translate/core';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html',
-  providers: [EventService, Endpoint]
+  providers: [EventService, Endpoint, NetworkConnection]
 })
 
 export class EventsPage {
@@ -23,46 +20,27 @@ export class EventsPage {
   private events: any;
   private url = '';
   private pageNum;
-  private disconnected: any;
 
   constructor(public navCtrl: NavController, private eventsService: EventService,
               private loading: Loading, private endpoint: Endpoint,
-              private facebook: Facebook, public ionEvents: Events,
-              private network: Network, private toast: Toast,
-              public translate: TranslateService) {
+              private facebook: Facebook, public ionEvents: Events, private network: NetworkConnection) {
     this.url = endpoint.url;
   }
 
   ionViewDidLoad() {
     this.getEvents();
-    this.onSubscribeNetwork();
+    this.network.onSubscribeNetwork();
   }
 
   ionViewDidLeave() {
     this.ionEvents.publish('tab:leave', {});
-    this.disconnected.unsubscribe();
-    this.toast.hide();
-  }
-
-  onSubscribeNetwork() {
-    this.disconnected = this.network.onDisconnect().subscribe(() => {
-      console.log('network was disconnected :-(');
-      this.alertDisconnect();
-    });
-  }
-
-  alertDisconnect() {
-    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
+    this.network.disconnected.unsubscribe();
+    this.network.hideToast();
   }
 
   getEvents() {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       return;
     }
 
@@ -77,7 +55,7 @@ export class EventsPage {
 
   getMoreItems(infiniteScroll) {
     if (!navigator.onLine) {
-      this.alertDisconnect();
+      this.network.alertDisconnect();
       return;
     }
 

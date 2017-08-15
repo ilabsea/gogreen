@@ -8,11 +8,12 @@ import { EventsPage } from '../events/events';
 
 import { Loading } from '../../providers/loading';
 import { EventService } from '../../providers/events';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-form-event',
   templateUrl: 'form-event.html',
-  providers: [EventService, Camera, Loading]
+  providers: [EventService, Camera, Loading, NetworkConnection]
 })
 
 export class FormEventPage {
@@ -22,7 +23,8 @@ export class FormEventPage {
 
   constructor(public navCtrl: NavController, private events: EventService,
               private camera: Camera, public formBuilder: FormBuilder, public navParams: NavParams,
-              public loading: Loading, private storage: Storage) {
+              public loading: Loading, private storage: Storage,
+              private network: NetworkConnection) {
 
     var urlPattern = /^((http|https):\/\/)?((www\.)?(xn--[\w-]+)(\.?xn--[\w-]+)*|[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*(\.[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*)*)\.((xn--[\w-]+)|aero|asia|biz|cat|com|coop|eus|gal|info|int|jobs|mobi|museum|name|net|org|post|pro|tel|travel|xxx|edu|gov|mil|[\w]{2}|[\u00BF-\u1FFF\u2C00-\uD7FF]{2,10})([\/?]\S*)?$/;
     var now = new Date();
@@ -43,25 +45,33 @@ export class FormEventPage {
     });
   }
 
+  ionViewDidLeave() {
+    this.network.hideToast();
+  }
+
   formatDate(date) {
     return date.toISOString().split('T')[0];
   }
 
   submit(){
     if (this.event.invalid) { return; }
-
-    let self = this;
-    this.loading.show();
-    this.storage.get("userID").then((userID) => {
-      var data = self.event.value;
-      data.user_id = userID;
-      data.image = self.event.image;
-      self.events.create(data).then((event) => {
-        self.loading.hide();
-        self.navCtrl.pop(EventsPage);
-        self.navParams.get("parentPage").refreshPage();
-      });
-    })
+    if (!navigator.onLine) {
+      this.network.alertDisconnect();
+      return;
+    } else{
+      let self = this;
+      this.loading.show();
+      this.storage.get("userID").then((userID) => {
+        var data = self.event.value;
+        data.user_id = userID;
+        data.image = self.event.image;
+        self.events.create(data).then((event) => {
+          self.loading.hide();
+          self.navCtrl.pop(EventsPage);
+          self.navParams.get("parentPage").refreshPage();
+        });
+      })
+    }
   }
 
   selectImage(){

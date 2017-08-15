@@ -11,32 +11,28 @@ import { PinsService } from '../../providers/pins-service';
 import { LanguagePage } from '../language/language';
 import { Events } from 'ionic-angular';
 
-import { Network } from '@ionic-native/network';
-import { Toast } from '@ionic-native/toast';
-import { TranslateService } from '@ngx-translate/core';
+import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
-  providers: [PinsService]
+  providers: [PinsService, NetworkConnection]
 })
 export class ProfilePage {
   userProfile: any;
   userName: any;
   badgeType: any;
-  disconnected: any;
 
   constructor(private facebook: Facebook, public navCtrl: NavController,
               private storage: Storage, private app: App,
               private pinsService: PinsService, public events: Events,
-              private network: Network, private toast: Toast,
-              public translate: TranslateService) {
+              private network: NetworkConnection) {
   }
 
   ionViewDidLeave() {
     this.events.publish('tab:leave', {});
-    this.disconnected.unsubscribe();
-    this.toast.hide();
+    this.network.disconnected.unsubscribe();
+    this.network.hideToast();
   }
 
   ionViewDidLoad() {
@@ -49,23 +45,7 @@ export class ProfilePage {
       })
     });
 
-    this.onSubscribeNetwork();
-  }
-
-  onSubscribeNetwork() {
-    this.disconnected = this.network.onDisconnect().subscribe(() => {
-      console.log('network was disconnected :-(');
-      this.alertDisconnect();
-    });
-  }
-
-  alertDisconnect() {
-    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
+    this.network.onSubscribeNetwork();
   }
 
   logout() {
