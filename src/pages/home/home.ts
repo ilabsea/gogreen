@@ -43,10 +43,13 @@ export class HomePage {
               private app: App, public events: Events, private geolocation: Geolocation,
               private network: NetworkConnection, public translate: TranslateService) {
     this.markers = [];
+    this.handleSubscribeEvent();
+  }
 
+  handleSubscribeEvent() {
     // Resolve subscribe event long click map
-    events.unsubscribe('tab:leave');
-    events.subscribe('tab:leave', (obj) => {
+    this.events.unsubscribe('tab:leave');
+    this.events.subscribe('tab:leave', (obj) => {
       if (!!this.subscription) {
         this.subscription.unsubscribe();
       }
@@ -58,6 +61,14 @@ export class HomePage {
       this.network.unsubscribe();
       this.network.onSubscribeNetwork();
     });
+
+    // Resolve logout to unsubscribe long click
+    this.events.unsubscribe('logout');
+    this.events.subscribe('logout', (obj) => {
+      if(!!this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    })
   }
 
   ngOnInit() {

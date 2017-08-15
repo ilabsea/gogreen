@@ -30,7 +30,9 @@ export class ProfilePage {
   }
 
   ionViewDidLeave() {
+    // Resolve subscribe event long click map
     this.events.publish('tab:leave', {});
+
     this.network.disconnected.unsubscribe();
     this.network.hideToast();
   }
@@ -49,11 +51,13 @@ export class ProfilePage {
   }
 
   logout() {
-    let self = this;
-    this.facebook.logout().then(function(response) {
-      self.storage.set('isLogged', false);
-      self.storage.set('userID', "");
-      self.app.getRootNav().setRoot(LoginPage);
+    this.facebook.logout().then((response)=> {
+      // Resolve logout to unsubscribe long click
+      this.events.publish('logout', {});
+
+      this.storage.set('isLogged', false);
+      this.storage.set('userID', "");
+      this.app.getRootNav().setRoot(LoginPage);
     });
   }
 
