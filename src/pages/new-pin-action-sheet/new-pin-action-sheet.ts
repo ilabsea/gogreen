@@ -9,6 +9,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Loading } from '../../providers/loading';
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
 import { NetworkConnection } from '../../providers/network-connection';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-new-pin-action-sheet',
@@ -27,7 +28,7 @@ export class NewPinActionSheetPage {
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, private facebook: Facebook,
               private pinPhotosService: PinPhotosService, private loading: Loading,
-              private network: NetworkConnection) {
+              private network: NetworkConnection, public translate: TranslateService) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
