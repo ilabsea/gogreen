@@ -76,7 +76,7 @@ page-home {
 }
 
 .my-action-sheets {
-  .action-sheet-group:nth-child(2) {
+  .action-sheet-group:nth-child(2), .cancel {
     display: none !important;
   }
 

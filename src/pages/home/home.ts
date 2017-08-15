@@ -215,11 +215,11 @@ export class HomePage {
       this.map.setClickable(false);
       this.marker = marker;
       this.currentPin = { id: null, latitude: pos.lat, longitude: pos.lng };
-      this.showFeelingIconActionSheet();
+      this.showMarkerActionSheet();
     });
   }
 
-  showFeelingIconActionSheet() {
+  showMarkerActionSheet() {
     let popover = this.popoverCtrl.create(NewPinActionSheetPage, {
       'map': this.map, 'pin': this.currentPin, 'marker': this.marker, 'userId': this.userId
     }, {cssClass: 'gogreen-action-sheets disable-focus'});

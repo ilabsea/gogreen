@@ -9,6 +9,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Loading } from '../../providers/loading';
 import { ThanksPopOver } from '../thanks-pop-over/thanks-pop-over';
 import { TranslateService } from '@ngx-translate/core';
+import { Toast } from '@ionic-native/toast';
 
 @Component({
   selector: 'page-new-pin-action-sheet',
@@ -27,7 +28,7 @@ export class NewPinActionSheetPage {
               public pinsService: PinsService, public popoverCtrl: PopoverController,
               public actionSheetCtrl: ActionSheetController, private facebook: Facebook,
               private pinPhotosService: PinPhotosService, private loading: Loading,
-              public translate: TranslateService) {
+              public translate: TranslateService, private toast: Toast) {
     this.map = navParams.data.map;
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
@@ -35,7 +36,7 @@ export class NewPinActionSheetPage {
   }
 
   ngOnInit() {
-    this.showFeelingIconActionSheet();
+    this.showMarkerActionSheet();
   }
 
   ionViewDidLoad() {
@@ -52,7 +53,7 @@ export class NewPinActionSheetPage {
     return this.translate.instant(keyword);
   }
 
-  showFeelingIconActionSheet() {
+  showMarkerActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: this.te('SELECT_YOUR_OPTION'),
       cssClass: 'pin-buttons my-action-sheets',
@@ -76,11 +77,7 @@ export class NewPinActionSheetPage {
           cssClass: 'cancel',
           role: 'cancel',
           handler: () => {
-            this.map.setClickable(true);
-            this.viewCtrl.dismiss();
-            if (!this.pin.id) {
-              this.marker.remove();
-            }
+            this.cancelPin();
           }
         }
       ]
@@ -89,7 +86,30 @@ export class NewPinActionSheetPage {
 
   }
 
+  cancelPin() {
+    this.map.setClickable(true);
+    this.viewCtrl.dismiss();
+    if (!this.pin.id) {
+      this.marker.remove();
+    }
+  }
+
+  alertDisconnect() {
+    let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
+    this.toast.show(msg, '10000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
+  }
+
   upsertPin(icon) {
+    if (!navigator.onLine) {
+      this.alertDisconnect();
+      this.cancelPin();
+      return;
+    }
+
     if(!!this.pin.id) {
       this.update(icon);
     } else {
