@@ -79,7 +79,7 @@ export class ProfilePage {
 
   inviteFiends() {
     this.facebook.appInvite({ url: "https://fb.me/1145545555578631",
-        picture: "http://laoblogger.com/images/children-cleaning-up-montessori-work-clipart-7.jpg"
+        picture: "https://s3-ap-southeast-1.amazonaws.com/gogreen-production/gogreen.jpg"
     }).then((obj) => {
       console.log('obj : ', obj);
     }, (obj) => {
