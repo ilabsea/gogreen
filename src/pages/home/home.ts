@@ -1,4 +1,5 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { ConferenceData } from '../../providers/conference-data';
 import { Platform, PopoverController} from 'ionic-angular';
 import {
   GoogleMaps,
@@ -20,7 +21,6 @@ import { LoginPage } from '../login/login';
 import { PinsService } from '../../providers/pins-service';
 import { NewPinActionSheetPage } from '../new-pin-action-sheet/new-pin-action-sheet';
 import { ChangeOptionActionSheetPage } from '../change-option-action-sheet/change-option-action-sheet';
-import { TranslateService } from '@ngx-translate/core';
 import { NetworkConnection } from '../../providers/network-connection';
 
 @Component({
@@ -32,43 +32,17 @@ import { NetworkConnection } from '../../providers/network-connection';
 export class HomePage {
   marker: Marker;
   map: GoogleMap;
-  subscription: any;
   currentPin: any;
   userId: any;
   markers: any;
 
+  @ViewChild('mapCanvas') mapElement: ElementRef;
   constructor(public popoverCtrl: PopoverController,
               public pinsService: PinsService, private storage: Storage,
               public viewCtrl: ViewController, private facebook: Facebook,
               private app: App, public events: Events, private geolocation: Geolocation,
-              private network: NetworkConnection, public translate: TranslateService) {
+              private network: NetworkConnection) {
     this.markers = [];
-    this.handleSubscribeEvent();
-  }
-
-  handleSubscribeEvent() {
-    // Resolve subscribe event long click map
-    this.events.unsubscribe('tab:leave');
-    this.events.subscribe('tab:leave', (obj) => {
-      if (!!this.subscription) {
-        this.subscription.unsubscribe();
-      }
-
-      if (!!this.map) {
-        this.onSubscribeLongClickMap();
-      }
-
-      this.network.unsubscribe();
-      this.network.onSubscribeNetwork();
-    });
-
-    // Resolve logout to unsubscribe long click
-    this.events.unsubscribe('logout');
-    this.events.subscribe('logout', (obj) => {
-      if(!!this.subscription) {
-        this.subscription.unsubscribe();
-      }
-    })
   }
 
   ngOnInit() {
@@ -86,28 +60,26 @@ export class HomePage {
       if (!this.map) {
         this.loadMap();
       }
-    }, 500);
+    }, 100);
 
     this.network.onSubscribeNetwork();
   }
 
   logout() {
-    let self = this;
-    this.facebook.logout().then(function(response) {
-      self.storage.set('isLogged', false);
-      self.app.getRootNav().setRoot(LoginPage);
+    this.facebook.logout().then((response) => {
+      this.storage.set('isLogged', false);
+      this.app.getRootNav().setRoot(LoginPage);
     });
   }
 
   ionViewDidLeave() {
-    if (!!this.subscription) {
-      this.subscription.unsubscribe();
-    }
     this.network.unsubscribe();
   }
 
   initMap(latlng) {
-    this.map = new GoogleMap('map_canvas', {
+    let mapEle = this.mapElement.nativeElement;
+
+    this.map = new GoogleMap(mapEle, {
       'backgroundColor': 'white',
       'controls': {
         'compass': true,
@@ -130,9 +102,11 @@ export class HomePage {
     });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-      this.geolocation.getCurrentPosition().then((resp) => {
-        this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
-      }).catch((error) => {});
+      if (!window['readySubscribe']) {
+        this.geolocation.getCurrentPosition().then((resp) => {
+          this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
+        }).catch((error) => {});
+      }
 
       this.map.setClickable(true);
       this.renderMarkers();
@@ -141,9 +115,7 @@ export class HomePage {
   }
 
   loadMap() {
-    let latlng: LatLng;
-
-    latlng = new LatLng(11.562108, 104.888535);
+    let latlng = new LatLng(11.562108, 104.888535);
     this.initMap(latlng);
   }
 
@@ -186,10 +158,14 @@ export class HomePage {
   }
 
   onSubscribeLongClickMap() {
-    this.subscription = this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((pos) => {
+    if (window['readySubscribe']) { return; }
+
+    this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((pos) => {
       this.map.setCenter(pos);
       this.addMarker(pos);
     });
+
+    window['readySubscribe'] = true;
   }
 
   addMarker(pos) {

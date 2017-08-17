@@ -33,7 +33,6 @@ export class EventsPage {
   }
 
   ionViewDidLeave() {
-    this.ionEvents.publish('tab:leave', {});
     this.network.disconnected.unsubscribe();
     this.network.hideToast();
   }

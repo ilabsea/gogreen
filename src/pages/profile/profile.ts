@@ -30,9 +30,6 @@ export class ProfilePage {
   }
 
   ionViewDidLeave() {
-    // Resolve subscribe event long click map
-    this.events.publish('tab:leave', {});
-
     this.network.disconnected.unsubscribe();
     this.network.hideToast();
   }
@@ -52,9 +49,6 @@ export class ProfilePage {
 
   logout() {
     this.facebook.logout().then((response)=> {
-      // Resolve logout to unsubscribe long click
-      this.events.publish('logout', {});
-
       this.storage.set('isLogged', false);
       this.storage.set('userID', "");
       this.app.getRootNav().setRoot(LoginPage);
