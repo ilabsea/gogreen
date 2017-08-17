@@ -38,4 +38,13 @@ page-events {
   h2, p {
     line-height: 1.5;
   }
+
+  .no-items{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 30px;
+  }
 }

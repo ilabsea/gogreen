@@ -20,6 +20,7 @@ export class EventsPage {
   private events: any;
   private url = '';
   private pageNum;
+  private ready: any;
 
   constructor(public navCtrl: NavController, private eventsService: EventService,
               private loading: Loading, private endpoint: Endpoint,
@@ -41,10 +42,10 @@ export class EventsPage {
       this.network.alertDisconnect();
       return;
     }
-
     this.pageNum = 1;
     this.loading.show();
     this.eventsService.getAll(this.pageNum).then((events) => {
+      this.ready = true;
       this.pageNum += 1;
       this.events = events;
       this.loading.hide();

@@ -1,8 +1,10 @@
 <ion-content>
-  <ion-list>
+  <div class="no-items" *ngIf='ready && !events.length'>
+    {{'NO_EVENT' | translate}}
+  </div>
 
+  <ion-list *ngIf='ready && events.length'>
     <ion-card *ngFor="let event of events" (click)='showDetail(event, $event)'>
-
       <div class="wrapper-image" >
         <img *ngIf="event.image" class='event-image' [src]="event.image">
         <img *ngIf="!event.image" class='default-image' src="assets/event/default_img.png">
@@ -26,9 +28,9 @@
     </ion-card>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="getMoreItems($event)">
-     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-   </ion-infinite-scroll>
+  <ion-infinite-scroll (ionInfinite)="getMoreItems($event)" *ngIf='ready && events.length'>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-fab right bottom>
     <button ion-fab color="green-color" (click)='goToForm()'>
