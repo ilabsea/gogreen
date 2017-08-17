@@ -14,7 +14,7 @@ import { PhotoPage } from '../pages/photo/photo';
 import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet';
 import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet';
 import { LanguagePage } from '../pages/language/language';
-
+import { AboutusPage } from '../pages/aboutus/aboutus';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -27,6 +27,7 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // rootPage:any = LoginPage;
   rootPage:any = IntroPage;
+  // rootPage:any = AboutusPage;
   // rootPage:any = PhotoPage;
   // rootPage:any = ChangeOptionActionSheetPage;
   // rootPage:any = NewPinActionSheetPage;

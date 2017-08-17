@@ -3,34 +3,36 @@
     {{'NO_EVENT' | translate}}
   </div>
 
-  <ion-list *ngIf='ready && events.length'>
-    <ion-card *ngFor="let event of events" (click)='showDetail(event, $event)'>
-      <div class="wrapper-image" >
-        <img *ngIf="event.image" class='event-image' [src]="event.image">
-        <img *ngIf="!event.image" class='default-image' src="assets/event/default_img.png">
-      </div>
-
-      <button (click)='share(event, $event)' ion-button round icon-right icon-only
-              class='share'>
-        <ion-icon name="share" color='light-black'></ion-icon>
-      </button>
-
-      <ion-item style='margin-bottom: 5%;'>
-        <div item-left style='margin-right: 10%;'>
-          <span class='month'>{{event.date | date: 'MMM'}}</span><br>
-          <span class='day'>{{event.date | date: 'dd'}}</span>
+  <div *ngIf='ready && events.length'>
+    <ion-list>
+      <ion-card *ngFor="let event of events" (click)='showDetail(event, $event)'>
+        <div class="wrapper-image" >
+          <img *ngIf="event.image" class='event-image' [src]="event.image">
+          <img *ngIf="!event.image" class='default-image' src="assets/event/default_img.png">
         </div>
 
-        <h2>{{event.title}}</h2>
-        <p>{{event.location}}</p>
-      </ion-item>
+        <button (click)='share(event, $event)' ion-button round icon-right icon-only
+                class='share'>
+          <ion-icon name="share" color='light-black'></ion-icon>
+        </button>
 
-    </ion-card>
-  </ion-list>
+        <ion-item style='margin-bottom: 5%;'>
+          <div item-left style='margin-right: 10%;'>
+            <span class='month'>{{event.date | date: 'MMM'}}</span><br>
+            <span class='day'>{{event.date | date: 'dd'}}</span>
+          </div>
 
-  <ion-infinite-scroll (ionInfinite)="getMoreItems($event)" *ngIf='ready && events.length'>
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+          <h2>{{event.title}}</h2>
+          <p>{{event.location}}</p>
+        </ion-item>
+
+      </ion-card>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="getMoreItems($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 
   <ion-fab right bottom>
     <button ion-fab color="green-color" (click)='goToForm()'>
