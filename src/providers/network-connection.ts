@@ -24,7 +24,7 @@ export class NetworkConnection {
 
   alertDisconnect() {
     let msg = this.translate.instant('CANNOT_CONNECT_RIGHT_NOW');
-    this.toast.show(msg, '10000', 'center').subscribe(
+    this.toast.show(msg, '5000', 'center').subscribe(
       toast => {
         console.log(toast);
       }

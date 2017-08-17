@@ -34,7 +34,6 @@ export class EventsPage {
 
   ionViewDidLeave() {
     this.network.disconnected.unsubscribe();
-    this.network.hideToast();
   }
 
   getEvents() {
