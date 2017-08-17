@@ -34,7 +34,7 @@ export class ShowEventPage {
   }
 
   viewEvent() {
-    window.open(this.event.facebook_link, '_blank');
+    window.open(this.event.facebook_link, '_system');
   }
 
   share(event, $event) {
