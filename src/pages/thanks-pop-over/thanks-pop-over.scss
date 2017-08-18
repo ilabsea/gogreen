@@ -6,6 +6,9 @@ page-thanks-pop-over {
 
 .thanks-popover .popover-content {
   border-radius: 4px;
+  top: 50% !important;
+  left: 50% !important;
+  -webkit-transform: translate(-50%, -50%) !important;
 
   .alert-dismissable {
     padding: 15px;
