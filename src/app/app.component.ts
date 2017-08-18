@@ -16,6 +16,7 @@ import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-act
 import { LanguagePage } from '../pages/language/language';
 import { AboutusPage } from '../pages/aboutus/aboutus';
 import { FormEventPage } from '../pages/form-event/form-event';
+import { EventsPage } from '../pages/events/events';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -28,6 +29,7 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // rootPage:any = LoginPage;
   rootPage:any = IntroPage;
+  // rootPage:any = EventsPage;
   // rootPage:any = FormEventPage;
   // rootPage:any = AboutusPage;
   // rootPage:any = PhotoPage;
