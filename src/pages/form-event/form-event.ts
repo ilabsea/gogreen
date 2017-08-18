@@ -120,8 +120,8 @@ export class FormEventPage {
   }
 
   getMinutes(time) {
-    let hours = time.split(':')[0];
-    let minutes = time.split(':')[1];
+    let hours = parseInt(time.split(':')[0]);
+    let minutes = parseInt(time.split(':')[1]);
     return (hours * 60) + minutes;
   }
 

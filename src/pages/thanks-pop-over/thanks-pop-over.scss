@@ -8,7 +8,10 @@ page-thanks-pop-over {
   border-radius: 4px;
   top: 50% !important;
   left: 50% !important;
+  bottom: auto !important;
+  right: auto !important;
   -webkit-transform: translate(-50%, -50%) !important;
+  transform: translate(-50%, -50%) !important;
 
   .alert-dismissable {
     padding: 15px;
