@@ -25,16 +25,16 @@
 
     <ion-row>
       <ion-col>
-        <ion-item>
+        <ion-item id='start-time'>
           <ion-label stacked class='require'>{{'START_TIME' | translate}}</ion-label>
-          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="start_time"></ion-datetime>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="start_time" [(ngModel)]="startTime" (ngModelChange)='validateTime()'></ion-datetime>
         </ion-item>
       </ion-col>
 
       <ion-col>
-        <ion-item>
+        <ion-item id='end-time'>
           <ion-label stacked class='require'>{{'END_TIME' | translate}}</ion-label>
-          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="end_time"></ion-datetime>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="end_time" [(ngModel)]="endTime" (ngModelChange)='validateTime()'></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>

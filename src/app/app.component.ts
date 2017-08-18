@@ -15,6 +15,7 @@ import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet
 import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet';
 import { LanguagePage } from '../pages/language/language';
 import { AboutusPage } from '../pages/aboutus/aboutus';
+import { FormEventPage } from '../pages/form-event/form-event';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -27,6 +28,7 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // rootPage:any = LoginPage;
   rootPage:any = IntroPage;
+  // rootPage:any = FormEventPage;
   // rootPage:any = AboutusPage;
   // rootPage:any = PhotoPage;
   // rootPage:any = ChangeOptionActionSheetPage;

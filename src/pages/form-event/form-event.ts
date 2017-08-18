@@ -3,6 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
+import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 import { EventsPage } from '../events/events';
 
@@ -20,11 +22,13 @@ export class FormEventPage {
   private event;
   private minDate;
   private maxDate;
+  private startTime;
+  private endTime;
 
   constructor(public navCtrl: NavController, private events: EventService,
               private camera: Camera, public formBuilder: FormBuilder, public navParams: NavParams,
-              public loading: Loading, private storage: Storage,
-              private network: NetworkConnection) {
+              public loading: Loading, private storage: Storage, public translate: TranslateService,
+              private network: NetworkConnection, private toast: Toast) {
 
     var urlPattern = /^((http|https):\/\/)?((www\.)?(xn--[\w-]+)(\.?xn--[\w-]+)*|[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*(\.[\u00BF-\u1FFF\u2C00-\uD7FF\w]+(\-[\u00BF-\u1FFF\u2C00-\uD7FF\w]+)*)*)\.((xn--[\w-]+)|aero|asia|biz|cat|com|coop|eus|gal|info|int|jobs|mobi|museum|name|net|org|post|pro|tel|travel|xxx|edu|gov|mil|[\w]{2}|[\u00BF-\u1FFF\u2C00-\uD7FF]{2,10})([\/?]\S*)?$/;
     var now = new Date();
@@ -55,23 +59,70 @@ export class FormEventPage {
 
   submit(){
     if (this.event.invalid) { return; }
+
     if (!navigator.onLine) {
       this.network.alertDisconnect();
       return;
-    } else{
-      let self = this;
-      this.loading.show();
-      this.storage.get("userID").then((userID) => {
-        var data = self.event.value;
-        data.user_id = userID;
-        data.image = self.event.image;
-        self.events.create(data).then((event) => {
-          self.loading.hide();
-          self.navCtrl.pop(EventsPage);
-          self.navParams.get("parentPage").refreshPage();
-        });
-      })
     }
+
+    this.loading.show();
+    this.storage.get("userID").then((userID) => {
+      var data = this.event.value;
+      data.user_id = userID;
+      data.image = this.event.image;
+
+      this.events.create(data).then((event) => {
+        this.loading.hide();
+        this.navCtrl.pop(EventsPage);
+        this.navParams.get("parentPage").refreshPage();
+      });
+    })
+  }
+
+  validateTime() {
+    if (!(this.startTime && this.endTime)) { return }
+
+    let start = this.getMinutes(this.startTime);
+    let end = this.getMinutes(this.endTime);
+
+    if (start >= end) {
+      this.alertTimeError();
+      this.addTimeError();
+    } else {
+      this.removeTimeError();
+    }
+  }
+
+  addTimeError() {
+    this.event.controls['start_time'].setErrors({"compare_time": true});
+    this.event.controls['end_time'].setErrors({"compare_time": true});
+
+    document.getElementById('start-time').classList.add('item-input', 'ng-invalid', 'ng-touched');
+    document.getElementById('end-time').classList.add('item-input', 'ng-invalid', 'ng-touched');
+  }
+
+  removeTimeError() {
+    this.event.controls['start_time'].setErrors();
+    this.event.controls['end_time'].setErrors();
+
+    document.getElementById('start-time').classList.remove('item-input', 'ng-invalid', 'ng-touched');
+    document.getElementById('end-time').classList.remove('item-input', 'ng-invalid', 'ng-touched');
+  }
+
+  alertTimeError() {
+    let msg = this.translate.instant('START_TIME_EALIER_THAN_END_TIME');
+
+    this.toast.show(msg, '2000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
+  }
+
+  getMinutes(time) {
+    let hours = time.split(':')[0];
+    let minutes = time.split(':')[1];
+    return (hours * 60) + minutes;
   }
 
   selectImage(){

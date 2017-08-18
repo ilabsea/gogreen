@@ -77,5 +77,6 @@
   "VIEW_IMAGES": "View images",
   "SELECT_YOUR_OPTION": "Please select following options",
   "NO_EVENT": "Setup your own events so your friend, family, and other people can join together.",
-  "VERSION": "Version"
+  "VERSION": "Version",
+  "START_TIME_EALIER_THAN_END_TIME": "Start time must be ealier than end time."
 }
