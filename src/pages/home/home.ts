@@ -161,7 +161,6 @@ export class HomePage {
     if (window['readySubscribe']) { return; }
 
     this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((pos) => {
-      this.map.setCenter(pos);
       this.addMarker(pos);
     });
 

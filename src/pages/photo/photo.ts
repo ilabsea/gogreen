@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PinPhotosService } from '../../providers/pin-photos-service';
 import { Endpoint } from '../../providers/endpoint';
 import { Loading } from '../../providers/loading';
@@ -21,7 +21,6 @@ export class PhotoPage {
   imageBase64: any;
   userId: any;
 
-  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public loading: Loading, private pinPhotosService: PinPhotosService,
               private endpoint: Endpoint, private network: NetworkConnection,
