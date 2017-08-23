@@ -27,10 +27,11 @@ import { LanguagePage } from '../pages/language/language';
 import { FaqPage } from '../pages/faq/faq';
 import { BadgePage } from '../pages/badge/badge';
 import { BadgeInfoPage } from '../pages/badge-info/badge-info';
-import { AboutusPage } from '../pages/aboutus/aboutus'
-import { IntroPage } from '../pages/intro/intro'
-import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet'
-import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet'
+import { AboutusPage } from '../pages/aboutus/aboutus';
+import { IntroPage } from '../pages/intro/intro';
+import { NewPinActionSheetPage } from '../pages/new-pin-action-sheet/new-pin-action-sheet';
+import { ChangeOptionActionSheetPage } from '../pages/change-option-action-sheet/change-option-action-sheet';
+import { ReasonPage } from '../pages/reason/reason';
 
 import { Loading } from '../providers/loading';
 import { EventService } from '../providers/events';
@@ -71,7 +72,8 @@ export function createTranslateLoader(http: Http) {
     AboutusPage,
     IntroPage,
     NewPinActionSheetPage,
-    ChangeOptionActionSheetPage
+    ChangeOptionActionSheetPage,
+    ReasonPage
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,8 @@ export function createTranslateLoader(http: Http) {
     AboutusPage,
     IntroPage,
     NewPinActionSheetPage,
-    ChangeOptionActionSheetPage
+    ChangeOptionActionSheetPage,
+    ReasonPage
   ],
   providers: [
     StatusBar,
