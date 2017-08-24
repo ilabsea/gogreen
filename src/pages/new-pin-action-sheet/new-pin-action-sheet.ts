@@ -202,11 +202,12 @@ export class NewPinActionSheetPage {
   shareToFacebook() {
     this.marker.getPosition().then((latlng) => {
       let latlngUrl = latlng.toUrlValue();
+      let icon = "icon:https://s3-ap-southeast-1.amazonaws.com/gogreen-production/"+ this.pin.icon +"-small.png";
 
       this.facebook.showDialog({
         method: 'share',
         href: "https://maps.googleapis.com/maps/api/staticmap?center=" + latlngUrl
-              + "&zoom=13&scale=2&size=600x300&markers=color:blue|label:S|"
+              + "&zoom=13&scale=2&size=600x300&markers="+ icon +"|"
               + latlngUrl,
         caption: '',
         description: ''
