@@ -11,12 +11,12 @@
   <ion-list class='accordion-list'>
 
     <ion-item *ngFor='let question of questions; let i=index' text-wrap (click)='toggleGroup(i)' [ngClass]='{active: isGroupShown(i)}'>
-      <h3>
+      <h2>
         {{ question.title | translate }}
         <ion-icon color="success" class='my-icon' item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
-      </h3>
+      </h2>
 
-      <p *ngIf='isGroupShown(i)' [innerHTML]='question.answer' class='text-justify'></p>
+      <p *ngIf='isGroupShown(i)' [innerHTML]='question.answer'></p>
     </ion-item>
 
   </ion-list>

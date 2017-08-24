@@ -32,14 +32,13 @@
         "@ngx-translate/core": "^7.1.0",
         "@ngx-translate/http-loader": "^0.1.0",
         "cordova-android": "^6.2.3",
-        "cordova-ios": "^4.4.0",
         "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-facebook4": "^1.7.4",
         "cordova-plugin-geolocation": "^2.4.3",
-        "cordova-plugin-googlemaps": "^1.4.3",
+        "cordova-plugin-googlemaps": "^1.4.5",
         "cordova-plugin-inappbrowser": "^1.7.1",
         "cordova-plugin-network-information": "^1.3.3",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -94,8 +93,7 @@
     ],
     "cordova": {
         "platforms": [
-            "android",
-            "ios"
+            "android"
         ],
         "plugins": {
             "cordova-plugin-camera": {
@@ -111,12 +109,6 @@
             "cordova-plugin-geolocation": {
                 "GEOLOCATION_USAGE_DESCRIPTION": " "
             },
-            "cordova-plugin-googlemaps": {
-                "API_KEY_FOR_ANDROID": "AIzaSyBk-fefN4mc2RpN1hsjUSqq4fKLx5OqWTM",
-                "API_KEY_FOR_IOS": "AIzaSyCEJqfYy1Z0mQ6ZlxXJc7zHpYctNKXdcvU",
-                "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
-                "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
-            },
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
@@ -126,7 +118,12 @@
             "cordova-plugin-network-information": {},
             "cordova-plugin-x-socialsharing": {},
             "cordova-plugin-x-toast": {},
-            "cordova-plugin-app-version": {}
+            "cordova-plugin-app-version": {},
+            "cordova-plugin-googlemaps": {
+                "API_KEY_FOR_ANDROID": "AIzaSyBk-fefN4mc2RpN1hsjUSqq4fKLx5OqWTM",
+                "API_KEY_FOR_IOS": "AIzaSyCEJqfYy1Z0mQ6ZlxXJc7zHpYctNKXdcvU",
+                "LANGUAGE": "km"
+            }
         }
     }
 }

@@ -79,5 +79,9 @@
   "NO_EVENT": "Setup your own events so your friend, family, and other people can join together.",
   "VERSION": "Version",
   "START_TIME_EALIER_THAN_END_TIME": "Start time must be ealier than end time.",
-  "REASONS": "Reasons"
+  "REASONS": "Reasons",
+  "WHAT_MAP_ICONS_MEAN": "what does the icon on the map mean?",
+  "HAPPY_ICON_MEANING": "If you place a green happy pin on the map, it means you notice an area that is really clean.",
+  "SAD_ICON_MEANING": "If you place a red sad pin on the map, it means you notice an area that needs cleaning up.",
+  "TRASH_ICON_MEANING": "If you place a black trash pin on the map, it means you notice an area that needs a trash bin."
 }
