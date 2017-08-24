@@ -83,5 +83,9 @@
   "WHAT_MAP_ICONS_MEAN": "what does the icon on the map mean?",
   "HAPPY_ICON_MEANING": "If you place a green happy pin on the map, it means you notice an area that is really clean.",
   "SAD_ICON_MEANING": "If you place a red sad pin on the map, it means you notice an area that needs cleaning up.",
-  "TRASH_ICON_MEANING": "If you place a black trash pin on the map, it means you notice an area that needs a trash bin."
+  "TRASH_ICON_MEANING": "If you place a black trash pin on the map, it means you notice an area that needs a trash bin.",
+  "IT_HAPPY": "The place is clean",
+  "IT_SAD": "The place is dirty",
+  "IT_TRASH": "The place should have a trash bin",
+  "CHANGE": "Change"
 }

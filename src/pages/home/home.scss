@@ -91,7 +91,19 @@ page-home {
   }
 
   .action-sheet-icon {
-    color: #10A224;
+    color: $dark-green;
+  }
+
+  button.sad .action-sheet-icon {
+    color: #EF5350;
+  }
+
+  button.happy .action-sheet-icon {
+    color: $dark-green;
+  }
+
+  button.trash .action-sheet-icon {
+    color: #000;
   }
 
   .focus-marker{

@@ -30,6 +30,11 @@ export class ChangeOptionActionSheetPage {
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
     this.userId = navParams.data.userId;
+
+    // this.map = {};
+    // this.marker = {};
+    // this.pin = {id: 118, icon: 'sad', created_at: "2017-08-24T04:34:15.000Z"};
+    // this.userId = 1;
   }
 
   ngOnInit() {
@@ -42,13 +47,13 @@ export class ChangeOptionActionSheetPage {
 
   showActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: this.te('CREATED_ON') + ' ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy'),
+      title: this.te('CREATED_ON') + ' ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy-h:mm a'),
       cssClass: 'my-action-sheets',
       buttons: [
         {
-          text: this.te('CHANGE_YOUR_PIN'),
-          cssClass: 'change-pin',
-          icon: 'pin',
+          text: this.te('IT_' + this.pin.icon.toUpperCase()) + ' (' + this.te('CHANGE') +')',
+          cssClass: 'change-pin ' + this.pin.icon,
+          icon: this.pin.icon,
           handler: () => {
             this.openChangePin();
           }
