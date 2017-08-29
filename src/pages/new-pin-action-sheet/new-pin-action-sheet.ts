@@ -207,7 +207,7 @@ export class NewPinActionSheetPage {
       this.facebook.showDialog({
         method: 'share',
         href: "https://maps.googleapis.com/maps/api/staticmap?center=" + latlngUrl
-              + "&zoom=13&scale=2&size=600x300&markers="+ icon +"|"
+              + "&zoom=17&scale=2&size=600x300&markers="+ icon +"|"
               + latlngUrl,
         caption: '',
         description: ''
