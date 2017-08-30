@@ -26,9 +26,14 @@ export class PinsService {
     })
   }
 
-  getAll(){
+  getAll(latlngBound) {
+    let pinParams = '?sw_lat=' + latlngBound.southwest.lat +
+                    '&sw_lng=' + latlngBound.southwest.lng +
+                    '&ne_lat=' + latlngBound.northeast.lat +
+                    '&ne_lng=' + latlngBound.northeast.lng;
+
     return new Promise(resolve => {
-      this.http.get(this.endpoint.api + "pins")
+      this.http.get(this.endpoint.api + "pins" + pinParams )
         .subscribe(data => {
           resolve(data.json());
         }, error => {

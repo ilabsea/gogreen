@@ -100,15 +100,18 @@ export class HomePage {
     });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-      if (!window['readySubscribe']) {
+      if (window['readySubscribe']) {
+        this.map.setClickable(true);
+        this.renderMarkers();
+        this.onSubscribeLongClickMap();
+      } else {
         this.map.getMyLocation((resp) => {
           this.map.setCenter(new LatLng(resp.latLng.lat, resp.latLng.lng));
+          this.map.setClickable(true);
+          this.renderMarkers();
+          this.onSubscribeLongClickMap();
         })
       }
-
-      this.map.setClickable(true);
-      this.renderMarkers();
-      this.onSubscribeLongClickMap();
     });
   }
 
@@ -124,7 +127,13 @@ export class HomePage {
     }
 
     this.map.clear();
-    this.pinsService.getAll().then((pinsResult) => {
+    this.map.getVisibleRegion().then((latlngBound) => {
+      this.getMarkers(latlngBound);
+    })
+  }
+
+  getMarkers(latlngBound) {
+    this.pinsService.getAll(latlngBound).then((pinsResult) => {
       let pins = [].concat(pinsResult);
 
       for(let pin of pins) {
