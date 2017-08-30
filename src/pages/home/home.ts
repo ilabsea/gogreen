@@ -11,7 +11,6 @@ import {
   GoogleMapsAnimation,
   CameraPosition
 } from '@ionic-native/google-maps';
-import { Geolocation } from '@ionic-native/geolocation';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
 import { App, ViewController } from 'ionic-angular';
@@ -37,10 +36,9 @@ export class HomePage {
   markers: any;
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(public popoverCtrl: PopoverController,
-              public pinsService: PinsService, private storage: Storage,
-              public viewCtrl: ViewController, private facebook: Facebook,
-              private app: App, public events: Events, private geolocation: Geolocation,
+  constructor(public popoverCtrl: PopoverController, public pinsService: PinsService,
+              private storage: Storage, public viewCtrl: ViewController,
+              private facebook: Facebook, private app: App, public events: Events,
               private network: NetworkConnection) {
     this.markers = [];
   }
@@ -103,9 +101,9 @@ export class HomePage {
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
       if (!window['readySubscribe']) {
-        this.geolocation.getCurrentPosition().then((resp) => {
-          this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
-        }).catch((error) => {});
+        this.map.getMyLocation((resp) => {
+          this.map.setCenter(new LatLng(resp.latLng.lat, resp.latLng.lng));
+        })
       }
 
       this.map.setClickable(true);
