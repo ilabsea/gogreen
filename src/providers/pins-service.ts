@@ -26,11 +26,11 @@ export class PinsService {
     })
   }
 
-  getAll(latlngBound) {
-    let pinParams = '?sw_lat=' + latlngBound.southwest.lat +
-                    '&sw_lng=' + latlngBound.southwest.lng +
-                    '&ne_lat=' + latlngBound.northeast.lat +
-                    '&ne_lng=' + latlngBound.northeast.lng;
+  getAll(currentRegion) {
+    let pinParams = '?sw_lat=' + currentRegion.sw_lat +
+                    '&sw_lng=' + currentRegion.sw_lng +
+                    '&ne_lat=' + currentRegion.ne_lat +
+                    '&ne_lng=' + currentRegion.ne_lng;
 
     return new Promise(resolve => {
       this.http.get(this.endpoint.api + "pins" + pinParams )
