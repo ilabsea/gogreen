@@ -32,6 +32,7 @@ export class HomePage {
   userId: any;
   markers: any;
   currentRegion: any;
+  showLoading: any;
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
   constructor(public popoverCtrl: PopoverController, public pinsService: PinsService,
@@ -137,8 +138,10 @@ export class HomePage {
     }
 
     this.map.clear();
+    this.showLoading = true;
     this.pinsService.getAll(this.currentRegion).then((pinsResult) => {
       this.renderMarkers(pinsResult);
+      this.showLoading = false;
     });
   }
 
