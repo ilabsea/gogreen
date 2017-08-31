@@ -103,16 +103,22 @@ export class HomePage {
         return;
       }
 
+      this.resetCurrentRegion();
+      this.getMarkerByViewPort();
+
       if (window['readySubscribe']) { return; }
       window['readySubscribe'] = true;
 
-      this.getMarkerByViewPort();
       this.onSubscribeLongClickMap();
       this.onSubscribeDragMap();
       this.map.getMyLocation((resp) => {
         this.map.setCenter(new LatLng(resp.latLng.lat, resp.latLng.lng));
       })
     });
+  }
+
+  resetCurrentRegion() {
+    this.currentRegion = null;
   }
 
   loadMap() {
@@ -137,8 +143,8 @@ export class HomePage {
       return;
     }
 
-    this.map.clear();
     this.showLoading = true;
+    this.map.clear();
     this.pinsService.getAll(this.currentRegion).then((pinsResult) => {
       this.renderMarkers(pinsResult);
       this.showLoading = false;
