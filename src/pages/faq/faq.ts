@@ -17,6 +17,7 @@ export class FaqPage {
       { title: 'HOW_TO_USE_GOGREEN_APP', answer: this.te('GOGREEN_USAGE') },
       { title: 'IS_THIS_FREE', answer: this.te('YES_IT_IS_FREE') },
       { title: 'HOW_CAN_I_ORGANISE_MY_OWN_CLEANUP', answer: this.te('WAY_TO_ORGANISE_OWN_CLEANUP') },
+      { title: 'WHAT_MAP_ICONS_MEAN', answer: this.te('HAPPY_ICON_MEANING') + '<br><br>' + this.te('SAD_ICON_MEANING') + '<br><br>' + this.te('TRASH_ICON_MEANING') },
       { title: 'CONTACT_US_OR_LEAVE_FEEDBACK', answer: this.te('FEEL_FREE_TO_SEND_AN_EMAIL_AT') + ' <a href="mailto:cambodia.go.green@gmail.com">cambodia.go.green@gmail.com</a>.<br><br>' + this.te('YOU_CAN_JOIN_OUR_FACEBOOK_GROUP') }
     ];
   }

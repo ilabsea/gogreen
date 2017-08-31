@@ -7,10 +7,15 @@ page-faq {
   }
 
   .accordion-list {
-    h3 {
+    h2 {
       margin-top: 11px !important;
       margin-bottom: 10px;
       font-weight: 500;
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 1.7em;
     }
 
     .my-icon {

@@ -55,7 +55,7 @@ export class NewPinActionSheetPage {
 
   showMarkerActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: this.te('SELECT_YOUR_OPTION'),
+      title: this.te('WHAT_DO_THINK_ABOUT_THIS_PLACE'),
       cssClass: 'pin-buttons my-action-sheets',
       buttons: [
         {
@@ -202,11 +202,12 @@ export class NewPinActionSheetPage {
   shareToFacebook() {
     this.marker.getPosition().then((latlng) => {
       let latlngUrl = latlng.toUrlValue();
+      let icon = "icon:https://s3-ap-southeast-1.amazonaws.com/gogreen-production/"+ this.pin.icon +"-small.png";
 
       this.facebook.showDialog({
         method: 'share',
         href: "https://maps.googleapis.com/maps/api/staticmap?center=" + latlngUrl
-              + "&zoom=13&scale=2&size=600x300&markers=color:blue|label:S|"
+              + "&zoom=17&scale=2&size=600x300&markers="+ icon +"|"
               + latlngUrl,
         caption: '',
         description: ''

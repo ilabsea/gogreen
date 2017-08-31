@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
-import { Platform, PopoverController} from 'ionic-angular';
+import { App, PopoverController} from 'ionic-angular';
 import {
   GoogleMaps,
   GoogleMap,
@@ -11,11 +10,11 @@ import {
   GoogleMapsAnimation,
   CameraPosition
 } from '@ionic-native/google-maps';
-import { Geolocation } from '@ionic-native/geolocation';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
-import { App, ViewController } from 'ionic-angular';
-import { Events } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 import { LoginPage } from '../login/login';
 import { PinsService } from '../../providers/pins-service';
@@ -35,13 +34,14 @@ export class HomePage {
   currentPin: any;
   userId: any;
   markers: any;
+  currentRegion: any;
+  showLoading: any;
 
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(public popoverCtrl: PopoverController,
-              public pinsService: PinsService, private storage: Storage,
-              public viewCtrl: ViewController, private facebook: Facebook,
-              private app: App, public events: Events, private geolocation: Geolocation,
-              private network: NetworkConnection) {
+  constructor(public popoverCtrl: PopoverController, public pinsService: PinsService,
+              private storage: Storage, private facebook: Facebook, private app: App,
+              private network: NetworkConnection, public translate: TranslateService,
+              private toast: Toast) {
     this.markers = [];
   }
 
@@ -102,16 +102,27 @@ export class HomePage {
     });
 
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-      if (!window['readySubscribe']) {
-        this.geolocation.getCurrentPosition().then((resp) => {
-          this.map.setCenter(new LatLng(resp.coords.latitude, resp.coords.longitude));
-        }).catch((error) => {});
+      if (!navigator.onLine) {
+        this.network.alertDisconnect();
+        return;
       }
 
-      this.map.setClickable(true);
-      this.renderMarkers();
+      this.resetCurrentRegion();
+      this.getMarkerByViewPort();
+
+      if (window['readySubscribe']) { return; }
+      window['readySubscribe'] = true;
+
       this.onSubscribeLongClickMap();
+      this.onSubscribeDragMap();
+      this.map.getMyLocation((resp) => {
+        this.map.setCenter(new LatLng(resp.latLng.lat, resp.latLng.lng));
+      })
     });
+  }
+
+  resetCurrentRegion() {
+    this.currentRegion = null;
   }
 
   loadMap() {
@@ -119,32 +130,61 @@ export class HomePage {
     this.initMap(latlng);
   }
 
-  renderMarkers() {
+  assignCurrentRegion(latlngBound) {
+    let expandArea: any = 0.03;
+
+    this.currentRegion = {
+      sw_lat: latlngBound.southwest.lat - expandArea,
+      sw_lng: latlngBound.southwest.lng - expandArea,
+      ne_lat: latlngBound.northeast.lat + expandArea,
+      ne_lng: latlngBound.northeast.lng + expandArea
+    }
+  }
+
+  getMarkers() {
     if (!navigator.onLine) {
       this.network.alertDisconnect();
       return;
     }
 
+    this.showLoading = true;
     this.map.clear();
-    this.pinsService.getAll().then((pinsResult) => {
-      let pins = [].concat(pinsResult);
-
-      for(let pin of pins) {
-        let option = {
-          position: new LatLng (pin.latitude, pin.longitude),
-          icon: { url: 'www/assets/pin/' + pin.icon + '-small.png', size: { width: 16, height: 16 } },
-          markerClick: (marker) => {
-            this.currentPin = pin;
-            this.marker = this.findMarker(marker.id);
-            this.openChangeOptionsActionSheet();
-          }
-        }
-
-        this.map.addMarker(option).then((marker: Marker) => {
-          this.markers.push(marker);
-        });
-      }
+    this.pinsService.getAll(this.currentRegion).then((pinsResult) => {
+      this.renderMarkers(pinsResult);
+      this.handleAlertBigRequest(pinsResult);
+      this.showLoading = false;
     });
+  }
+
+  handleAlertBigRequest(pinsResult) {
+    if (pinsResult['length'] < 1000) { return; }
+
+    let msg = this.translate.instant('TOO_MANY_PINS');
+    this.toast.show(msg, '3000', 'bottom').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
+  }
+
+  renderMarkers(pinsResult) {
+    let pins = [].concat(pinsResult);
+
+    for(let pin of pins) {
+      let option = {
+        position: new LatLng (pin.latitude, pin.longitude),
+        icon: { url: 'www/assets/pin/' + pin.icon + '-small.png', size: { width: 16, height: 16 } },
+        markerClick: (marker) => {
+          this.currentPin = pin;
+          this.marker = this.findMarker(marker.id);
+          this.openChangeOptionsActionSheet();
+        }
+      }
+
+      this.map.addMarker(option).then((marker: Marker) => {
+        this.markers.push(marker);
+      });
+    }
   }
 
   openChangeOptionsActionSheet() {
@@ -158,14 +198,33 @@ export class HomePage {
   }
 
   onSubscribeLongClickMap() {
-    if (window['readySubscribe']) { return; }
-
     this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe((pos) => {
-      this.map.setCenter(pos);
       this.addMarker(pos);
     });
+  }
 
-    window['readySubscribe'] = true;
+  onSubscribeDragMap() {
+    this.map.on(GoogleMapsEvent.CAMERA_CHANGE).subscribe((pos) => {
+      this.getMarkerByViewPort();
+    });
+  }
+
+  getMarkerByViewPort() {
+    this.map.getVisibleRegion().then((latlngBound) => {
+      if(!this.currentRegion) {
+        this.assignCurrentRegion(latlngBound);
+        this.getMarkers();
+        return;
+      }
+
+      if (latlngBound.southwest.lat < this.currentRegion.sw_lat ||
+          latlngBound.southwest.lng < this.currentRegion.sw_lng ||
+          latlngBound.northeast.lat > this.currentRegion.ne_lat ||
+          latlngBound.northeast.lng > this.currentRegion.ne_lng ) {
+        this.assignCurrentRegion(latlngBound);
+        this.getMarkers();
+      }
+    })
   }
 
   addMarker(pos) {
@@ -206,5 +265,4 @@ export class HomePage {
   findMarker(id) {
     return this.markers.find(x => x['_objectInstance']['id'] === id);
   }
-
 }

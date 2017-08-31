@@ -17,7 +17,10 @@
       <div class="photo-wrap" *ngIf="photo.status == 'approved' || photo.is_mine">
         <div class="photo">
           <img [src]="photo.url">
-          <div [ngClass]="['status', photo.status]" *ngIf="photo.is_mine">{{ photo.status }}</div>
+          <div [ngClass]="['status', photo.status]" *ngIf="photo.is_mine" (click)="presentReasonPopover(photo)">
+            {{ photo.status }}
+            <ion-icon name="information-circle" *ngIf="photo.is_rejected" style='margin-left:2px'></ion-icon>
+          </div>
         </div>
       </div>
     </div>

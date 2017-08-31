@@ -42,13 +42,13 @@ export class ChangeOptionActionSheetPage {
 
   showActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: this.te('CREATED_ON') + ' ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy'),
+      title: this.te('CREATED_ON') + ' ' + this.datePipe.transform(this.pin.created_at, 'dd/MM/yyyy-h:mm a'),
       cssClass: 'my-action-sheets',
       buttons: [
         {
-          text: this.te('CHANGE_YOUR_PIN'),
-          cssClass: 'change-pin',
-          icon: 'pin',
+          text: this.te('IT_' + this.pin.icon.toUpperCase()) + ' (' + this.te('CHANGE') +')',
+          cssClass: 'change-pin ' + this.pin.icon,
+          icon: this.pin.icon,
           handler: () => {
             this.openChangePin();
           }
