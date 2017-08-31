@@ -30,11 +30,6 @@ export class ChangeOptionActionSheetPage {
     this.marker = navParams.data.marker;
     this.pin = navParams.data.pin;
     this.userId = navParams.data.userId;
-
-    // this.map = {};
-    // this.marker = {};
-    // this.pin = {id: 118, icon: 'sad', created_at: "2017-08-24T04:34:15.000Z"};
-    // this.userId = 1;
   }
 
   ngOnInit() {
