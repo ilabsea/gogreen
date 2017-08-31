@@ -12,6 +12,9 @@ import {
 } from '@ionic-native/google-maps';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
+import { Toast } from '@ionic-native/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 import { LoginPage } from '../login/login';
 import { PinsService } from '../../providers/pins-service';
@@ -37,7 +40,8 @@ export class HomePage {
   @ViewChild('mapCanvas') mapElement: ElementRef;
   constructor(public popoverCtrl: PopoverController, public pinsService: PinsService,
               private storage: Storage, private facebook: Facebook, private app: App,
-              private network: NetworkConnection) {
+              private network: NetworkConnection, public translate: TranslateService,
+              private toast: Toast) {
     this.markers = [];
   }
 
@@ -147,8 +151,20 @@ export class HomePage {
     this.map.clear();
     this.pinsService.getAll(this.currentRegion).then((pinsResult) => {
       this.renderMarkers(pinsResult);
+      this.handleAlertBigRequest(pinsResult);
       this.showLoading = false;
     });
+  }
+
+  handleAlertBigRequest(pinsResult) {
+    if (pinsResult['length'] < 1000) { return; }
+
+    let msg = this.translate.instant('TOO_MANY_PINS');
+    this.toast.show(msg, '3000', 'bottom').subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
   renderMarkers(pinsResult) {

@@ -55,7 +55,7 @@ export class NewPinActionSheetPage {
 
   showMarkerActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: this.te('SELECT_YOUR_OPTION'),
+      title: this.te('WHAT_DO_THINK_ABOUT_THIS_PLACE'),
       cssClass: 'pin-buttons my-action-sheets',
       buttons: [
         {

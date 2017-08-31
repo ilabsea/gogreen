@@ -87,5 +87,7 @@
   "IT_HAPPY": "The place is clean",
   "IT_SAD": "The place is dirty",
   "IT_TRASH": "The place should have a trash bin",
-  "CHANGE": "Change"
+  "CHANGE": "Change",
+  "WHAT_DO_THINK_ABOUT_THIS_PLACE": "What do you think about this place?",
+  "TOO_MANY_PINS": "There are too much data here, so you may experience interruptions."
 }
